@@ -8,7 +8,7 @@ final class RationsStore {
         didSet { persistPreferences() }
     }
     var accounts: [AccountReading]
-    var activeCodexID: String?
+    var activeAccounts: [ProviderID: String] = [:]
     var selectedTab = SettingsTab.general
     var message: String?
     let isPreview: Bool
@@ -23,7 +23,9 @@ final class RationsStore {
         preferences.normalize()
         self.preferences = preferences
         accounts = isPreview ? DesignFixtures.accounts(now: .now) : []
-        activeCodexID = isPreview ? "codex-lab" : nil
+        for account in accounts where activeAccounts[account.profile.provider] == nil {
+            activeAccounts[account.profile.provider] = account.id
+        }
     }
 
     func updatePreferences(_ update: (inout DisplayPreferences) -> Void) {
@@ -40,8 +42,16 @@ final class RationsStore {
     }
 
     func remove(_ accountID: String) {
-        guard accountID != activeCodexID else { return }
+        guard let account = accounts.first(where: { $0.id == accountID }), !isActive(account) else { return }
         accounts.removeAll { $0.id == accountID }
+    }
+
+    func isActive(_ account: AccountReading) -> Bool {
+        activeAccounts[account.profile.provider] == account.id
+    }
+
+    func accounts(for provider: ProviderID) -> [AccountReading] {
+        accounts.filter { $0.profile.provider == provider }
     }
 
     func refresh() {

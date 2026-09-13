@@ -1,9 +1,8 @@
 import AppKit
-import RationsCore
 
 enum StatusGlyph {
-    static func image(selection: MenuSelection?) -> NSImage {
-        let remaining = selection?.window.remainingPercent ?? 0
+    static func image(remainingPercent: Double?) -> NSImage {
+        let remaining = remainingPercent ?? 0
         let image = NSImage(size: NSSize(width: 16, height: 16), flipped: false) { _ in
             NSColor.black.set()
             let circle = NSBezierPath(ovalIn: NSRect(x: 1.5, y: 1.5, width: 13, height: 13))

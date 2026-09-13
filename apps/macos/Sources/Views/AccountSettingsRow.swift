@@ -7,7 +7,7 @@ struct AccountSettingsRow: View {
     @State private var hovering = false
     @State private var editing = false
     @State private var draft = ""
-    private var active: Bool { account.id == store.activeCodexID }
+    private var active: Bool { store.isActive(account) }
 
     var body: some View {
         HStack(spacing: 10) {

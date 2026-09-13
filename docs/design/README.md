@@ -24,6 +24,18 @@ single monochrome macOS template pie with no text. Fill represents quota remaini
 (full at 100% available, empty when capped). Percentage and reset text stay in the
 menu; thresholds do not tint the status icon.
 
+The pie combines every connected account across every provider. Each independent
+quota pool contributes its tightest window; independent pools are averaged within
+an account, then accounts are averaged with equal weight. Supplemental model limits
+are not counted as extra independent capacity. This is a normalized percentage,
+not a sum of incomparable provider units. Duplicate account readings are deduplicated,
+and incomplete, stale, or reset-expired readings are excluded with coverage reported
+in the tooltip. The icon responds immediately to new readings and schedules updates
+at reset/freshness boundaries. A reset passing never invents a refill.
+
+The user also superseded the Codex-only Accounts design: **every provider supports
+multiple named accounts**, with its own section and the same add/rename/remove controls.
+
 | Surface | v6 requirements |
 | --- | --- |
 | Main menu | 344-point content width, provider headings, 24-point account rows, no title or column headings |
@@ -32,14 +44,13 @@ menu; thresholds do not tint the status icon.
 | Account detail | Native submenu, scoped usage, exact local reset plus countdown, freshness, read-only reset credits, named destination actions |
 | Settings | 560-point native window with General, Accounts, and Providers toolbar tabs; grouped forms |
 | General | Remaining usage by default, absolute + relative reset times, 25%/10% remaining thresholds, refresh interval, login, privacy |
-| Accounts | Named Codex accounts, active marker, rename, add sheet, remove inactive accounts; other provider switching remains later work |
+| Accounts | Separate sections for all four providers; multiple named accounts, active marker, rename, add sheet, remove inactive accounts |
 | Switching | Progress and failure presentations, no forced termination of a busy Codex app, identity verification and rollback before success |
 | Materials | System glass on floating menus/panels; ordinary grouped forms in Settings; no glass layered on glass |
 
-Screen 6a retains older example rows with two Claude accounts, while 6d explicitly
-limits switching to Codex. Treat those extra menu rows as layout examples;
-Codex is the first supported switching workflow. Antigravity model groups remain
-part of the Google subscription, separate from Anthropic and OpenAI accounts.
+Screen 6d's original restriction to one non-Codex account no longer applies.
+Antigravity model groups remain part of each Google account's subscription,
+separate from Anthropic and OpenAI accounts.
 
 The first implementation slice covers the native menu, detail views, persistent
 display preferences, account-management presentation, and an isolated design

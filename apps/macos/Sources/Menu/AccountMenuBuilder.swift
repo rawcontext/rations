@@ -8,7 +8,7 @@ enum AccountMenuBuilder {
         let title = row.label ?? account.profile.name
         let item = NSMenuItem(title: title, action: nil, keyEquivalent: "")
         item.view = AccountMenuItemView(content: AccountMenuRow(
-            account: account, row: row, preferences: store.preferences, active: account.id == store.activeCodexID
+            account: account, row: row, preferences: store.preferences, active: store.isActive(account)
         ))
         item.isEnabled = !row.isSupplemental
         if !row.isSupplemental { item.submenu = detail(account: account, row: row, store: store) }
@@ -28,9 +28,9 @@ enum AccountMenuBuilder {
         menu.addItem(.separator())
         let provider = account.profile.provider
         menu.addItem(MenuCommand("Open " + provider.displayName) { ProviderLinks.open(provider) })
-        if provider == .codex, account.id != store.activeCodexID {
-            let command = MenuCommand("Launch Codex as " + account.profile.name) {
-                store.message = "Account switching is still being implemented. Your current Codex sign-in is unchanged."
+        if !store.isActive(account) {
+            let command = MenuCommand("Use " + account.profile.name) {
+                store.message = "Account switching is still being implemented. Your sign-ins have not been changed."
             }
             menu.addItem(command)
         }

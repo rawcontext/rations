@@ -6,17 +6,17 @@ struct ProviderSettingsRow: View {
     let store: RationsStore
     let showsToggle: Bool
 
-    private var accounts: [AccountReading] { store.accounts.filter { $0.profile.provider == provider } }
+    private var accounts: [AccountReading] { store.accounts(for: provider) }
 
     var body: some View {
         HStack(spacing: 10) {
             VStack(alignment: .leading, spacing: 3) {
                 Text(provider.displayName)
-                Text(accounts.first?.profile.plan ?? "No account connected")
+                Text(accountDescription)
                     .font(.caption).foregroundStyle(.secondary)
             }
             Spacer()
-            if provider == .codex, showsToggle {
+            if showsToggle {
                 Button("Accounts ›") { store.selectedTab = .accounts }.buttonStyle(.link)
             }
             Text(accounts.isEmpty ? "Not signed in" : "Connected")
@@ -28,5 +28,9 @@ struct ProviderSettingsRow: View {
             }
         }
         .frame(minHeight: 32)
+    }
+
+    private var accountDescription: String {
+        accounts.count > 1 ? "\(accounts.count) accounts" : accounts.first?.profile.plan ?? "No account connected"
     }
 }

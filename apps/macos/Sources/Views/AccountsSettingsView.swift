@@ -3,39 +3,33 @@ import SwiftUI
 
 struct AccountsSettingsView: View {
     let store: RationsStore
-    @State private var addingAccount = false
+    @State private var addingProvider: ProviderID?
 
     var body: some View {
         Form {
-            Section {
-                ForEach(store.accounts.filter { $0.profile.provider == .codex }) { account in
-                    AccountSettingsRow(account: account, store: store)
-                }
-                if store.accounts.isEmpty { Text("No saved accounts").foregroundStyle(.secondary) }
-                Button("Add Another Account", systemImage: "plus") { addingAccount = true }
-                    .buttonStyle(.plain).foregroundStyle(Color.accentColor).disabled(!store.isPreview)
-            } header: {
-                Text("Codex")
-            } footer: {
-                Text(store.isPreview
-                    ? "Design preview. Rename or remove sample accounts; the signed-in account cannot be removed."
-                    : "Named account sign-in and switching are still being implemented.")
-            }
-            otherAccounts
+            ForEach(ProviderID.allCases) { provider in accountSection(provider) }
         }
         .formStyle(.grouped)
-        .sheet(isPresented: $addingAccount) { AddAccountSheet(store: store) }
+        .sheet(item: $addingProvider) { provider in AddAccountSheet(store: store, provider: provider) }
     }
 
-    private var otherAccounts: some View {
+    private func accountSection(_ provider: ProviderID) -> some View {
         Section {
-            ForEach(ProviderID.allCases.filter { $0 != .codex }) { provider in
-                ProviderSettingsRow(provider: provider, store: store, showsToggle: false)
+            ForEach(store.accounts(for: provider)) { account in
+                AccountSettingsRow(account: account, store: store)
             }
+            if store.accounts(for: provider).isEmpty {
+                Text("No saved accounts").foregroundStyle(.secondary)
+            }
+            Button("Add Another Account", systemImage: "plus") { addingProvider = provider }
+                .buttonStyle(.plain).foregroundStyle(Color.accentColor).disabled(!store.isPreview)
+                .accessibilityLabel("Add " + provider.displayName + " account")
         } header: {
-            Text("Claude, Antigravity, Grok")
+            Text(provider.displayName)
         } footer: {
-            Text("One account each; switching isn't available for these yet.")
+            Text(store.isPreview
+                ? "Design preview. Rename or remove sample accounts; the signed-in account cannot be removed."
+                : "Named account sign-in and switching are still being implemented.")
         }
     }
 }

@@ -3,7 +3,11 @@ import RationsCore
 
 enum DesignFixtures {
     static func accounts(now: Date) -> [AccountReading] {
-        codexAccounts(now: now) + [claude(now: now), antigravity(now: now), grok(now: now)]
+        codexAccounts(now: now) + [
+            claude(details: ("Personal", "Max 5x"), remaining: (22, 59), opus: 77, now: now),
+            claude(details: ("Acme", "Team"), remaining: (80, 45), opus: 92, now: now),
+            antigravity(now: now), grok(now: now)
+        ]
     }
 
     private static func codexAccounts(now: Date) -> [AccountReading] {
@@ -22,14 +26,16 @@ enum DesignFixtures {
         }
     }
 
-    private static func claude(now: Date) -> AccountReading {
-        reading(.claude, details: ("Personal", "Max 5x"), now: now, rows: [
+    private static func claude(
+        details: (String, String), remaining: (session: Double, weekly: Double), opus: Double, now: Date
+    ) -> AccountReading {
+        reading(.claude, details: details, now: now, rows: [
             QuotaRow(id: "main", windows: [
-                window(.session, left: 22, seconds: 10_140, now: now),
-                window(.weekly, left: 59, seconds: 118_800, now: now)
+                window(.session, left: remaining.session, seconds: 10_140, now: now),
+                window(.weekly, left: remaining.weekly, seconds: 118_800, now: now)
             ]),
             QuotaRow(id: "opus", windows: [
-                window(.weekly, left: 77, seconds: 118_800, now: now)
+                window(.weekly, left: opus, seconds: 118_800, now: now)
             ], label: "↳ Opus", isSupplemental: true)
         ])
     }

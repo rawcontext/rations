@@ -23,10 +23,7 @@ struct GeneralSettingsView: View {
 
     private var menuSection: some View {
         Section("Menu bar") {
-            Picker("Show in menu bar", selection: store.binding(\.menuProvider)) {
-                Text("Tightest window across accounts").tag(ProviderID?.none)
-                ForEach(ProviderID.allCases) { Text($0.displayName).tag(Optional($0)) }
-            }
+            LabeledContent("Pie fill", value: "All connected accounts")
             Picker("Show usage as", selection: store.binding(\.usageMode)) {
                 ForEach(UsageDisplayMode.allCases, id: \.self) { Text($0.title).tag($0) }
             }

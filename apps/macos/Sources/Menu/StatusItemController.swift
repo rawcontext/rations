@@ -18,9 +18,6 @@ final class StatusItemController: NSObject, NSMenuDelegate {
         menu.autoenablesItems = false
         item.menu = menu
         observeChanges()
-        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
-            Task { @MainActor in self?.updateLabel() }
-        }
     }
 
     func menuNeedsUpdate(_ menu: NSMenu) {
@@ -49,7 +46,7 @@ final class StatusItemController: NSObject, NSMenuDelegate {
     }
 
     private func addSection(_ provider: ProviderID, to menu: NSMenu) {
-        let accounts = store.accounts.filter { $0.profile.provider == provider }
+        let accounts = store.accounts(for: provider)
         let newest = accounts.compactMap(\.fetchedAt).max()
         let title = provider.displayName + "   " + ResetText.age(of: newest, now: .now)
         let header = NSMenuItem.sectionHeader(title: title)
@@ -75,14 +72,28 @@ final class StatusItemController: NSObject, NSMenuDelegate {
 
     private func updateLabel() {
         guard let button = item.button else { return }
-        let selection = MenuSelection.tightest(in: store.accounts, preferences: store.preferences, now: .now)
-        button.image = StatusGlyph.image(selection: selection)
+        let aggregate = AggregateQuota.summarize(store.accounts, now: .now)
+        button.image = StatusGlyph.image(remainingPercent: aggregate.remainingPercent)
         button.title = ""
-        button.alphaValue = selection == nil ? 0.45 : 1
-        let text = selection.flatMap { $0.window.remainingPercent }.map { "\(Int($0.rounded()))% remaining" }
+        button.alphaValue = aggregate.remainingPercent == nil ? 0.45 : 1
+        let text = aggregate.remainingPercent.map {
+            "\(Int($0.rounded()))% remaining across \(aggregate.reportingAccountCount) accounts"
+        }
             ?? "usage unavailable"
-        button.toolTip = selection.map { "\($0.account.profile.provider.displayName) · \($0.account.profile.name)" }
-            ?? "Rations · no current usage"
-        button.setAccessibilityLabel("Rations, " + text + (store.isPreview ? ", design preview" : ""))
+        let pending = aggregate.pendingAccountCount == 0
+            ? "" : "; \(aggregate.pendingAccountCount) awaiting current usage"
+        button.toolTip = "Rations · " + text + pending
+        button.setAccessibilityLabel("Rations, " + text + pending + (store.isPreview ? ", design preview" : ""))
+        scheduleBoundaryUpdate(at: aggregate.nextUpdateAt)
+    }
+
+    private func scheduleBoundaryUpdate(at date: Date?) {
+        timer?.invalidate()
+        guard let date else { timer = nil; return }
+        let nextTimer = Timer(timeInterval: max(0.1, date.timeIntervalSinceNow), repeats: false) { [weak self] _ in
+            Task { @MainActor in self?.updateLabel() }
+        }
+        RunLoop.main.add(nextTimer, forMode: .common)
+        timer = nextTimer
     }
 }

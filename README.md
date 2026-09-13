@@ -8,6 +8,12 @@ compact account rows, stacked quota meters, hover submenus, and General/Accounts
 Settings. Display preferences persist locally. Provider authentication, live quota
 fetching, and credential switching remain upcoming work in [the implementation plan](IMPLEMENTATION_PLAN.md).
 
+Every provider has its own multi-account section with shared add/rename/remove
+controls. The monochrome pie averages the available quota across connected accounts,
+combining independent pools within an account first. It updates immediately when
+readings change, without double-counting overlapping quota windows. Expired or
+incomplete readings remain unknown until a provider publishes current data.
+
 ## Development setup
 
 Use macOS with **Xcode 27 beta** installed and its first-launch setup completed.

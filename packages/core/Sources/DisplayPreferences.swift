@@ -1,7 +1,6 @@
 public struct DisplayPreferences: Codable, Equatable, Sendable {
     public var usageMode = UsageDisplayMode.remaining
     public var resetMode = ResetDisplayMode.both
-    public var menuProvider: ProviderID?
     public var warningRemaining = 25
     public var criticalRemaining = 10
     public var refreshMinutes = 5
