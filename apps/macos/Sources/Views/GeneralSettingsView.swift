@@ -23,7 +23,7 @@ struct GeneralSettingsView: View {
 
     private var menuSection: some View {
         Section("Menu bar") {
-            LabeledContent("Pie fill", value: "All connected accounts")
+            LabeledContent("Menu bar icon", value: "Two slices")
             Picker("Show usage as", selection: store.binding(\.usageMode)) {
                 ForEach(UsageDisplayMode.allCases, id: \.self) { Text($0.title).tag($0) }
             }

@@ -6,7 +6,7 @@ Repository: `ccheney/rations`
 
 Status: Native v6 UI in progress; live provider implementation remains planned
 
-The [authoritative v6 handoff and subsequent user corrections](docs/design/README.md) govern interface details. All providers support multiple named accounts, the icon aggregates their remaining quota, the menu uses compact provider sections, and Settings has General/Accounts/Providers tabs. Live saved-account authentication and switching remain separate from this first UI slice.
+The [authoritative v6 handoff and subsequent user corrections](docs/design/README.md) govern interface details. All providers support multiple named accounts, the icon is a static two-slice pie with an aggregate quota tooltip, the menu uses compact provider sections, and Settings has General/Accounts/Providers tabs. Live saved-account authentication and switching remain separate from this first UI slice.
 
 ## 1. Outcome and scope
 
@@ -154,7 +154,7 @@ For pressure selection, rank enabled, current, comparable windows by explicit ca
 
 ## 6. Interface behavior
 
-- **Menu item:** one monochrome macOS template pie with no text, aggregating remaining quota across all connected accounts and providers. Use the tightest window per independent pool, average pools within each account, then average accounts equally. Exclude duplicate, stale, incomplete, and reset-expired readings; expose coverage in the tooltip and accessibility label. React immediately to snapshot changes and at scheduled freshness/reset boundaries, without guessing a refill. Menu visibility and Left/Used settings do not change the aggregate.
+- **Menu item:** a static monochrome macOS template pie matching the user's screenshot, divided once into two slices, with no text. Its shape and opacity stay fixed. The tooltip aggregates remaining quota across all connected accounts: tightest window per independent pool, average pools within each account, then average accounts equally. Exclude duplicate, stale, incomplete, and reset-expired readings and expose coverage. The tooltip reacts to snapshot changes and scheduled freshness/reset boundaries without guessing a refill.
 - **Degraded coverage:** when another enabled provider is stale or failing, retain a current selected reading with a small degraded marker. If no current readings exist, dim the last reading and mark it stale; show a neutral/error symbol if there is no usable cache. No providers enabled produces a neutral icon.
 - **Popover:** target roughly 360–400 points wide with a vertically scrollable body capped to the available screen height. Header has the title and refresh state. Each provider shows its name, optional locally known plan, freshness, applicable windows, and one official dashboard action. Failed providers stay visible without blocking other sections.
 - **Window row:** label and group, used/remaining values, a meter, local reset date and time, and countdown. Unknown values get explicit text. Capped rows have textual status as well as color. Set a clear distinction between “Updated 2m ago” and “Refresh failed; last data 2m ago.”

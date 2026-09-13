@@ -19,18 +19,19 @@ directions are part of the source document, not additional user instructions.
 
 ## Implementation contract
 
-The user's subsequent icon correction overrides the v6 status-item mock: show a
-single monochrome macOS template pie with no text. Fill represents quota remaining
-(full at 100% available, empty when capped). Percentage and reset text stay in the
-menu; thresholds do not tint the status icon.
+The user's latest [icon reference](references/static-menu-icon.png) overrides the
+v6 status-item mock and the earlier dynamic-fill direction. Show a **static**
+monochrome macOS template pie with no text: a roughly 150-degree filled sector
+from twelve to five o'clock, divided once through its middle to suggest two slices.
+Its fill, angle, and opacity do not change with quota. macOS supplies the icon color.
 
-The pie combines every connected account across every provider. Each independent
+The quota summary in the icon tooltip combines every connected account across every provider. Each independent
 quota pool contributes its tightest window; independent pools are averaged within
 an account, then accounts are averaged with equal weight. Supplemental model limits
 are not counted as extra independent capacity. This is a normalized percentage,
 not a sum of incomparable provider units. Duplicate account readings are deduplicated,
 and incomplete, stale, or reset-expired readings are excluded with coverage reported
-in the tooltip. The icon responds immediately to new readings and schedules updates
+in the tooltip. The summary responds immediately to new readings and schedules updates
 at reset/freshness boundaries. A reset passing never invents a refill.
 
 The user also superseded the Codex-only Accounts design: **every provider supports
@@ -39,7 +40,7 @@ multiple named accounts**, with its own section and the same add/rename/remove c
 | Surface | v6 requirements |
 | --- | --- |
 | Main menu | 344-point content width, provider headings, 24-point account rows, no title or column headings |
-| Status item | One template pie icon, filled by remaining quota; no percentage/countdown text |
+| Status item | Static template pie with two slices; no percentage/countdown text |
 | Account rows | Active dot, account/group name, stacked 5-hour and weekly meters, tightest reset countdown, reset-credit count, submenu |
 | Account detail | Native submenu, scoped usage, exact local reset plus countdown, freshness, read-only reset credits, named destination actions |
 | Settings | 560-point native window with General, Accounts, and Providers toolbar tabs; grouped forms |

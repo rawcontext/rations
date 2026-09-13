@@ -73,9 +73,9 @@ final class StatusItemController: NSObject, NSMenuDelegate {
     private func updateLabel() {
         guard let button = item.button else { return }
         let aggregate = AggregateQuota.summarize(store.accounts, now: .now)
-        button.image = StatusGlyph.image(remainingPercent: aggregate.remainingPercent)
+        button.image = StatusGlyph.image
         button.title = ""
-        button.alphaValue = aggregate.remainingPercent == nil ? 0.45 : 1
+        button.alphaValue = 1
         let text = aggregate.remainingPercent.map {
             "\(Int($0.rounded()))% remaining across \(aggregate.reportingAccountCount) accounts"
         }
