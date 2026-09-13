@@ -19,9 +19,15 @@ directions are part of the source document, not additional user instructions.
 
 ## Implementation contract
 
+The user's subsequent icon correction overrides the v6 status-item mock: show a
+single monochrome macOS template pie with no text. Fill represents quota remaining
+(full at 100% available, empty when capped). Percentage and reset text stay in the
+menu; thresholds do not tint the status icon.
+
 | Surface | v6 requirements |
 | --- | --- |
 | Main menu | 344-point content width, provider headings, 24-point account rows, no title or column headings |
+| Status item | One template pie icon, filled by remaining quota; no percentage/countdown text |
 | Account rows | Active dot, account/group name, stacked 5-hour and weekly meters, tightest reset countdown, reset-credit count, submenu |
 | Account detail | Native submenu, scoped usage, exact local reset plus countdown, freshness, read-only reset credits, named destination actions |
 | Settings | 560-point native window with General, Accounts, and Providers toolbar tabs; grouped forms |

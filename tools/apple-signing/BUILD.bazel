@@ -1,0 +1,19 @@
+load("@rules_apple//apple:apple.bzl", "local_provisioning_profile")
+load("@rules_xcodeproj//xcodeproj:xcode_provisioning_profile.bzl", "xcode_provisioning_profile")
+
+local_provisioning_profile(
+    name = "development_profile",
+    profile_extension = ".provisionprofile",
+    profile_name = "Mac Team Provisioning Profile: *",
+    tags = ["manual"],
+    team_id = "U65DCW9TAK",
+)
+
+xcode_provisioning_profile(
+    name = "development",
+    managed_by_xcode = True,
+    provisioning_profile = ":development_profile",
+    tags = ["manual"],
+    team_id = "U65DCW9TAK",
+    visibility = ["//apps/macos:__pkg__"],
+)

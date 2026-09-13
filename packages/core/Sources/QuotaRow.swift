@@ -1,0 +1,21 @@
+public struct QuotaRow: Identifiable, Equatable, Sendable {
+    public let id: String
+    public let label: String?
+    public let windows: [QuotaWindow]
+    public let isSupplemental: Bool
+
+    public init(id: String, windows: [QuotaWindow], label: String? = nil, isSupplemental: Bool = false) {
+        self.id = id
+        self.label = label
+        self.windows = windows
+        self.isSupplemental = isSupplemental
+    }
+
+    public var tightestWindow: QuotaWindow? {
+        windows.filter { $0.usedPercent != nil }.max { ($0.usedPercent ?? 0) < ($1.usedPercent ?? 0) }
+    }
+
+    public func window(for period: QuotaPeriod) -> QuotaWindow? {
+        windows.first { $0.period == period }
+    }
+}

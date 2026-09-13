@@ -4,7 +4,9 @@ Date: 13 September 2026
 
 Repository: `ccheney/rations`
 
-Status: Development scaffold in place; live provider implementation remains planned
+Status: Native v6 UI in progress; live provider implementation remains planned
+
+The [authoritative v6 handoff](docs/design/README.md) now governs interface details. It adds named Codex accounts and manual switching, replaces the popover header with compact provider sections, and defines General/Accounts/Providers Settings. Saved account switching is a separate implementation milestone from this first UI slice.
 
 ## 1. Outcome and scope
 
@@ -23,9 +25,9 @@ The four v1 integrations are:
 
 These sources expose particular product entitlements. A Codex window is not every ChatGPT limit, and Antigravity's Claude-model pool is not the user's Anthropic subscription. Preserve those distinctions in labels and identifiers.
 
-Ship one menu bar item, a narrow popover, native settings, provider detection, manual and automatic refresh, accurate local reset dates, reset-credit visibility where available, offline snapshots, and launch at login. Keep one active identity per provider. Additional providers remain adapter work after v1; Gemini CLI is not part of this implementation.
+Ship one menu bar item, a narrow native menu, native settings, provider detection, manual and automatic refresh, accurate local reset dates, reset-credit visibility where available, offline snapshots, and launch at login. Support named saved Codex accounts with one active Codex identity at a time; other providers initially use one account each. Additional providers remain adapter work after v1; Gemini CLI is not part of this implementation.
 
-Exclude spend charts, session-log estimates, account rotation, browser-cookie extraction, custom OAuth sign-in screens, reset-credit redemption, notifications, widgets, a public CLI, plugins, and a backend. Reusing an installed vendor CLI internally is compatible with having no Rations CLI product.
+Exclude spend charts, session-log estimates, automatic account rotation, browser-cookie extraction, custom OAuth sign-in screens, reset-credit redemption, notifications, widgets, a public CLI, plugins, and a backend. Manual Codex switching is included by the v6 design. Reusing an installed vendor CLI internally is compatible with having no Rations CLI product.
 
 **Release cuts:** resolve the PRD's different provider-count checklists explicitly. An internal preview can ship with Codex + Claude. MVP requires those two plus Antigravity or Grok. The intended v1 includes all four; an unavailable adapter must be reported as unfinished rather than counted as working support.
 
@@ -152,7 +154,7 @@ For pressure selection, rank enabled, current, comparable windows by explicit ca
 
 ## 6. Interface behavior
 
-- **Menu item:** show the selected window's small meter and used percentage, with 75% warning / 90% critical defaults. The used/remaining preference changes presentation, not ranking. Add the countdown only for the selected capped window. Identify the selected provider and window in the accessible label, tooltip, and matching popover row.
+- **Menu item:** one monochrome macOS template pie icon with no text. Fill tracks remaining quota: full at 100% available, empty when capped. Keep thresholds and used/remaining preferences in the menu and Settings; neither changes the icon color or reverses its remaining-quota meaning. Identify the selected account and quota in the tooltip and accessibility label.
 - **Degraded coverage:** when another enabled provider is stale or failing, retain a current selected reading with a small degraded marker. If no current readings exist, dim the last reading and mark it stale; show a neutral/error symbol if there is no usable cache. No providers enabled produces a neutral icon.
 - **Popover:** target roughly 360–400 points wide with a vertically scrollable body capped to the available screen height. Header has the title and refresh state. Each provider shows its name, optional locally known plan, freshness, applicable windows, and one official dashboard action. Failed providers stay visible without blocking other sections.
 - **Window row:** label and group, used/remaining values, a meter, local reset date and time, and countdown. Unknown values get explicit text. Capped rows have textual status as well as color. Set a clear distinction between “Updated 2m ago” and “Refresh failed; last data 2m ago.”
@@ -238,7 +240,7 @@ Final release checklist:
 
 | Decision | Working choice | When it must be settled |
 |---|---|---|
-| Shipping name and bundle ID | Rations is confirmed; development ID is `com.ccheney.rations.dev` | Production bundle ID before external beta |
+| Shipping name and bundle ID | Rations; `com.rawcontext.rations` / `com.rawcontext.rations.dev`; Raw Context team `U65DCW9TAK` | Confirmed |
 | App source license | MIT for original code, preserving upstream notices | Before the first code import |
 | Antigravity fallback breadth | App service plus installed `agy`; add remote access only for a demonstrated coverage gap | M0/M4 |
 | Grok fallback breadth | Credits proxy first; only adopt another bearer/CLI source when necessary and proven | M0/M5 |

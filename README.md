@@ -3,10 +3,10 @@
 A native Swift macOS menu bar app for subscription usage and reset times across
 Codex, Claude, Antigravity, and Grok.
 
-This repository currently contains the development scaffold: a runnable menu bar
-app, settings shell, shared quota models, a provider interface, and build/lint/test
-automation. Provider authentication and live quota fetching are future work in
-[the implementation plan](IMPLEMENTATION_PLAN.md).
+The first native UI slice follows the [authoritative v6 design](docs/design/README.md):
+compact account rows, stacked quota meters, hover submenus, and General/Accounts/Providers
+Settings. Display preferences persist locally. Provider authentication, live quota
+fetching, and credential switching remain upcoming work in [the implementation plan](IMPLEMENTATION_PLAN.md).
 
 ## Development setup
 
@@ -46,6 +46,8 @@ and lint executables, independently of any global pnpm installation.
 | `npm run lint` | Run the complete Eudoxus 3-derived lint policy, including JSCPD |
 | `npm run check` | Lint, build, and test the repository |
 | `npm run dev` | Stop the existing Rations process, build, and launch the `.app` |
+| `npm run dev -- --design-preview --settings` | Open the v6 UI with isolated sample accounts and Settings |
+| `npm run dev -- --signed` | Build and run with Raw Context's local development signing profile |
 | `./script/build_and_run.sh --verify` | Build, launch, and verify the process is running |
 | `./script/build_and_run.sh --debug` | Build and launch under LLDB |
 | `./script/build_and_run.sh --logs` | Launch and stream process logs |
@@ -54,10 +56,18 @@ and lint executables, independently of any global pnpm installation.
 | `bazel test //packages/core:test` | Run the quota model tests during development |
 | `bazel build --config=release //apps/macos:app` | Build an optimized development bundle |
 
-Rations intentionally has no Dock icon or main window. Click the gauge icon in
+Rations intentionally has no Dock icon or main window. Click the pie icon in
 the menu bar to open it, then choose Settings or Quit. The development bundle is
-staged at `dist/Rations.app`, uses `com.ccheney.rations.dev`, and is locally signed
-for development. Release signing and notarization are separate future work.
+staged at `dist/Rations.app`. Normal launches show only real available data; the
+current disconnected state stays empty. Design preview is explicitly labeled and
+does not persist sample accounts or touch provider credentials.
+
+Development uses `com.rawcontext.rations.dev`; `--config=release` uses
+`com.rawcontext.rations`. Xcode Debug and Release use Raw Context LLC's team
+`U65DCW9TAK` and a local Mac development profile. Ordinary Bazel/CI builds remain
+ad-hoc signed; add `--config=signed` for team signing. See
+[signing configuration](tools/apple-signing/README.md). Developer ID distribution
+and notarization are separate future work.
 
 The Codex app's Run action invokes the same build-and-run script.
 

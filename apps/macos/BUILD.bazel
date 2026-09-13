@@ -1,8 +1,29 @@
+load("@bazel_skylib//rules:common_settings.bzl", "bool_flag")
 load("@rules_apple//apple:macos.bzl", "macos_application")
 load("@rules_swift//swift:swift.bzl", "swift_library")
 load("@rules_xcodeproj//xcodeproj:xcodeproj.bzl", "xcodeproj")
 
 package(default_visibility = ["//visibility:private"])
+
+bool_flag(
+    name = "production",
+    build_setting_default = False,
+)
+
+bool_flag(
+    name = "team_signing",
+    build_setting_default = False,
+)
+
+config_setting(
+    name = "production_enabled",
+    flag_values = {":production": "true"},
+)
+
+config_setting(
+    name = "team_signing_enabled",
+    flag_values = {":team_signing": "true"},
+)
 
 swift_library(
     name = "sources",
@@ -17,10 +38,21 @@ swift_library(
 
 macos_application(
     name = "app",
-    bundle_id = "com.ccheney.rations.dev",
+    bundle_id = select({
+        ":production_enabled": "com.rawcontext.rations",
+        "//conditions:default": "com.rawcontext.rations.dev",
+    }),
     bundle_name = "Rations",
+    entitlements = select({
+        ":team_signing_enabled": "Resources/Development.entitlements",
+        "//conditions:default": None,
+    }),
     infoplists = ["Resources/Info.plist"],
     minimum_os_version = "14.0",
+    provisioning_profile = select({
+        ":team_signing_enabled": "//tools/apple-signing:development",
+        "//conditions:default": None,
+    }),
     visibility = ["//visibility:public"],
     deps = [":sources"],
 )
@@ -30,4 +62,16 @@ xcodeproj(
     project_name = "Rations",
     tags = ["manual"],
     top_level_targets = [":app"],
+    xcode_configurations = {
+        "Debug": {
+            "//command_line_option:compilation_mode": "dbg",
+            "//apps/macos:production": False,
+            "//apps/macos:team_signing": True,
+        },
+        "Release": {
+            "//command_line_option:compilation_mode": "opt",
+            "//apps/macos:production": True,
+            "//apps/macos:team_signing": True,
+        },
+    },
 )

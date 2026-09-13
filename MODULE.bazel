@@ -1,6 +1,7 @@
 module(name = "rations")
 
 bazel_dep(name = "apple_support", version = "2.8.2")
+bazel_dep(name = "bazel_skylib", version = "1.9.2")
 
 bazel_dep(name = "buildifier_prebuilt", version = "8.5.1.4", dev_dependency = True)
 

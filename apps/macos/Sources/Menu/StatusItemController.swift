@@ -1,0 +1,88 @@
+import AppKit
+import Observation
+import RationsCore
+
+@MainActor
+final class StatusItemController: NSObject, NSMenuDelegate {
+    private let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+    private let store: RationsStore
+    private let showSettings: @MainActor () -> Void
+    private var timer: Timer?
+
+    init(store: RationsStore, showSettings: @escaping @MainActor () -> Void) {
+        self.store = store
+        self.showSettings = showSettings
+        super.init()
+        let menu = NSMenu()
+        menu.delegate = self
+        menu.autoenablesItems = false
+        item.menu = menu
+        observeChanges()
+        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
+            Task { @MainActor in self?.updateLabel() }
+        }
+    }
+
+    func menuNeedsUpdate(_ menu: NSMenu) {
+        menu.removeAllItems()
+        for provider in ProviderID.allCases where !store.preferences.disabledProviders.contains(provider) {
+            addSection(provider, to: menu)
+        }
+        if menu.items.isEmpty {
+            menu.addItem(NSMenuItem(title: "No providers enabled", action: nil, keyEquivalent: ""))
+        }
+        if store.isPreview {
+            let preview = NSMenuItem(title: "Design preview · sample data", action: nil, keyEquivalent: "")
+            preview.isEnabled = false
+            menu.addItem(preview)
+        }
+        menu.addItem(MenuCommand("Refresh", key: "r") { [weak self] in self?.store.refresh() })
+        menu.addItem(MenuCommand("Settings…", key: ",", handler: showSettings))
+        menu.addItem(.separator())
+        menu.addItem(MenuCommand("Quit Rations", key: "q") { NSApp.terminate(nil) })
+    }
+
+    func menu(_ menu: NSMenu, willHighlight item: NSMenuItem?) {
+        for candidate in menu.items {
+            (candidate.view as? AccountMenuItemView)?.setHighlighted(candidate === item)
+        }
+    }
+
+    private func addSection(_ provider: ProviderID, to menu: NSMenu) {
+        let accounts = store.accounts.filter { $0.profile.provider == provider }
+        let newest = accounts.compactMap(\.fetchedAt).max()
+        let title = provider.displayName + "   " + ResetText.age(of: newest, now: .now)
+        let header = NSMenuItem.sectionHeader(title: title)
+        menu.addItem(header)
+        if accounts.isEmpty {
+            let empty = NSMenuItem(title: "Not connected", action: nil, keyEquivalent: "")
+            empty.isEnabled = false
+            menu.addItem(empty)
+        }
+        for account in accounts {
+            for row in account.rows { menu.addItem(AccountMenuBuilder.item(account: account, row: row, store: store)) }
+        }
+        menu.addItem(.separator())
+    }
+
+    private func observeChanges() {
+        withObservationTracking {
+            updateLabel()
+        } onChange: { [weak self] in
+            Task { @MainActor in self?.observeChanges() }
+        }
+    }
+
+    private func updateLabel() {
+        guard let button = item.button else { return }
+        let selection = MenuSelection.tightest(in: store.accounts, preferences: store.preferences, now: .now)
+        button.image = StatusGlyph.image(selection: selection)
+        button.title = ""
+        button.alphaValue = selection == nil ? 0.45 : 1
+        let text = selection.flatMap { $0.window.remainingPercent }.map { "\(Int($0.rounded()))% remaining" }
+            ?? "usage unavailable"
+        button.toolTip = selection.map { "\($0.account.profile.provider.displayName) · \($0.account.profile.name)" }
+            ?? "Rations · no current usage"
+        button.setAccessibilityLabel("Rations, " + text + (store.isPreview ? ", design preview" : ""))
+    }
+}
