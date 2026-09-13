@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><meta name="design_doc_mode" content="canvas"><style>body{margin:0;background:#ecebe6;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,sans-serif;-webkit-font-smoothing:antialiased}a{color:#2a78d6}a:hover{color:#1b5fb0}</style></helmet>
+<section id="t6" style="padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:10px;margin:0 0 20px"><a href="#t6" style="font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none">6</a><span style="font:600 13px/1.2 system-ui,sans-serif;color:#1a1a1a"><a href="#5a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">5a</a> rebuilt with Liquid Glass for macOS 27 Golden Gate · transparent menu bar, glass menu and panels, capsule controls · Settings redone with a tabbed toolbar and an Accounts tab</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
+
+<div id="6a" data-screen-label="6a Liquid Glass menu" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#6a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">6a</a>Menu · Liquid Glass (regular) with the Golden Gate darkened edge and specular rim · 24pt items, 7pt rounded highlight · glass submenu on hover</div>
+<div style="width:960px;height:540px;position:relative;overflow:hidden;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);background:radial-gradient(80% 70% at 15% 10%,#4d5d80 0%,rgba(77,93,128,0) 60%),radial-gradient(60% 55% at 85% 25%,#7a4f63 0%,rgba(122,79,99,0) 55%),radial-gradient(70% 60% at 50% 100%,#2c4a5e 0%,rgba(44,74,94,0) 60%),linear-gradient(180deg,#1b1f2b,#0c0e14)">
+  <div style="position:absolute;top:0;left:0;right:0;height:24px;display:flex;align-items:center;gap:18px;padding:0 10px 0 14px;color:#fff;font-size:13px;text-shadow:0 1px 2px rgba(0,0,0,.6)">
+    <div style="width:13px;height:15px;border-radius:4px 4px 5px 5px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.4)"></div><span style="font-weight:700">Finder</span><span>File</span><span>Edit</span><span>View</span><span>Go</span><span>Window</span><span>Help</span><span style="flex:1"></span>
+    <div style="display:flex;align-items:center;gap:5px;height:22px;padding:0 7px;border-radius:7px;background:rgba(255,255,255,.22);box-shadow:inset 0 0 0 0.5px rgba(255,255,255,.28);font-variant-numeric:tabular-nums;text-shadow:none"><div style="display:flex;gap:1.5px;align-items:flex-end"><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div></div><span style="color:#FF453A;font-weight:500">2h 14m</span></div>
+    <div style="width:24px;height:11px;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.8)"></div><span style="font-variant-numeric:tabular-nums">Sun 13 Sep&nbsp;&nbsp;9:41 AM</span>
+  </div>
+  <div style="position:absolute;top:29px;right:62px;width:344px;padding:6px;border-radius:12px;color:rgba(255,255,255,.92);font-size:13px;background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,0) 45%),rgba(44,44,48,.62);backdrop-filter:blur(30px) saturate(1.7);-webkit-backdrop-filter:blur(30px) saturate(1.7);box-shadow:inset 0 0 0 0.5px rgba(255,255,255,.22),inset 0 1px 0 rgba(255,255,255,.16),0 0 0 0.5px rgba(0,0,0,.55),0 16px 44px rgba(0,0,0,.5)">
+    <sc-for list="{{ menu5 }}" as="p" hint-placeholder-count="4">
+      <div style="height:22px;display:flex;align-items:center;gap:6px;padding:0 10px;font-size:11px;font-weight:600;color:rgba(255,255,255,.55)"><span>{{ p.name }}</span><span style="font-weight:400">{{ p.fresh }}</span></div>
+      <sc-for list="{{ p.items }}" as="i" hint-placeholder-count="3">
+        <div style="display:flex;align-items:center;gap:8px;height:24px;padding:0 10px;border-radius:7px;background:{{ i.bg }}">
+          <div style="width:5px;height:5px;border-radius:50%;flex:none;background:{{ i.dot }}"></div>
+          <span style="width:82px;flex:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:{{ i.labelColor }}">{{ i.label }}</span>
+          <div style="width:108px;flex:none;display:flex;flex-direction:column;gap:3px">
+            <sc-if value="{{ i.c5.has }}" hint-placeholder-val="{{ true }}"><div style="height:5px;border-radius:2.5px;background:{{ i.c5.track }};overflow:hidden"><div style="height:100%;border-radius:2.5px;width:{{ i.c5.width }};background:{{ i.c5.fill }}"></div></div></sc-if>
+            <sc-if value="{{ i.c5.dash }}" hint-placeholder-val="{{ false }}"><div style="height:5px;display:flex;align-items:center"><div style="width:100%;border-top:1px dashed {{ i.c5.pctColor }}"></div></div></sc-if>
+            <div style="height:5px;border-radius:2.5px;background:{{ i.cwk.track }};overflow:hidden"><div style="height:100%;border-radius:2.5px;width:{{ i.cwk.width }};background:{{ i.cwk.fill }}"></div></div>
+          </div>
+          <span style="width:56px;flex:none;text-align:right;font-size:11.5px;font-variant-numeric:tabular-nums;white-space:nowrap;color:{{ i.resetColor }}">{{ i.reset }}</span>
+          <span style="width:16px;flex:none;text-align:right;font-size:11.5px;font-variant-numeric:tabular-nums;color:{{ i.creditsColor }}">{{ i.credits }}</span>
+          <span style="width:7px;flex:none;font-size:9px;color:{{ i.chev }}">▶</span>
+        </div>
+      </sc-for>
+      <div style="height:1px;background:rgba(255,255,255,.13);margin:5px 10px"></div>
+    </sc-for>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:24px;padding:0 10px;border-radius:7px"><span>Refresh</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘R</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:24px;padding:0 10px;border-radius:7px"><span>Settings…</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘,</span></div>
+    <div style="height:1px;background:rgba(255,255,255,.13);margin:5px 10px"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:24px;padding:0 10px;border-radius:7px"><span>Quit Rations</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘Q</span></div>
+    <div style="position:absolute;top:47px;right:calc(100% + 4px);width:336px;padding:6px;border-radius:12px;color:rgba(255,255,255,.92);font-size:13px;background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,0) 45%),rgba(44,44,48,.62);backdrop-filter:blur(30px) saturate(1.7);-webkit-backdrop-filter:blur(30px) saturate(1.7);box-shadow:inset 0 0 0 0.5px rgba(255,255,255,.22),inset 0 1px 0 rgba(255,255,255,.16),0 0 0 0.5px rgba(0,0,0,.55),0 16px 44px rgba(0,0,0,.5)">
+      <div style="display:flex;align-items:baseline;gap:6px;height:24px;padding:0 10px"><span style="font-weight:600">Acme</span><span style="font-size:11px;color:rgba(255,255,255,.55)">Codex Team · c•••@acme.io</span></div>
+      <div style="padding:2px 10px 8px;display:flex;flex-direction:column;gap:4px;font-variant-numeric:tabular-nums">
+        <div style="display:flex;justify-content:space-between;font-size:12px"><span>Weekly</span><span style="color:#FF9F0A;font-weight:600">18% left</span></div>
+        <div style="height:4px;border-radius:2px;background:rgba(255,255,255,.14);overflow:hidden"><div style="height:100%;width:18%;border-radius:2px;background:#FF9F0A"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.6)"><span>Resets Mon 14 Sep, 3:41 PM</span><span>in 1d 6h</span></div>
+      </div>
+      <div style="display:flex;align-items:center;height:24px;padding:0 10px;font-size:12px;color:rgba(255,255,255,.55)">No reset credits · Updated 2m ago</div>
+      <div style="height:1px;background:rgba(255,255,255,.13);margin:5px 10px"></div>
+      <div style="display:flex;align-items:center;height:24px;padding:0 10px;border-radius:7px;background:#0A84FF;color:#fff">Launch Codex as Acme</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div id="6b" data-screen-label="6b Glass switch panel" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#6b" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">6b</a>Switch progress and blocked state as glass panels · capsule buttons: glass (Cancel) and glassProminent (Try Again)</div>
+<div style="display:flex;flex-direction:column;gap:16px">
+  <div style="width:436px;height:236px;position:relative;overflow:hidden;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);background:radial-gradient(80% 70% at 15% 10%,#4d5d80 0%,rgba(77,93,128,0) 60%),radial-gradient(60% 55% at 85% 25%,#7a4f63 0%,rgba(122,79,99,0) 55%),linear-gradient(180deg,#1b1f2b,#0c0e14)">
+    <div style="position:absolute;top:0;left:0;right:0;height:24px;display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:0 10px;color:#fff;font-size:13px;font-variant-numeric:tabular-nums;text-shadow:0 1px 2px rgba(0,0,0,.6)"><div style="display:flex;align-items:center;gap:5px;height:22px;padding:0 7px"><div style="display:flex;gap:1.5px;align-items:flex-end"><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div></div><span style="color:#FF453A">2h 14m</span></div><div style="width:24px;height:11px;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.8)"></div><span>9:41 AM</span></div>
+    <div style="position:absolute;top:34px;right:78px;width:300px;padding:14px 16px;border-radius:16px;font-size:12px;color:rgba(255,255,255,.9);background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,0) 45%),rgba(40,40,44,.66);backdrop-filter:blur(30px) saturate(1.7);-webkit-backdrop-filter:blur(30px) saturate(1.7);box-shadow:inset 0 0 0 0.5px rgba(255,255,255,.22),inset 0 1px 0 rgba(255,255,255,.16),0 0 0 0.5px rgba(0,0,0,.55),0 16px 44px rgba(0,0,0,.5)">
+      <div style="font-weight:600;font-size:13px;margin-bottom:9px">Switching Codex to Acme</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:14px;text-align:center;color:#30D158;font-weight:700">✓</span><span>Codex Desktop quit</span></div>
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:14px;text-align:center;color:#30D158;font-weight:700">✓</span><span>Lab sign-in saved</span></div>
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:14px;display:flex;justify-content:center"><span style="width:10px;height:10px;border-radius:50%;border:1.5px solid rgba(255,255,255,.22);border-top-color:rgba(255,255,255,.85)"></span></span><span>Activating Acme sign-in…</span></div>
+        <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.45)"><span style="width:14px;text-align:center">○</span><span>Verify identity</span></div>
+        <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.45)"><span style="width:14px;text-align:center">○</span><span>Reopen Codex Desktop</span></div>
+      </div>
+      <div style="margin-top:10px;font-size:11px;line-height:1.45;color:rgba(255,255,255,.55);text-wrap:pretty">Codex CLI sessions already running keep Lab until restarted.</div>
+    </div>
+  </div>
+  <div style="width:436px;height:236px;position:relative;overflow:hidden;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);background:radial-gradient(80% 70% at 15% 10%,#4d5d80 0%,rgba(77,93,128,0) 60%),radial-gradient(60% 55% at 85% 25%,#7a4f63 0%,rgba(122,79,99,0) 55%),linear-gradient(180deg,#1b1f2b,#0c0e14)">
+    <div style="position:absolute;top:0;left:0;right:0;height:24px;display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:0 10px;color:#fff;font-size:13px;font-variant-numeric:tabular-nums;text-shadow:0 1px 2px rgba(0,0,0,.6)"><div style="display:flex;align-items:center;gap:5px;height:22px;padding:0 7px"><div style="display:flex;gap:1.5px;align-items:flex-end"><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div></div><span style="color:#FF453A">2h 14m</span></div><div style="width:24px;height:11px;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.8)"></div><span>9:41 AM</span></div>
+    <div style="position:absolute;top:34px;right:78px;width:300px;padding:14px 16px;border-radius:16px;font-size:12px;color:rgba(255,255,255,.9);background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,0) 45%),rgba(40,40,44,.66);backdrop-filter:blur(30px) saturate(1.7);-webkit-backdrop-filter:blur(30px) saturate(1.7);box-shadow:inset 0 0 0 0.5px rgba(255,255,255,.22),inset 0 1px 0 rgba(255,255,255,.16),0 0 0 0.5px rgba(0,0,0,.55),0 16px 44px rgba(0,0,0,.5)">
+      <div style="font-weight:600;font-size:13px;margin-bottom:6px">Couldn’t switch to Acme</div>
+      <p style="margin:0;line-height:1.45;text-wrap:pretty">Codex Desktop didn’t quit within 30 seconds, probably because a task is still running. Finish or stop it, then try again. Codex is still signed in as Lab.</p>
+      <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:14px">
+        <div style="padding:4px 14px;border-radius:999px;background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 0.5px rgba(255,255,255,.3),inset 0 1px 0 rgba(255,255,255,.12)">Cancel</div>
+        <div style="padding:4px 14px;border-radius:999px;color:#fff;background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,0) 55%),#0A84FF;box-shadow:inset 0 0 0 0.5px rgba(255,255,255,.35),0 1px 2px rgba(0,0,0,.35)">Try Again</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div id="6c" data-screen-label="6c Settings General" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#6c" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">6c</a>Settings · General · tabbed toolbar, grouped form, capsule pop-ups and segmented controls</div>
+<div style="padding:28px;border-radius:8px;background:radial-gradient(80% 70% at 20% 0%,#c9d2e3 0%,rgba(201,210,227,0) 60%),radial-gradient(60% 55% at 90% 30%,#d9c3cc 0%,rgba(217,195,204,0) 55%),linear-gradient(180deg,#e6e8ee,#cfd3dc);box-shadow:0 1px 3px rgba(0,0,0,.1)">
+  <div style="width:560px;border-radius:12px;overflow:hidden;background:#ECECEE;color:rgba(0,0,0,.85);font-size:13px;box-shadow:0 0 0 0.5px rgba(0,0,0,.28),0 26px 70px rgba(0,0,0,.4)">
+    <div style="position:relative;background:linear-gradient(180deg,#F7F7F9,#F1F1F3);border-bottom:1px solid rgba(0,0,0,.09)">
+      <div style="position:absolute;left:12px;top:9px;display:flex;gap:8px"><div style="width:12px;height:12px;border-radius:50%;background:#FF5F57;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,.15)"></div><div style="width:12px;height:12px;border-radius:50%;background:#FEBC2E;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,.15)"></div><div style="width:12px;height:12px;border-radius:50%;background:#28C840;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,.15)"></div></div>
+      <div style="height:30px;display:flex;align-items:center;justify-content:center;font-weight:600">General</div>
+      <div style="display:flex;justify-content:center;gap:4px;padding:0 0 8px">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 16px 5px;border-radius:9px;background:rgba(0,0,0,.07);font-size:11px;color:rgba(0,0,0,.85)"><div style="width:20px;height:20px;display:flex;flex-direction:column;justify-content:center;gap:4px;position:relative"><div style="height:2px;border-radius:1px;background:#007AFF"></div><div style="height:2px;border-radius:1px;background:#007AFF"></div><div style="height:2px;border-radius:1px;background:#007AFF"></div><div style="position:absolute;left:3px;top:2px;width:6px;height:6px;border-radius:50%;background:#007AFF;box-shadow:0 0 0 1.5px #ECECEE"></div><div style="position:absolute;right:3px;top:8px;width:6px;height:6px;border-radius:50%;background:#007AFF;box-shadow:0 0 0 1.5px #ECECEE"></div><div style="position:absolute;left:7px;top:14px;width:6px;height:6px;border-radius:50%;background:#007AFF;box-shadow:0 0 0 1.5px #ECECEE"></div></div><span>General</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 16px 5px;border-radius:9px;font-size:11px;color:rgba(0,0,0,.7)"><div style="width:20px;height:20px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:1px"><div style="width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,.6)"></div><div style="width:16px;height:8px;border-radius:8px 8px 3px 3px;background:rgba(0,0,0,.6)"></div></div><span>Accounts</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 16px 5px;border-radius:9px;font-size:11px;color:rgba(0,0,0,.7)"><div style="width:20px;height:20px;display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:1px"><div style="border-radius:2px;background:rgba(0,0,0,.6)"></div><div style="border-radius:2px;background:rgba(0,0,0,.6)"></div><div style="border-radius:2px;background:rgba(0,0,0,.6)"></div><div style="border-radius:2px;background:rgba(0,0,0,.6)"></div></div><span>Providers</span></div>
+      </div>
+    </div>
+    <div style="padding:16px 20px 20px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:12px;font-weight:600;color:rgba(0,0,0,.6);padding-left:2px">Menu bar</div>
+        <div style="background:#fff;border-radius:10px;box-shadow:0 0 0 0.5px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.04)">
+          <div style="display:flex;align-items:center;gap:12px;min-height:36px;padding:6px 12px;border-bottom:1px solid rgba(0,0,0,.06)"><div style="flex:1">Show in menu bar</div><div style="display:flex;align-items:center;gap:8px;height:22px;padding:0 3px 0 10px;border-radius:11px;background:#fff;box-shadow:0 0 0 0.5px rgba(0,0,0,.18),0 1px 2px rgba(0,0,0,.1);font-size:12.5px"><span>Tightest window across accounts</span><div style="width:16px;height:16px;border-radius:50%;background:#007AFF;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><div style="width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-bottom:3px solid #fff"></div><div style="width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-top:3px solid #fff"></div></div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;min-height:36px;padding:6px 12px;border-bottom:1px solid rgba(0,0,0,.06)"><div style="flex:1">Show usage as</div><div style="display:flex;background:rgba(0,0,0,.06);border-radius:11px;padding:2px;height:22px;font-size:12px"><div style="padding:0 12px;display:flex;align-items:center;border-radius:9px;background:#fff;font-weight:500;box-shadow:0 0 0 0.5px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.12)">Left</div><div style="padding:0 12px;display:flex;align-items:center">Used</div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;min-height:36px;padding:6px 12px"><div style="flex:1">Reset time</div><div style="display:flex;background:rgba(0,0,0,.06);border-radius:11px;padding:2px;height:22px;font-size:12px"><div style="padding:0 12px;display:flex;align-items:center">Absolute</div><div style="padding:0 12px;display:flex;align-items:center">Relative</div><div style="padding:0 12px;display:flex;align-items:center;border-radius:9px;background:#fff;font-weight:500;box-shadow:0 0 0 0.5px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.12)">Both</div></div></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:12px;font-weight:600;color:rgba(0,0,0,.6);padding-left:2px">Thresholds</div>
+        <div style="background:#fff;border-radius:10px;box-shadow:0 0 0 0.5px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.04)">
+          <div style="display:flex;align-items:center;gap:12px;min-height:36px;padding:6px 12px;border-bottom:1px solid rgba(0,0,0,.06)"><div style="flex:1">Warning when less than</div><div style="display:flex;align-items:center;gap:6px"><div style="width:42px;height:22px;padding:0 7px;display:flex;align-items:center;justify-content:flex-end;border-radius:7px;background:#fff;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,.24);font-variant-numeric:tabular-nums">25</div><span style="color:rgba(0,0,0,.6)">% left</span><div style="width:16px;height:22px;border-radius:8px;background:#fff;box-shadow:0 0 0 0.5px rgba(0,0,0,.18),0 1px 2px rgba(0,0,0,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px"><div style="width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-bottom:3px solid rgba(0,0,0,.7)"></div><div style="width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-top:3px solid rgba(0,0,0,.7)"></div></div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;min-height:36px;padding:6px 12px"><div style="flex:1">Critical when less than</div><div style="display:flex;align-items:center;gap:6px"><div style="width:42px;height:22px;padding:0 7px;display:flex;align-items:center;justify-content:flex-end;border-radius:7px;background:#fff;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,.24);font-variant-numeric:tabular-nums">10</div><span style="color:rgba(0,0,0,.6)">% left</span><div style="width:16px;height:22px;border-radius:8px;background:#fff;box-shadow:0 0 0 0.5px rgba(0,0,0,.18),0 1px 2px rgba(0,0,0,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px"><div style="width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-bottom:3px solid rgba(0,0,0,.7)"></div><div style="width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-top:3px solid rgba(0,0,0,.7)"></div></div></div></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:12px;font-weight:600;color:rgba(0,0,0,.6);padding-left:2px">Refresh</div>
+        <div style="background:#fff;border-radius:10px;box-shadow:0 0 0 0.5px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.04)">
+          <div style="display:flex;align-items:center;gap:12px;min-height:36px;padding:6px 12px;border-bottom:1px solid rgba(0,0,0,.06)"><div style="flex:1">Refresh every</div><div style="display:flex;align-items:center;gap:8px;height:22px;padding:0 3px 0 10px;border-radius:11px;background:#fff;box-shadow:0 0 0 0.5px rgba(0,0,0,.18),0 1px 2px rgba(0,0,0,.1);font-size:12.5px"><span>5 minutes</span><div style="width:16px;height:16px;border-radius:50%;background:#007AFF;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><div style="width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-bottom:3px solid #fff"></div><div style="width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-top:3px solid #fff"></div></div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;min-height:36px;padding:6px 12px"><div style="flex:1">Launch at login</div><div style="width:26px;height:15px;border-radius:8px;background:#007AFF;position:relative"><div style="position:absolute;top:1px;left:12px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3)"></div></div></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:12px;font-weight:600;color:rgba(0,0,0,.6);padding-left:2px">Privacy</div>
+        <div style="background:#fff;border-radius:10px;box-shadow:0 0 0 0.5px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.04)">
+          <div style="display:flex;align-items:center;gap:12px;min-height:36px;padding:8px 12px"><div style="flex:1"><div>Hide personal information</div><div style="font-size:11px;color:rgba(0,0,0,.5)">Emails are redacted in the menu. Nothing personal is shown in the menu bar.</div></div><div style="width:26px;height:15px;border-radius:8px;background:#007AFF;position:relative"><div style="position:absolute;top:1px;left:12px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3)"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div id="6d" data-screen-label="6d Settings Accounts" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#6d" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">6d</a>Settings · Accounts · named accounts with inline rename, Connected / Signed in status, remove on hover, “Add Another Account” opens a sheet that asks for the name first</div>
+<div style="display:flex;gap:16px">
+<div style="padding:28px;border-radius:8px;background:radial-gradient(80% 70% at 20% 0%,#c9d2e3 0%,rgba(201,210,227,0) 60%),radial-gradient(60% 55% at 90% 30%,#d9c3cc 0%,rgba(217,195,204,0) 55%),linear-gradient(180deg,#e6e8ee,#cfd3dc);box-shadow:0 1px 3px rgba(0,0,0,.1)"><div style="width:560px;border-radius:12px;overflow:hidden;background:#ECECEE;color:rgba(0,0,0,.85);font-size:13px;box-shadow:0 0 0 0.5px rgba(0,0,0,.28),0 26px 70px rgba(0,0,0,.4);position:relative"><div style="position:relative;background:linear-gradient(180deg,#F7F7F9,#F1F1F3);border-bottom:1px solid rgba(0,0,0,.09)"><div style="position:absolute;left:12px;top:9px;display:flex;gap:8px"><div style="width:12px;height:12px;border-radius:50%;background:#FF5F57;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,.15)"></div><div style="width:12px;height:12px;border-radius:50%;background:#FEBC2E;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,.15)"></div><div style="width:12px;height:12px;border-radius:50%;background:#28C840;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,.15)"></div></div><div style="height:30px;display:flex;align-items:center;justify-content:center;font-weight:600">Accounts</div><div style="display:flex;justify-content:center;gap:4px;padding:0 0 8px"><div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 16px 5px;border-radius:9px;font-size:11px;color:rgba(0,0,0,.7)"><div style="width:20px;height:20px;display:flex;flex-direction:column;justify-content:center;gap:4px;position:relative"><div style="height:2px;border-radius:1px;background:rgba(0,0,0,.6)"></div><div style="height:2px;border-radius:1px;background:rgba(0,0,0,.6)"></div><div style="height:2px;border-radius:1px;background:rgba(0,0,0,.6)"></div><div style="position:absolute;left:3px;top:2px;width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.6);box-shadow:0 0 0 1.5px #F3F3F5"></div><div style="position:absolute;right:3px;top:8px;width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.6);box-shadow:0 0 0 1.5px #F3F3F5"></div><div style="position:absolute;left:7px;top:14px;width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.6);box-shadow:0 0 0 1.5px #F3F3F5"></div></div><span>General</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 16px 5px;border-radius:9px;background:rgba(0,0,0,.07);font-size:11px;color:rgba(0,0,0,.85)"><div style="width:20px;height:20px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:1px"><div style="width:8px;height:8px;border-radius:50%;background:#007AFF"></div><div style="width:16px;height:8px;border-radius:8px 8px 3px 3px;background:#007AFF"></div></div><span>Accounts</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 16px 5px;border-radius:9px;font-size:11px;color:rgba(0,0,0,.7)"><div style="width:20px;height:20px;display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:1px"><div style="border-radius:2px;background:rgba(0,0,0,.6)"></div><div style="border-radius:2px;background:rgba(0,0,0,.6)"></div><div style="border-radius:2px;background:rgba(0,0,0,.6)"></div><div style="border-radius:2px;background:rgba(0,0,0,.6)"></div></div><span>Providers</span></div></div></div><div style="padding:16px 20px 20px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;align-items:baseline;gap:8px;padding-left:2px"><span style="font-size:12px;font-weight:600;color:rgba(0,0,0,.6)">Codex</span><span style="font-size:11px;color:rgba(0,0,0,.5)">One account is signed in at a time. Rations keeps a saved sign-in for each and swaps it when you switch.</span></div>
+        <div style="background:#fff;border-radius:10px;box-shadow:0 0 0 0.5px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.04)">
+          <div style="display:flex;align-items:center;gap:12px;height:44px;padding:0 12px;border-bottom:1px solid rgba(0,0,0,.06)"><div style="flex:1;min-width:0"><div style="display:flex;align-items:center"><span>Lab</span><span style="font-size:11px;color:rgba(0,0,0,.35);margin-left:6px">✎</span></div><div style="font-size:11px;color:rgba(0,0,0,.5)">Pro · c•••@lab.ai</div></div><span style="font-size:12px;font-weight:600;color:#007AFF">Signed in</span></div>
+          <div style="display:flex;align-items:center;gap:12px;height:44px;padding:0 12px;border-bottom:1px solid rgba(0,0,0,.06)"><div style="flex:1;min-width:0"><div style="display:flex;align-items:center"><span>Acme</span><span style="font-size:11px;color:rgba(0,0,0,.35);margin-left:6px">✎</span></div><div style="font-size:11px;color:rgba(0,0,0,.5)">Team · c•••@acme.io</div></div><span style="font-size:12px;font-weight:600;color:#1E9E5A">Connected</span></div>
+          <div style="display:flex;align-items:center;gap:12px;height:44px;padding:0 12px;border-bottom:1px solid rgba(0,0,0,.06);background:rgba(0,0,0,.035)"><div style="flex:1;min-width:0"><div style="display:flex;align-items:center"><span>Northwind</span><span style="font-size:11px;color:rgba(0,0,0,.35);margin-left:6px">✎</span></div><div style="font-size:11px;color:rgba(0,0,0,.5)">Plus · c•••@northwind.co</div></div><div style="height:22px;padding:0 10px;display:flex;align-items:center;border-radius:999px;font-size:12px;background:#fff;box-shadow:0 0 0 0.5px rgba(0,0,0,.16),0 1px 2px rgba(0,0,0,.08)">Remove</div><span style="font-size:12px;font-weight:600;color:#1E9E5A">Connected</span></div>
+          <div style="display:flex;align-items:center;gap:12px;height:44px;padding:0 12px;border-bottom:1px solid rgba(0,0,0,.06)"><div style="flex:1;min-width:0"><div style="display:flex;align-items:center"><span>Personal</span><span style="font-size:11px;color:rgba(0,0,0,.35);margin-left:6px">✎</span></div><div style="font-size:11px;color:rgba(0,0,0,.5)">Plus · c•••@cheney.dev</div></div><span style="font-size:12px;font-weight:600;color:#1E9E5A">Connected</span></div>
+          <div style="display:flex;align-items:center;gap:8px;height:40px;padding:0 12px;color:#007AFF"><span style="font-size:15px;line-height:1">+</span><span>Add Another Account</span></div>
+        </div>
+        <div style="font-size:11px;color:rgba(0,0,0,.5);padding-left:2px;line-height:1.45;text-wrap:pretty">Click ✎ to rename. Hover a row to remove it; the signed-in account can’t be removed until you switch away from it. Saved sign-ins live in ~/Library/Application Support/Rations, user-only.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:12px;font-weight:600;color:rgba(0,0,0,.6);padding-left:2px">Claude, Antigravity, Grok</div>
+        <div style="background:#fff;border-radius:10px;box-shadow:0 0 0 0.5px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.04)">
+          <div style="display:flex;align-items:center;gap:12px;height:44px;padding:0 12px;border-bottom:1px solid rgba(0,0,0,.06)"><div style="flex:1;min-width:0"><div>Claude</div><div style="font-size:11px;color:rgba(0,0,0,.5)">Max 5x · c•••@cheney.dev</div></div><span style="font-size:12px;font-weight:600;color:#1E9E5A">Connected</span></div>
+          <div style="display:flex;align-items:center;gap:12px;height:44px;padding:0 12px;border-bottom:1px solid rgba(0,0,0,.06)"><div style="flex:1;min-width:0"><div>Antigravity</div><div style="font-size:11px;color:rgba(0,0,0,.5)">Pro · c•••@cheney.dev</div></div><span style="font-size:12px;font-weight:600;color:#1E9E5A">Connected</span></div>
+          <div style="display:flex;align-items:center;gap:12px;height:44px;padding:0 12px"><div style="flex:1;min-width:0"><div>Grok</div><div style="font-size:11px;color:rgba(0,0,0,.5)">Run <span style="font-family:ui-monospace,Menlo,monospace">grok login</span> in Terminal, then Detect</div></div><div style="height:22px;padding:0 10px;display:flex;align-items:center;border-radius:999px;font-size:12px;background:#fff;box-shadow:0 0 0 0.5px rgba(0,0,0,.16),0 1px 2px rgba(0,0,0,.08)">Detect</div><span style="font-size:12px;font-weight:600;color:#D9720B">Not signed in</span></div>
+        </div>
+        <div style="font-size:11px;color:rgba(0,0,0,.5);padding-left:2px;line-height:1.45;text-wrap:pretty">One account each; switching isn’t available for these yet.</div>
+      </div>
+    </div></div></div>
+<div style="padding:28px;border-radius:8px;background:radial-gradient(80% 70% at 20% 0%,#c9d2e3 0%,rgba(201,210,227,0) 60%),radial-gradient(60% 55% at 90% 30%,#d9c3cc 0%,rgba(217,195,204,0) 55%),linear-gradient(180deg,#e6e8ee,#cfd3dc);box-shadow:0 1px 3px rgba(0,0,0,.1)"><div style="width:560px;border-radius:12px;overflow:hidden;background:#ECECEE;color:rgba(0,0,0,.85);font-size:13px;box-shadow:0 0 0 0.5px rgba(0,0,0,.28),0 26px 70px rgba(0,0,0,.4);position:relative"><div style="position:relative;background:linear-gradient(180deg,#F7F7F9,#F1F1F3);border-bottom:1px solid rgba(0,0,0,.09)"><div style="position:absolute;left:12px;top:9px;display:flex;gap:8px"><div style="width:12px;height:12px;border-radius:50%;background:#FF5F57;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,.15)"></div><div style="width:12px;height:12px;border-radius:50%;background:#FEBC2E;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,.15)"></div><div style="width:12px;height:12px;border-radius:50%;background:#28C840;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,.15)"></div></div><div style="height:30px;display:flex;align-items:center;justify-content:center;font-weight:600">Accounts</div><div style="display:flex;justify-content:center;gap:4px;padding:0 0 8px"><div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 16px 5px;border-radius:9px;font-size:11px;color:rgba(0,0,0,.7)"><div style="width:20px;height:20px;display:flex;flex-direction:column;justify-content:center;gap:4px;position:relative"><div style="height:2px;border-radius:1px;background:rgba(0,0,0,.6)"></div><div style="height:2px;border-radius:1px;background:rgba(0,0,0,.6)"></div><div style="height:2px;border-radius:1px;background:rgba(0,0,0,.6)"></div><div style="position:absolute;left:3px;top:2px;width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.6);box-shadow:0 0 0 1.5px #F3F3F5"></div><div style="position:absolute;right:3px;top:8px;width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.6);box-shadow:0 0 0 1.5px #F3F3F5"></div><div style="position:absolute;left:7px;top:14px;width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.6);box-shadow:0 0 0 1.5px #F3F3F5"></div></div><span>General</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 16px 5px;border-radius:9px;background:rgba(0,0,0,.07);font-size:11px;color:rgba(0,0,0,.85)"><div style="width:20px;height:20px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:1px"><div style="width:8px;height:8px;border-radius:50%;background:#007AFF"></div><div style="width:16px;height:8px;border-radius:8px 8px 3px 3px;background:#007AFF"></div></div><span>Accounts</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 16px 5px;border-radius:9px;font-size:11px;color:rgba(0,0,0,.7)"><div style="width:20px;height:20px;display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:1px"><div style="border-radius:2px;background:rgba(0,0,0,.6)"></div><div style="border-radius:2px;background:rgba(0,0,0,.6)"></div><div style="border-radius:2px;background:rgba(0,0,0,.6)"></div><div style="border-radius:2px;background:rgba(0,0,0,.6)"></div></div><span>Providers</span></div></div></div><div style="padding:16px 20px 20px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;align-items:baseline;gap:8px;padding-left:2px"><span style="font-size:12px;font-weight:600;color:rgba(0,0,0,.6)">Codex</span><span style="font-size:11px;color:rgba(0,0,0,.5)">One account is signed in at a time. Rations keeps a saved sign-in for each and swaps it when you switch.</span></div>
+        <div style="background:#fff;border-radius:10px;box-shadow:0 0 0 0.5px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.04)">
+          <div style="display:flex;align-items:center;gap:12px;height:44px;padding:0 12px;border-bottom:1px solid rgba(0,0,0,.06)"><div style="flex:1;min-width:0"><div style="display:flex;align-items:center"><span>Lab</span><span style="font-size:11px;color:rgba(0,0,0,.35);margin-left:6px">✎</span></div><div style="font-size:11px;color:rgba(0,0,0,.5)">Pro · c•••@lab.ai</div></div><span style="font-size:12px;font-weight:600;color:#007AFF">Signed in</span></div>
+          <div style="display:flex;align-items:center;gap:12px;height:44px;padding:0 12px;border-bottom:1px solid rgba(0,0,0,.06)"><div style="flex:1;min-width:0"><div style="display:flex;align-items:center"><span>Acme</span><span style="font-size:11px;color:rgba(0,0,0,.35);margin-left:6px">✎</span></div><div style="font-size:11px;color:rgba(0,0,0,.5)">Team · c•••@acme.io</div></div><span style="font-size:12px;font-weight:600;color:#1E9E5A">Connected</span></div>
+          <div style="display:flex;align-items:center;gap:12px;height:44px;padding:0 12px;border-bottom:1px solid rgba(0,0,0,.06)"><div style="flex:1;min-width:0"><div style="display:flex;align-items:center"><span>Northwind</span><span style="font-size:11px;color:rgba(0,0,0,.35);margin-left:6px">✎</span></div><div style="font-size:11px;color:rgba(0,0,0,.5)">Plus · c•••@northwind.co</div></div><span style="font-size:12px;font-weight:600;color:#1E9E5A">Connected</span></div>
+          <div style="display:flex;align-items:center;gap:12px;height:44px;padding:0 12px;border-bottom:1px solid rgba(0,0,0,.06)"><div style="flex:1;min-width:0"><div style="display:flex;align-items:center"><span>Personal</span><span style="font-size:11px;color:rgba(0,0,0,.35);margin-left:6px">✎</span></div><div style="font-size:11px;color:rgba(0,0,0,.5)">Plus · c•••@cheney.dev</div></div><span style="font-size:12px;font-weight:600;color:#1E9E5A">Connected</span></div>
+          <div style="display:flex;align-items:center;gap:8px;height:40px;padding:0 12px;color:#007AFF"><span style="font-size:15px;line-height:1">+</span><span>Add Another Account</span></div>
+        </div>
+        <div style="font-size:11px;color:rgba(0,0,0,.5);padding-left:2px;line-height:1.45;text-wrap:pretty">Click ✎ to rename. Hover a row to remove it; the signed-in account can’t be removed until you switch away from it. Saved sign-ins live in ~/Library/Application Support/Rations, user-only.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:12px;font-weight:600;color:rgba(0,0,0,.6);padding-left:2px">Claude, Antigravity, Grok</div>
+        <div style="background:#fff;border-radius:10px;box-shadow:0 0 0 0.5px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.04)">
+          <div style="display:flex;align-items:center;gap:12px;height:44px;padding:0 12px;border-bottom:1px solid rgba(0,0,0,.06)"><div style="flex:1;min-width:0"><div>Claude</div><div style="font-size:11px;color:rgba(0,0,0,.5)">Max 5x · c•••@cheney.dev</div></div><span style="font-size:12px;font-weight:600;color:#1E9E5A">Connected</span></div>
+          <div style="display:flex;align-items:center;gap:12px;height:44px;padding:0 12px;border-bottom:1px solid rgba(0,0,0,.06)"><div style="flex:1;min-width:0"><div>Antigravity</div><div style="font-size:11px;color:rgba(0,0,0,.5)">Pro · c•••@cheney.dev</div></div><span style="font-size:12px;font-weight:600;color:#1E9E5A">Connected</span></div>
+          <div style="display:flex;align-items:center;gap:12px;height:44px;padding:0 12px"><div style="flex:1;min-width:0"><div>Grok</div><div style="font-size:11px;color:rgba(0,0,0,.5)">Run <span style="font-family:ui-monospace,Menlo,monospace">grok login</span> in Terminal, then Detect</div></div><div style="height:22px;padding:0 10px;display:flex;align-items:center;border-radius:999px;font-size:12px;background:#fff;box-shadow:0 0 0 0.5px rgba(0,0,0,.16),0 1px 2px rgba(0,0,0,.08)">Detect</div><span style="font-size:12px;font-weight:600;color:#D9720B">Not signed in</span></div>
+        </div>
+        <div style="font-size:11px;color:rgba(0,0,0,.5);padding-left:2px;line-height:1.45;text-wrap:pretty">One account each; switching isn’t available for these yet.</div>
+      </div>
+    </div><div style="position:absolute;top:86px;left:50%;width:372px;margin-left:-186px;box-sizing:border-box;padding:18px 18px 16px;border-radius:0 0 12px 12px;background:#F4F4F6;box-shadow:0 0 0 0.5px rgba(0,0,0,.2),0 14px 40px rgba(0,0,0,.3);color:rgba(0,0,0,.85)">
+      <div style="font-weight:600;font-size:13px">Add Codex Account</div>
+      <div style="margin-top:12px;display:flex;flex-direction:column;gap:5px"><span style="font-size:12px;color:rgba(0,0,0,.6)">Name</span><div style="height:24px;padding:0 8px;display:flex;align-items:center;border-radius:7px;background:#fff;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,.22),0 0 0 3px rgba(0,122,255,.25);font-size:13px"><span>Consulting</span><span style="width:1px;height:14px;background:#000;margin-left:1px"></span></div><span style="font-size:11px;color:rgba(0,0,0,.5)">Shown in the menu and used when switching. You can rename it later.</span></div>
+      <p style="margin:12px 0 0;font-size:12px;line-height:1.45;color:rgba(0,0,0,.7);text-wrap:pretty">Next, Codex opens so you can sign in to this account. Rations saves that sign-in under the name above. Your current account, Lab, stays saved.</p>
+      <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:16px">
+        <div style="padding:4px 14px;border-radius:999px;background:#fff;box-shadow:0 0 0 0.5px rgba(0,0,0,.16),0 1px 2px rgba(0,0,0,.08)">Cancel</div>
+        <div style="padding:4px 14px;border-radius:999px;color:#fff;background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,0) 55%),#007AFF;box-shadow:inset 0 0 0 0.5px rgba(255,255,255,.35),0 1px 2px rgba(0,0,0,.25)">Continue</div>
+      </div>
+    </div></div></div>
+</div>
+</div>
+
+<div id="6e" data-screen-label="6e Settings Providers dark" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#6e" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">6e</a>Settings · Providers · dark · on/off per provider with a Connected / Not signed in status; Codex links through to Accounts</div>
+<div style="padding:28px;border-radius:8px;background:radial-gradient(80% 70% at 15% 10%,#4d5d80 0%,rgba(77,93,128,0) 60%),radial-gradient(60% 55% at 85% 25%,#7a4f63 0%,rgba(122,79,99,0) 55%),linear-gradient(180deg,#1b1f2b,#0c0e14);box-shadow:0 1px 3px rgba(0,0,0,.1)">
+  <div style="width:560px;border-radius:12px;overflow:hidden;background:#1F1F22;color:rgba(255,255,255,.88);font-size:13px;box-shadow:0 0 0 0.5px rgba(255,255,255,.2),0 26px 70px rgba(0,0,0,.6)">
+    <div style="position:relative;background:linear-gradient(180deg,#2B2B2F,#262629);border-bottom:1px solid rgba(0,0,0,.6)"><div style="position:absolute;left:12px;top:9px;display:flex;gap:8px"><div style="width:12px;height:12px;border-radius:50%;background:#FF5F57"></div><div style="width:12px;height:12px;border-radius:50%;background:#FEBC2E"></div><div style="width:12px;height:12px;border-radius:50%;background:#28C840"></div></div><div style="height:30px;display:flex;align-items:center;justify-content:center;font-weight:600">Providers</div><div style="display:flex;justify-content:center;gap:4px;padding:0 0 8px"><div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 16px 5px;border-radius:9px;font-size:11px;color:rgba(255,255,255,.7)"><div style="width:20px;height:20px;display:flex;flex-direction:column;justify-content:center;gap:4px;position:relative"><div style="height:2px;border-radius:1px;background:rgba(255,255,255,.7)"></div><div style="height:2px;border-radius:1px;background:rgba(255,255,255,.7)"></div><div style="height:2px;border-radius:1px;background:rgba(255,255,255,.7)"></div><div style="position:absolute;left:3px;top:2px;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.7);box-shadow:0 0 0 1.5px #282A2E"></div><div style="position:absolute;right:3px;top:8px;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.7);box-shadow:0 0 0 1.5px #282A2E"></div><div style="position:absolute;left:7px;top:14px;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.7);box-shadow:0 0 0 1.5px #282A2E"></div></div><span>General</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 16px 5px;border-radius:9px;font-size:11px;color:rgba(255,255,255,.7)"><div style="width:20px;height:20px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:1px"><div style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.7)"></div><div style="width:16px;height:8px;border-radius:8px 8px 3px 3px;background:rgba(255,255,255,.7)"></div></div><span>Accounts</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 16px 5px;border-radius:9px;background:rgba(255,255,255,.1);font-size:11px;color:rgba(255,255,255,.92)"><div style="width:20px;height:20px;display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:1px"><div style="border-radius:2px;background:#0A84FF"></div><div style="border-radius:2px;background:#0A84FF"></div><div style="border-radius:2px;background:#0A84FF"></div><div style="border-radius:2px;background:#0A84FF"></div></div><span>Providers</span></div></div></div>
+    <div style="padding:16px 20px 20px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:12px;font-weight:600;color:rgba(255,255,255,.6);padding-left:2px">Providers</div>
+        <div style="background:rgba(255,255,255,.06);border-radius:10px;box-shadow:0 0 0 0.5px rgba(255,255,255,.1)">
+          <div style="display:flex;align-items:center;gap:12px;min-height:44px;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.07)"><div style="flex:1"><div>Codex</div><div style="font-size:11px;color:rgba(255,255,255,.55)">4 accounts · Codex CLI · ~/.codex/auth.json</div></div><span style="font-size:12px;color:#0A84FF">Accounts ›</span><span style="font-size:12px;font-weight:600;color:#30D158">Connected</span><div style="width:26px;height:15px;border-radius:8px;background:#0A84FF;position:relative"><div style="position:absolute;top:1px;left:12px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.4)"></div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;min-height:44px;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.07)"><div style="flex:1"><div>Claude</div><div style="font-size:11px;color:rgba(255,255,255,.55)">Claude Code · Keychain item “Claude Code-credentials”</div></div><span style="font-size:12px;font-weight:600;color:#30D158">Connected</span><div style="width:26px;height:15px;border-radius:8px;background:#0A84FF;position:relative"><div style="position:absolute;top:1px;left:12px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.4)"></div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;min-height:44px;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.07)"><div style="flex:1"><div>Antigravity</div><div style="font-size:11px;color:rgba(255,255,255,.55)">Antigravity app running · agy 1.4.2</div></div><span style="font-size:12px;font-weight:600;color:#30D158">Connected</span><div style="width:26px;height:15px;border-radius:8px;background:#0A84FF;position:relative"><div style="position:absolute;top:1px;left:12px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.4)"></div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;min-height:44px;padding:8px 12px"><div style="flex:1"><div>Grok</div><div style="font-size:11px;color:rgba(255,255,255,.55)">Run <span style="font-family:ui-monospace,Menlo,monospace;white-space:nowrap">grok login</span> in Terminal, then Detect</div></div><div style="height:24px;padding:0 12px;display:flex;align-items:center;border-radius:999px;font-size:12px;background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 0.5px rgba(255,255,255,.28),inset 0 1px 0 rgba(255,255,255,.1)">Detect</div><span style="font-size:12px;font-weight:600;color:#FF9F0A">Not signed in</span><div style="width:26px;height:15px;border-radius:8px;background:rgba(255,255,255,.2);position:relative"><div style="position:absolute;top:1px;left:1px;width:13px;height:13px;border-radius:50%;background:#d8d8d8;box-shadow:0 1px 2px rgba(0,0,0,.4)"></div></div></div>
+        </div>
+        <div style="font-size:11px;color:rgba(255,255,255,.5);padding-left:2px;text-wrap:pretty">Rations reads sign-ins that already exist on this Mac. It stores no passwords and sends nothing anywhere but the vendor.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div id="6f" data-screen-label="6f Notes" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#6f" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">6f</a>What Liquid Glass changed here, and what it deliberately didn’t</div>
+<div style="width:400px;padding:18px 20px 20px;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);font-size:12px;line-height:1.5;color:#2a2a2a;display:flex;flex-direction:column;gap:9px;text-wrap:pretty">
+  <div><b>Where the glass goes.</b> Apple’s guidance reserves Liquid Glass for the layer that floats above content: menus, popovers, alerts, toolbars. So the menu, the submenu, the switch panel and the alert are glass; the Settings form and its groups are not. No glass on glass.</div>
+  <div><b>macOS 27 refinements applied.</b> Golden Gate made the material a little more opaque so it diffuses busy wallpaper, and added a darkened edge with a brighter specular rim for separation; both are in the panel edges here. Window corners share one, less dramatic radius (12pt). The menu bar itself is transparent since Tahoe, so the status item sits directly on the wallpaper with a subtle shadow for contrast, and its pressed state is a glass pill. Users can now dial glass from clear to tinted in System Settings › Appearance; the design has to read at both ends, so text never relies on the material for contrast.</div>
+  <div><b>Menu.</b> Items are 24pt with a 7pt-radius highlight in the accent color, separators are inset, and the menu corners are 12pt. Menu-item icons are optional per the HIG (“not all menu items need an icon”), and the account rows already carry a lot of information, so none were added.</div>
+  <div><b>Controls.</b> Pop-up buttons, segmented controls, steppers and push buttons take the capsule shapes of the new design; Cancel uses the translucent glass style, Try Again the prominent tinted one. Toggles are unchanged.</div>
+  <div><b>Settings.</b> A tabbed toolbar (General · Accounts · Providers) with a grouped form, the standard shape for a small Mac app’s Settings scene. Accounts is new: saved Codex sign-ins with the signed-in one marked, add and remove, rename in place. The three tab glyphs are placeholders for SF Symbols (slider.horizontal.3, person.fill, square.grid.2x2).</div>
+  <div><b>Sources.</b> Apple HIG › Materials and “Meet Liquid Glass” (WWDC25); WWDC26 Golden Gate design notes as reported by MacRumors, Macworld and AppleInsider (opacity, edge, corner radius, transparency slider, single-window menu bar with overflow).</div>
+</div>
+</div>
+
+</div>
+<p style="margin:22px 0 0;font:12px/1.5 system-ui,sans-serif;color:rgba(0,0,0,.5)">Try next: “<a href="#6a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">6a</a> in light appearance on a bright wallpaper” · “Settings as a sidebar instead of tabs” · “status item states on the transparent bar”</p>
+</section>
+<section id="t5" style="padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:10px;margin:0 0 20px"><a href="#t5" style="font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none">5</a><span style="font:600 13px/1.2 system-ui,sans-serif;color:#1a1a1a">Account switching from the hover submenu · <a href="#4a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">4a</a> without title and headers · clearer copy for the usage link and reset credits</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
+
+<div id="5a" data-screen-label="5a Switch from submenu" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#5a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">5a</a>Lab is capped and active (blue dot) · hovering Acme shows its window and “Launch Codex as Acme”</div>
+<div style="width:900px;height:500px;position:relative;overflow:hidden;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);background:radial-gradient(120% 80% at 70% 10%,#4a4f58 0%,#2c3038 45%,#15171c 100%)">
+  <div style="position:absolute;top:0;left:0;right:0;height:24px;display:flex;align-items:center;gap:18px;padding:0 10px 0 14px;background:rgba(30,30,32,.55);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);color:rgba(255,255,255,.92);font-size:13px">
+    <div style="width:13px;height:15px;border-radius:4px 4px 5px 5px;background:rgba(255,255,255,.9)"></div><span style="font-weight:700">Finder</span><span>File</span><span>Edit</span><span>View</span><span>Go</span><span>Window</span><span>Help</span><span style="flex:1"></span>
+    <div style="display:flex;align-items:center;gap:5px;height:22px;padding:0 6px;border-radius:4px;background:rgba(255,255,255,.28);font-variant-numeric:tabular-nums"><div style="display:flex;gap:1.5px;align-items:flex-end"><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div></div><span style="color:#FF453A">2h 14m</span></div>
+    <div style="width:24px;height:11px;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55)"></div><span style="font-variant-numeric:tabular-nums">Sun 13 Sep&nbsp;&nbsp;9:41 AM</span>
+  </div>
+  <div style="position:absolute;top:27px;right:60px;width:340px;padding:5px;background:rgba(50,50,52,.85);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-radius:7px;border:0.5px solid rgba(255,255,255,.15);box-shadow:0 8px 24px rgba(0,0,0,.5);color:rgba(255,255,255,.9);font-size:13px">
+    <sc-for list="{{ menu5 }}" as="p" hint-placeholder-count="4">
+      <div style="height:20px;display:flex;align-items:center;gap:6px;padding:0 9px;font-size:11px;font-weight:600;color:rgba(255,255,255,.5)"><span>{{ p.name }}</span><span style="font-weight:400">{{ p.fresh }}</span></div>
+      <sc-for list="{{ p.items }}" as="i" hint-placeholder-count="3">
+        <div style="display:flex;align-items:center;gap:8px;height:22px;padding:0 9px;border-radius:4px;background:{{ i.bg }}">
+          <div style="width:5px;height:5px;border-radius:50%;flex:none;background:{{ i.dot }}"></div>
+          <span style="width:82px;flex:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:{{ i.labelColor }}">{{ i.label }}</span>
+          <div style="width:108px;flex:none;display:flex;flex-direction:column;gap:3px">
+            <sc-if value="{{ i.c5.has }}" hint-placeholder-val="{{ true }}"><div style="height:5px;border-radius:2.5px;background:{{ i.c5.track }};overflow:hidden"><div style="height:100%;border-radius:2.5px;width:{{ i.c5.width }};background:{{ i.c5.fill }}"></div></div></sc-if>
+            <sc-if value="{{ i.c5.dash }}" hint-placeholder-val="{{ false }}"><div style="height:5px;display:flex;align-items:center"><div style="width:100%;border-top:1px dashed {{ i.c5.pctColor }}"></div></div></sc-if>
+            <div style="height:5px;border-radius:2.5px;background:{{ i.cwk.track }};overflow:hidden"><div style="height:100%;border-radius:2.5px;width:{{ i.cwk.width }};background:{{ i.cwk.fill }}"></div></div>
+          </div>
+          <span style="width:56px;flex:none;text-align:right;font-size:11.5px;font-variant-numeric:tabular-nums;white-space:nowrap;color:{{ i.resetColor }}">{{ i.reset }}</span>
+          <span style="width:16px;flex:none;text-align:right;font-size:11.5px;font-variant-numeric:tabular-nums;color:{{ i.creditsColor }}">{{ i.credits }}</span>
+          <span style="width:7px;flex:none;font-size:9px;color:{{ i.chev }}">▶</span>
+        </div>
+      </sc-for>
+      <div style="height:1px;background:rgba(255,255,255,.14);margin:5px 9px"></div>
+    </sc-for>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px"><span>Refresh</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘R</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px"><span>Settings…</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘,</span></div>
+    <div style="height:1px;background:rgba(255,255,255,.14);margin:5px 9px"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px"><span>Quit Rations</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘Q</span></div>
+    <div style="position:absolute;top:42px;right:calc(100% + 3px);width:332px;padding:5px;background:rgba(50,50,52,.85);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-radius:7px;border:0.5px solid rgba(255,255,255,.15);box-shadow:0 8px 24px rgba(0,0,0,.5);color:rgba(255,255,255,.9);font-size:13px">
+      <div style="display:flex;align-items:baseline;gap:6px;height:22px;padding:0 9px"><span style="font-weight:600">Acme</span><span style="font-size:11px;color:rgba(255,255,255,.55)">Codex Team · c•••@acme.io</span></div>
+      <div style="padding:3px 9px 7px;display:flex;flex-direction:column;gap:4px;font-variant-numeric:tabular-nums">
+        <div style="display:flex;justify-content:space-between;font-size:12px"><span>Weekly</span><span style="color:#FF9F0A;font-weight:600">18% left</span></div>
+        <div style="height:4px;border-radius:2px;background:rgba(255,255,255,.12);overflow:hidden"><div style="height:100%;width:18%;border-radius:2px;background:#FF9F0A"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.6)"><span>Resets Mon 14 Sep, 3:41 PM</span><span>in 1d 6h</span></div>
+      </div>
+      <div style="display:flex;align-items:center;height:22px;padding:0 9px;font-size:12px;color:rgba(255,255,255,.55)">No reset credits · Updated 2m ago</div>
+      <div style="height:1px;background:rgba(255,255,255,.14);margin:5px 9px"></div>
+      <div style="display:flex;align-items:center;height:22px;padding:0 9px;border-radius:4px;background:#0A84FF;color:#fff">Launch Codex as Acme</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div id="5b" data-screen-label="5b Switch in progress" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#5b" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">5b</a>After the click · the menu closes and a small panel under the status item reports each step</div>
+<div style="width:436px;height:236px;position:relative;overflow:hidden;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);background:radial-gradient(120% 80% at 70% 10%,#4a4f58 0%,#2c3038 45%,#15171c 100%)">
+  <div style="position:absolute;top:0;left:0;right:0;height:24px;display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:0 10px;background:rgba(30,30,32,.55);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);color:rgba(255,255,255,.92);font-size:13px;font-variant-numeric:tabular-nums">
+    <div style="display:flex;align-items:center;gap:5px;height:22px;padding:0 6px;border-radius:4px"><div style="display:flex;gap:1.5px;align-items:flex-end"><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div></div><span style="color:#FF453A">2h 14m</span></div>
+    <div style="width:24px;height:11px;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55)"></div><span>9:41 AM</span>
+  </div>
+  <div style="position:absolute;top:33px;right:78px;width:300px;padding:12px 14px 12px;font-size:12px;color:rgba(255,255,255,.88);background:rgba(40,40,42,.9);backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);border:0.5px solid rgba(255,255,255,.14);border-radius:10px;box-shadow:0 12px 34px rgba(0,0,0,.5)">
+    <div style="position:absolute;top:-7px;right:36px;width:14px;height:14px;transform:rotate(45deg);background:rgba(48,48,50,.98);border-left:0.5px solid rgba(255,255,255,.16);border-top:0.5px solid rgba(255,255,255,.16);border-radius:2px 0 0 0"></div>
+    <div style="font-weight:600;font-size:13px;margin-bottom:9px">Switching Codex to Acme</div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="display:flex;align-items:center;gap:8px"><span style="width:14px;text-align:center;color:#30D158;font-weight:700">✓</span><span>Codex Desktop quit</span></div>
+      <div style="display:flex;align-items:center;gap:8px"><span style="width:14px;text-align:center;color:#30D158;font-weight:700">✓</span><span>Lab sign-in saved</span></div>
+      <div style="display:flex;align-items:center;gap:8px"><span style="width:14px;display:flex;justify-content:center"><span style="width:10px;height:10px;border-radius:50%;border:1.5px solid rgba(255,255,255,.22);border-top-color:rgba(255,255,255,.85)"></span></span><span>Activating Acme sign-in…</span></div>
+      <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.45)"><span style="width:14px;text-align:center">○</span><span>Verify identity</span></div>
+      <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.45)"><span style="width:14px;text-align:center">○</span><span>Reopen Codex Desktop</span></div>
+    </div>
+    <div style="margin-top:10px;font-size:11px;line-height:1.45;color:rgba(255,255,255,.55);text-wrap:pretty">Codex CLI sessions already running keep Lab until restarted.</div>
+  </div>
+</div>
+</div>
+
+<div id="5c" data-screen-label="5c Switch blocked" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#5c" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">5c</a>Blocked · Codex Desktop would not quit (a task is still running) · nothing has changed</div>
+<div style="width:436px;height:236px;position:relative;overflow:hidden;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);background:radial-gradient(120% 80% at 70% 10%,#4a4f58 0%,#2c3038 45%,#15171c 100%)">
+  <div style="position:absolute;top:0;left:0;right:0;height:24px;display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:0 10px;background:rgba(30,30,32,.55);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);color:rgba(255,255,255,.92);font-size:13px;font-variant-numeric:tabular-nums">
+    <div style="display:flex;align-items:center;gap:5px;height:22px;padding:0 6px;border-radius:4px"><div style="display:flex;gap:1.5px;align-items:flex-end"><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div></div><span style="color:#FF453A">2h 14m</span></div>
+    <div style="width:24px;height:11px;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55)"></div><span>9:41 AM</span>
+  </div>
+  <div style="position:absolute;top:33px;right:78px;width:300px;padding:12px 14px 12px;font-size:12px;color:rgba(255,255,255,.88);background:rgba(40,40,42,.9);backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);border:0.5px solid rgba(255,255,255,.14);border-radius:10px;box-shadow:0 12px 34px rgba(0,0,0,.5)">
+    <div style="position:absolute;top:-7px;right:36px;width:14px;height:14px;transform:rotate(45deg);background:rgba(48,48,50,.98);border-left:0.5px solid rgba(255,255,255,.16);border-top:0.5px solid rgba(255,255,255,.16);border-radius:2px 0 0 0"></div>
+    <div style="font-weight:600;font-size:13px;margin-bottom:6px">Couldn’t switch to Acme</div>
+    <p style="margin:0;line-height:1.45;text-wrap:pretty">Codex Desktop didn’t quit within 30 seconds, probably because a task is still running. Finish or stop it, then try again. Codex is still signed in as Lab.</p>
+    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:12px">
+      <div style="padding:3px 12px;border-radius:5px;background:rgba(255,255,255,.13);box-shadow:0 0 0 0.5px rgba(255,255,255,.08),0 0.5px 1px rgba(0,0,0,.3)">Cancel</div>
+      <div style="padding:3px 12px;border-radius:5px;background:#0A84FF;color:#fff;box-shadow:0 0.5px 1px rgba(0,0,0,.3)">Try Again</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div id="5d" data-screen-label="5d Notes" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#5d" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">5d</a>Answers and how switching works</div>
+<div style="width:400px;padding:18px 20px 20px;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);font-size:12px;line-height:1.5;color:#2a2a2a;display:flex;flex-direction:column;gap:9px;text-wrap:pretty">
+  <div><b>“Open Dashboard”</b> was PRD FR-11: one link per provider that opens the vendor’s own usage page in your browser (for Codex, the usage page on chatgpt.com). Nothing embedded. Renamed to say where it goes.</div>
+  <div><b>The ↺ glyph</b> is not a button. It is the same symbol as the ↺ column: reset-credit inventory the vendor reports. Rations only reads it; redeeming happens inside Codex. The submenu now says “2 reset credits · redeem in Codex” or “No reset credits”.</div>
+  <div><b>Switching accounts.</b> Codex keeps the active sign-in in one file, <span style="font-family:ui-monospace,Menlo,monospace;font-size:11px">~/.codex/auth.json</span>. Every open-source switcher works by saving a copy of that file per account and swapping it: liuzhao1225/codex-account-switcher (native Swift menu bar app, macOS 14+), Lampese/codex-switcher, denysdovhan/codex-account, Sls0n/codex-account-switcher, MinhVuong1997/codex-profiles-bar.</div>
+  <div><b>The sequence</b> shown in <a href="#5b" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:2px 6px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">5b</a> follows codex-account-switcher’s SwitchService: quit Codex Desktop (a normal quit request, wait up to 30 s, never force-kill) → save the current auth.json as Lab → write Acme’s → verify the identity Codex now reports → commit → reopen Codex.app. If verification fails, Lab’s file is restored. Codex CLI processes already running keep the account they loaded; new ones pick up Acme.</div>
+  <div><b>Blocked switch</b> (<a href="#5c" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:2px 6px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">5c</a>): if Desktop is mid-task it refuses to quit; the switch stops before any credential changes.</div>
+  <div><b>Scope.</b> Codex only for now. Claude Code, Antigravity and Grok store sign-ins differently, so their submenus show no launch action until an adapter supports it. Adding an account is a Settings job: sign in once through Codex, then “Save current sign-in as…”.</div>
+  <div><b>Also in this turn.</b> The blue dot marks the account Codex is currently signed in as. Title and column headers removed as requested.</div>
+</div>
+</div>
+
+</div>
+<p style="margin:22px 0 0;font:12px/1.5 system-ui,sans-serif;color:rgba(0,0,0,.5)">Try next: “hover Lab in <a href="#5a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">5a</a> (the active account)” · “settings page for saving and nicknaming Codex accounts” · “light appearance”</p>
+</section>
+<section id="t4" style="padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:10px;margin:0 0 20px"><a href="#t4" style="font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none">4</a><span style="font:600 13px/1.2 system-ui,sans-serif;color:#1a1a1a"><a href="#3c" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">3c</a> with the two window columns merged into one stack · 5-hour above weekly · dashed line where an account has no 5-hour window</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
+
+<div id="4a" data-screen-label="4a Menu stacked bars" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#4a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">4a</a>One bar column, two bars per account (5-hour above weekly) · no title or column headers · hover submenu unchanged</div>
+<div style="width:900px;height:540px;position:relative;overflow:hidden;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);background:radial-gradient(120% 80% at 70% 10%,#4a4f58 0%,#2c3038 45%,#15171c 100%)">
+  <div style="position:absolute;top:0;left:0;right:0;height:24px;display:flex;align-items:center;gap:18px;padding:0 10px 0 14px;background:rgba(30,30,32,.55);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);color:rgba(255,255,255,.92);font-size:13px">
+    <div style="width:13px;height:15px;border-radius:4px 4px 5px 5px;background:rgba(255,255,255,.9)"></div><span style="font-weight:700">Finder</span><span>File</span><span>Edit</span><span>View</span><span>Go</span><span>Window</span><span>Help</span><span style="flex:1"></span>
+    <div style="display:flex;align-items:center;gap:5px;height:22px;padding:0 6px;border-radius:4px;background:rgba(255,255,255,.28);font-variant-numeric:tabular-nums"><div style="display:flex;gap:1.5px;align-items:flex-end"><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div></div><span style="color:#FF453A">2h 14m</span></div>
+    <div style="width:24px;height:11px;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55)"></div><span style="font-variant-numeric:tabular-nums">Sun 13 Sep&nbsp;&nbsp;9:41 AM</span>
+  </div>
+  <div style="position:absolute;top:27px;right:60px;width:336px;padding:5px;background:rgba(50,50,52,.85);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-radius:7px;border:0.5px solid rgba(255,255,255,.15);box-shadow:0 8px 24px rgba(0,0,0,.5);color:rgba(255,255,255,.9);font-size:13px">
+    <sc-for list="{{ menu3 }}" as="p" hint-placeholder-count="4">
+      <div style="height:20px;display:flex;align-items:center;gap:6px;padding:0 9px;font-size:11px;font-weight:600;color:rgba(255,255,255,.5)"><span>{{ p.name }}</span><span style="font-weight:400">{{ p.fresh }}</span></div>
+      <sc-for list="{{ p.items }}" as="i" hint-placeholder-count="3">
+        <div style="display:flex;align-items:center;gap:8px;height:22px;padding:0 9px;border-radius:4px;background:{{ i.bg }}">
+          <span style="width:90px;flex:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:{{ i.labelColor }}">{{ i.label }}</span>
+          <div style="width:108px;flex:none;display:flex;flex-direction:column;gap:3px">
+            <sc-if value="{{ i.c5.has }}" hint-placeholder-val="{{ true }}"><div style="height:5px;border-radius:2.5px;background:{{ i.c5.track }};overflow:hidden"><div style="height:100%;border-radius:2.5px;width:{{ i.c5.width }};background:{{ i.c5.fill }}"></div></div></sc-if>
+            <sc-if value="{{ i.c5.dash }}" hint-placeholder-val="{{ false }}"><div style="height:5px;display:flex;align-items:center"><div style="width:100%;border-top:1px dashed {{ i.c5.pctColor }}"></div></div></sc-if>
+            <div style="height:5px;border-radius:2.5px;background:{{ i.cwk.track }};overflow:hidden"><div style="height:100%;border-radius:2.5px;width:{{ i.cwk.width }};background:{{ i.cwk.fill }}"></div></div>
+          </div>
+          <span style="width:56px;flex:none;text-align:right;font-size:11.5px;font-variant-numeric:tabular-nums;white-space:nowrap;color:{{ i.resetColor }}">{{ i.reset }}</span>
+          <span style="width:16px;flex:none;text-align:right;font-size:11.5px;font-variant-numeric:tabular-nums;color:{{ i.creditsColor }}">{{ i.credits }}</span>
+          <span style="width:7px;flex:none;font-size:9px;color:{{ i.chev }}">▶</span>
+        </div>
+      </sc-for>
+      <div style="height:1px;background:rgba(255,255,255,.14);margin:5px 9px"></div>
+    </sc-for>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px"><span>Refresh</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘R</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px"><span>Settings…</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘,</span></div>
+    <div style="height:1px;background:rgba(255,255,255,.14);margin:5px 9px"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px"><span>Quit Rations</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘Q</span></div>
+    <div style="position:absolute;top:20px;right:calc(100% + 3px);width:332px;padding:5px;background:rgba(50,50,52,.85);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-radius:7px;border:0.5px solid rgba(255,255,255,.15);box-shadow:0 8px 24px rgba(0,0,0,.5);color:rgba(255,255,255,.9);font-size:13px">
+      <div style="display:flex;align-items:baseline;gap:6px;height:22px;padding:0 9px"><span style="font-weight:600">Lab</span><span style="font-size:11px;color:rgba(255,255,255,.55)">Codex Pro · c•••@lab.ai</span></div>
+      <div style="padding:3px 9px 7px;display:flex;flex-direction:column;gap:4px;font-variant-numeric:tabular-nums">
+        <div style="display:flex;justify-content:space-between;font-size:12px"><span>5-hour</span><span style="color:#FF453A;font-weight:600">0% left · capped</span></div>
+        <div style="height:4px;border-radius:2px;background:rgba(255,69,58,.3)"></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.6)"><span>Resets Sun 13 Sep, 11:55 AM</span><span>in 2h 14m</span></div>
+      </div>
+      <div style="padding:3px 9px 7px;display:flex;flex-direction:column;gap:4px;font-variant-numeric:tabular-nums">
+        <div style="display:flex;justify-content:space-between;font-size:12px"><span>Weekly</span><span>38% left</span></div>
+        <div style="height:4px;border-radius:2px;background:rgba(255,255,255,.12);overflow:hidden"><div style="height:100%;width:38%;border-radius:2px;background:#0A84FF"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.6)"><span>Resets Thu 17 Sep, 9:00 AM</span><span>in 3d 23h</span></div>
+      </div>
+      <div style="height:1px;background:rgba(255,255,255,.14);margin:3px 9px 5px"></div>
+      <div style="display:flex;align-items:center;height:22px;padding:0 9px;font-size:12px;color:rgba(255,255,255,.55)">2 reset credits · redeem in Codex · Updated 2m ago</div>
+      <div style="height:1px;background:rgba(255,255,255,.14);margin:5px 9px"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px"><span>Usage page on chatgpt.com</span><span style="color:rgba(255,255,255,.5)">↗</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+<p style="margin:22px 0 0;font:12px/1.5 system-ui,sans-serif;color:rgba(0,0,0,.5)">Try next: “drop the provider header rows in <a href="#4a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">4a</a>, monogram before each account” · “light appearance” · “show a weekly-only account hovered”</p>
+</section>
+<section id="t3" style="padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:10px;margin:0 0 20px"><a href="#t3" style="font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none">3</a><span style="font:600 13px/1.2 system-ui,sans-serif;color:#1a1a1a">Iterating on <a href="#2c" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">2c</a> · symbols over text · three weekly-only Codex accounts, one with both windows · detail lives in the hover submenu</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
+
+<div id="3a" data-screen-label="3a Menu with bars and numbers" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#3a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">3a</a>Columns · one header row names the windows once · mini bar + percent per cell · countdown only for the tightest window</div>
+<div style="width:900px;height:540px;position:relative;overflow:hidden;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);background:radial-gradient(120% 80% at 70% 10%,#4a4f58 0%,#2c3038 45%,#15171c 100%)">
+  <div style="position:absolute;top:0;left:0;right:0;height:24px;display:flex;align-items:center;gap:18px;padding:0 10px 0 14px;background:rgba(30,30,32,.55);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);color:rgba(255,255,255,.92);font-size:13px">
+    <div style="width:13px;height:15px;border-radius:4px 4px 5px 5px;background:rgba(255,255,255,.9)"></div><span style="font-weight:700">Finder</span><span>File</span><span>Edit</span><span>View</span><span>Go</span><span>Window</span><span>Help</span><span style="flex:1"></span>
+    <div style="display:flex;align-items:center;gap:5px;height:22px;padding:0 6px;border-radius:4px;background:rgba(255,255,255,.28);font-variant-numeric:tabular-nums"><div style="display:flex;gap:1.5px;align-items:flex-end"><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div></div><span style="color:#FF453A;font-weight:500">0%</span><span style="color:rgba(255,255,255,.6)">·</span><span>2h 14m</span></div>
+    <div style="width:24px;height:11px;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55)"></div><span style="font-variant-numeric:tabular-nums">Sun 13 Sep&nbsp;&nbsp;9:41 AM</span>
+  </div>
+  <div style="position:absolute;top:27px;right:60px;width:390px;padding:5px;background:rgba(50,50,52,.85);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-radius:7px;border:0.5px solid rgba(255,255,255,.15);box-shadow:0 8px 24px rgba(0,0,0,.5);color:rgba(255,255,255,.9);font-size:13px">
+    <div style="display:flex;align-items:baseline;gap:6px;height:22px;padding:0 9px"><span style="font-weight:600">Rations</span><span style="font-size:11px;color:rgba(255,255,255,.5)">what’s left</span></div>
+    <div style="display:flex;align-items:center;gap:8px;height:18px;padding:0 9px;font-size:9.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4)"><span style="width:90px;flex:none">Account</span><span style="width:66px;flex:none">5-hour</span><span style="width:66px;flex:none">Weekly</span><span style="width:56px;flex:none;text-align:right">Resets</span><span style="width:16px;flex:none;text-align:right;font-size:11px;letter-spacing:0">↺</span><span style="width:7px;flex:none"></span></div>
+    <sc-for list="{{ menu3 }}" as="p" hint-placeholder-count="4">
+      <div style="height:20px;display:flex;align-items:center;gap:6px;padding:0 9px;font-size:11px;font-weight:600;color:rgba(255,255,255,.5)"><span>{{ p.name }}</span><span style="font-weight:400">{{ p.fresh }}</span></div>
+      <sc-for list="{{ p.items }}" as="i" hint-placeholder-count="3">
+        <div style="display:flex;align-items:center;gap:8px;height:22px;padding:0 9px;border-radius:4px;background:{{ i.bg }}">
+          <span style="width:90px;flex:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:{{ i.labelColor }}">{{ i.label }}</span>
+          <div style="width:66px;flex:none;display:flex;align-items:center;gap:6px;font-size:11.5px;font-variant-numeric:tabular-nums">
+            <sc-if value="{{ i.c5.has }}" hint-placeholder-val="{{ true }}"><div style="width:26px;height:5px;border-radius:2.5px;background:{{ i.c5.track }};overflow:hidden"><div style="height:100%;border-radius:2.5px;width:{{ i.c5.width }};background:{{ i.c5.fill }}"></div></div><span style="color:{{ i.c5.pctColor }}">{{ i.c5.pctText }}</span></sc-if>
+            <sc-if value="{{ i.c5.none }}" hint-placeholder-val="{{ false }}"><span style="padding-left:9px;color:{{ i.c5.pctColor }}">—</span></sc-if>
+          </div>
+          <div style="width:66px;flex:none;display:flex;align-items:center;gap:6px;font-size:11.5px;font-variant-numeric:tabular-nums">
+            <sc-if value="{{ i.cwk.has }}" hint-placeholder-val="{{ true }}"><div style="width:26px;height:5px;border-radius:2.5px;background:{{ i.cwk.track }};overflow:hidden"><div style="height:100%;border-radius:2.5px;width:{{ i.cwk.width }};background:{{ i.cwk.fill }}"></div></div><span style="color:{{ i.cwk.pctColor }}">{{ i.cwk.pctText }}</span></sc-if>
+          </div>
+          <span style="width:56px;flex:none;text-align:right;font-size:11.5px;font-variant-numeric:tabular-nums;white-space:nowrap;color:{{ i.resetColor }}">{{ i.reset }}</span>
+          <span style="width:16px;flex:none;text-align:right;font-size:11.5px;font-variant-numeric:tabular-nums;color:{{ i.creditsColor }}">{{ i.credits }}</span>
+          <span style="width:7px;flex:none;font-size:9px;color:{{ i.chev }}">▶</span>
+        </div>
+      </sc-for>
+      <div style="height:1px;background:rgba(255,255,255,.14);margin:5px 9px"></div>
+    </sc-for>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px"><span>Refresh</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘R</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px"><span>Settings…</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘,</span></div>
+    <div style="height:1px;background:rgba(255,255,255,.14);margin:5px 9px"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px"><span>Quit Rations</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘Q</span></div>
+    <div style="position:absolute;top:60px;right:calc(100% + 3px);width:332px;padding:5px;background:rgba(50,50,52,.85);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-radius:7px;border:0.5px solid rgba(255,255,255,.15);box-shadow:0 8px 24px rgba(0,0,0,.5);color:rgba(255,255,255,.9);font-size:13px">
+      <div style="display:flex;align-items:baseline;gap:6px;height:22px;padding:0 9px"><span style="font-weight:600">Lab</span><span style="font-size:11px;color:rgba(255,255,255,.55)">Codex Pro · c•••@lab.ai</span></div>
+      <div style="padding:3px 9px 7px;display:flex;flex-direction:column;gap:4px;font-variant-numeric:tabular-nums">
+        <div style="display:flex;justify-content:space-between;font-size:12px"><span>5-hour</span><span style="color:#FF453A;font-weight:600">0% left · capped</span></div>
+        <div style="height:4px;border-radius:2px;background:rgba(255,69,58,.3)"></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.6)"><span>Resets Sun 13 Sep, 11:55 AM</span><span>in 2h 14m</span></div>
+      </div>
+      <div style="padding:3px 9px 7px;display:flex;flex-direction:column;gap:4px;font-variant-numeric:tabular-nums">
+        <div style="display:flex;justify-content:space-between;font-size:12px"><span>Weekly</span><span>38% left</span></div>
+        <div style="height:4px;border-radius:2px;background:rgba(255,255,255,.12);overflow:hidden"><div style="height:100%;width:38%;border-radius:2px;background:#0A84FF"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.6)"><span>Resets Thu 17 Sep, 9:00 AM</span><span>in 3d 23h</span></div>
+      </div>
+      <div style="height:1px;background:rgba(255,255,255,.14);margin:3px 9px 5px"></div>
+      <div style="display:flex;align-items:center;height:22px;padding:0 9px;font-size:12px;color:rgba(255,255,255,.55)">2 reset credits · redeem in Codex · Updated 2m ago</div>
+      <div style="height:1px;background:rgba(255,255,255,.14);margin:5px 9px"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px"><span>Usage page on chatgpt.com</span><span style="color:rgba(255,255,255,.5)">↗</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div id="3b" data-screen-label="3b Menu with rings" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#3b" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">3b</a>Rings · each window is a small ring that empties as quota is spent · same columns and submenu</div>
+<div style="width:900px;height:540px;position:relative;overflow:hidden;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);background:radial-gradient(120% 80% at 70% 10%,#4a4f58 0%,#2c3038 45%,#15171c 100%)">
+  <div style="position:absolute;top:0;left:0;right:0;height:24px;display:flex;align-items:center;gap:18px;padding:0 10px 0 14px;background:rgba(30,30,32,.55);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);color:rgba(255,255,255,.92);font-size:13px">
+    <div style="width:13px;height:15px;border-radius:4px 4px 5px 5px;background:rgba(255,255,255,.9)"></div><span style="font-weight:700">Finder</span><span>File</span><span>Edit</span><span>View</span><span>Go</span><span>Window</span><span>Help</span><span style="flex:1"></span>
+    <div style="display:flex;align-items:center;gap:5px;height:22px;padding:0 6px;border-radius:4px;background:rgba(255,255,255,.28);font-variant-numeric:tabular-nums"><div style="width:12px;height:12px;border-radius:50%;background:conic-gradient(#FF453A 0 0%, rgba(255,69,58,.45) 0);mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 3px))"></div><span style="color:#FF453A;font-weight:500">0%</span><span style="color:rgba(255,255,255,.6)">·</span><span>2h 14m</span></div>
+    <div style="width:24px;height:11px;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55)"></div><span style="font-variant-numeric:tabular-nums">Sun 13 Sep&nbsp;&nbsp;9:41 AM</span>
+  </div>
+  <div style="position:absolute;top:27px;right:60px;width:390px;padding:5px;background:rgba(50,50,52,.85);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-radius:7px;border:0.5px solid rgba(255,255,255,.15);box-shadow:0 8px 24px rgba(0,0,0,.5);color:rgba(255,255,255,.9);font-size:13px">
+    <div style="display:flex;align-items:baseline;gap:6px;height:22px;padding:0 9px"><span style="font-weight:600">Rations</span><span style="font-size:11px;color:rgba(255,255,255,.5)">what’s left</span></div>
+    <div style="display:flex;align-items:center;gap:8px;height:18px;padding:0 9px;font-size:9.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4)"><span style="width:90px;flex:none">Account</span><span style="width:66px;flex:none">5-hour</span><span style="width:66px;flex:none">Weekly</span><span style="width:56px;flex:none;text-align:right">Resets</span><span style="width:16px;flex:none;text-align:right;font-size:11px;letter-spacing:0">↺</span><span style="width:7px;flex:none"></span></div>
+    <sc-for list="{{ menu3 }}" as="p" hint-placeholder-count="4">
+      <div style="height:20px;display:flex;align-items:center;gap:6px;padding:0 9px;font-size:11px;font-weight:600;color:rgba(255,255,255,.5)"><span>{{ p.name }}</span><span style="font-weight:400">{{ p.fresh }}</span></div>
+      <sc-for list="{{ p.items }}" as="i" hint-placeholder-count="3">
+        <div style="display:flex;align-items:center;gap:8px;height:22px;padding:0 9px;border-radius:4px;background:{{ i.bg }}">
+          <span style="width:90px;flex:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:{{ i.labelColor }}">{{ i.label }}</span>
+          <div style="width:66px;flex:none;display:flex;align-items:center;gap:6px;font-size:11.5px;font-variant-numeric:tabular-nums">
+            <sc-if value="{{ i.c5.has }}" hint-placeholder-val="{{ true }}"><div style="width:14px;height:14px;border-radius:50%;background:{{ i.c5.ring }};mask:radial-gradient(farthest-side,transparent calc(100% - 3.5px),#000 calc(100% - 3.5px))"></div><span style="color:{{ i.c5.pctColor }}">{{ i.c5.pctText }}</span></sc-if>
+            <sc-if value="{{ i.c5.none }}" hint-placeholder-val="{{ false }}"><span style="padding-left:3px;color:{{ i.c5.pctColor }}">—</span></sc-if>
+          </div>
+          <div style="width:66px;flex:none;display:flex;align-items:center;gap:6px;font-size:11.5px;font-variant-numeric:tabular-nums">
+            <sc-if value="{{ i.cwk.has }}" hint-placeholder-val="{{ true }}"><div style="width:14px;height:14px;border-radius:50%;background:{{ i.cwk.ring }};mask:radial-gradient(farthest-side,transparent calc(100% - 3.5px),#000 calc(100% - 3.5px))"></div><span style="color:{{ i.cwk.pctColor }}">{{ i.cwk.pctText }}</span></sc-if>
+          </div>
+          <span style="width:56px;flex:none;text-align:right;font-size:11.5px;font-variant-numeric:tabular-nums;white-space:nowrap;color:{{ i.resetColor }}">{{ i.reset }}</span>
+          <span style="width:16px;flex:none;text-align:right;font-size:11.5px;font-variant-numeric:tabular-nums;color:{{ i.creditsColor }}">{{ i.credits }}</span>
+          <span style="width:7px;flex:none;font-size:9px;color:{{ i.chev }}">▶</span>
+        </div>
+      </sc-for>
+      <div style="height:1px;background:rgba(255,255,255,.14);margin:5px 9px"></div>
+    </sc-for>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px"><span>Refresh</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘R</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px"><span>Settings…</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘,</span></div>
+    <div style="height:1px;background:rgba(255,255,255,.14);margin:5px 9px"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px"><span>Quit Rations</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘Q</span></div>
+    <div style="position:absolute;top:60px;right:calc(100% + 3px);width:332px;padding:5px;background:rgba(50,50,52,.85);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-radius:7px;border:0.5px solid rgba(255,255,255,.15);box-shadow:0 8px 24px rgba(0,0,0,.5);color:rgba(255,255,255,.9);font-size:13px">
+      <div style="display:flex;align-items:baseline;gap:6px;height:22px;padding:0 9px"><span style="font-weight:600">Lab</span><span style="font-size:11px;color:rgba(255,255,255,.55)">Codex Pro · c•••@lab.ai</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:4px 9px 6px;font-variant-numeric:tabular-nums">
+        <div style="width:34px;height:34px;border-radius:50%;flex:none;background:conic-gradient(#FF453A 0 0%, rgba(255,69,58,.3) 0);mask:radial-gradient(farthest-side,transparent calc(100% - 5px),#000 calc(100% - 5px))"></div>
+        <div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between;font-size:12px"><span>5-hour</span><span style="color:#FF453A;font-weight:600">0% left · capped</span></div><div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.6)"><span>Resets Sun 13 Sep, 11:55 AM</span><span>in 2h 14m</span></div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:4px 9px 6px;font-variant-numeric:tabular-nums">
+        <div style="width:34px;height:34px;border-radius:50%;flex:none;background:conic-gradient(#0A84FF 0 38%, rgba(255,255,255,.14) 0);mask:radial-gradient(farthest-side,transparent calc(100% - 5px),#000 calc(100% - 5px))"></div>
+        <div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between;font-size:12px"><span>Weekly</span><span>38% left</span></div><div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.6)"><span>Resets Thu 17 Sep, 9:00 AM</span><span>in 3d 23h</span></div></div>
+      </div>
+      <div style="height:1px;background:rgba(255,255,255,.14);margin:3px 9px 5px"></div>
+      <div style="display:flex;align-items:center;height:22px;padding:0 9px;font-size:12px;color:rgba(255,255,255,.55)">2 reset credits · redeem in Codex · Updated 2m ago</div>
+      <div style="height:1px;background:rgba(255,255,255,.14);margin:5px 9px"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px"><span>Usage page on chatgpt.com</span><span style="color:rgba(255,255,255,.5)">↗</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div id="3c" data-screen-label="3c Menu bars only" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#3c" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">3c</a>Bars only · no percentages on the surface, just fill and color · the tightest countdown and ↺ are the only text · numbers on hover</div>
+<div style="width:900px;height:540px;position:relative;overflow:hidden;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);background:radial-gradient(120% 80% at 70% 10%,#4a4f58 0%,#2c3038 45%,#15171c 100%)">
+  <div style="position:absolute;top:0;left:0;right:0;height:24px;display:flex;align-items:center;gap:18px;padding:0 10px 0 14px;background:rgba(30,30,32,.55);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);color:rgba(255,255,255,.92);font-size:13px">
+    <div style="width:13px;height:15px;border-radius:4px 4px 5px 5px;background:rgba(255,255,255,.9)"></div><span style="font-weight:700">Finder</span><span>File</span><span>Edit</span><span>View</span><span>Go</span><span>Window</span><span>Help</span><span style="flex:1"></span>
+    <div style="display:flex;align-items:center;gap:5px;height:22px;padding:0 6px;border-radius:4px;background:rgba(255,255,255,.28);font-variant-numeric:tabular-nums"><div style="display:flex;gap:1.5px;align-items:flex-end"><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div></div><span style="color:#FF453A">2h 14m</span></div>
+    <div style="width:24px;height:11px;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55)"></div><span style="font-variant-numeric:tabular-nums">Sun 13 Sep&nbsp;&nbsp;9:41 AM</span>
+  </div>
+  <div style="position:absolute;top:27px;right:60px;width:390px;padding:5px;background:rgba(50,50,52,.85);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-radius:7px;border:0.5px solid rgba(255,255,255,.15);box-shadow:0 8px 24px rgba(0,0,0,.5);color:rgba(255,255,255,.9);font-size:13px">
+    <div style="display:flex;align-items:baseline;gap:6px;height:22px;padding:0 9px"><span style="font-weight:600">Rations</span><span style="font-size:11px;color:rgba(255,255,255,.5)">what’s left</span></div>
+    <div style="display:flex;align-items:center;gap:8px;height:18px;padding:0 9px;font-size:9.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4)"><span style="width:90px;flex:none">Account</span><span style="width:66px;flex:none">5-hour</span><span style="width:66px;flex:none">Weekly</span><span style="width:56px;flex:none;text-align:right">Resets</span><span style="width:16px;flex:none;text-align:right;font-size:11px;letter-spacing:0">↺</span><span style="width:7px;flex:none"></span></div>
+    <sc-for list="{{ menu3 }}" as="p" hint-placeholder-count="4">
+      <div style="height:20px;display:flex;align-items:center;gap:6px;padding:0 9px;font-size:11px;font-weight:600;color:rgba(255,255,255,.5)"><span>{{ p.name }}</span><span style="font-weight:400">{{ p.fresh }}</span></div>
+      <sc-for list="{{ p.items }}" as="i" hint-placeholder-count="3">
+        <div style="display:flex;align-items:center;gap:8px;height:22px;padding:0 9px;border-radius:4px;background:{{ i.bg }}">
+          <span style="width:90px;flex:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:{{ i.labelColor }}">{{ i.label }}</span>
+          <div style="width:66px;flex:none;display:flex;align-items:center;font-size:11.5px">
+            <sc-if value="{{ i.c5.has }}" hint-placeholder-val="{{ true }}"><div style="width:58px;height:6px;border-radius:3px;background:{{ i.c5.track }};overflow:hidden"><div style="height:100%;border-radius:3px;width:{{ i.c5.width }};background:{{ i.c5.fill }}"></div></div></sc-if>
+            <sc-if value="{{ i.c5.none }}" hint-placeholder-val="{{ false }}"><span style="padding-left:25px;color:{{ i.c5.pctColor }}">—</span></sc-if>
+          </div>
+          <div style="width:66px;flex:none;display:flex;align-items:center">
+            <sc-if value="{{ i.cwk.has }}" hint-placeholder-val="{{ true }}"><div style="width:58px;height:6px;border-radius:3px;background:{{ i.cwk.track }};overflow:hidden"><div style="height:100%;border-radius:3px;width:{{ i.cwk.width }};background:{{ i.cwk.fill }}"></div></div></sc-if>
+          </div>
+          <span style="width:56px;flex:none;text-align:right;font-size:11.5px;font-variant-numeric:tabular-nums;white-space:nowrap;color:{{ i.resetColor }}">{{ i.reset }}</span>
+          <span style="width:16px;flex:none;text-align:right;font-size:11.5px;font-variant-numeric:tabular-nums;color:{{ i.creditsColor }}">{{ i.credits }}</span>
+          <span style="width:7px;flex:none;font-size:9px;color:{{ i.chev }}">▶</span>
+        </div>
+      </sc-for>
+      <div style="height:1px;background:rgba(255,255,255,.14);margin:5px 9px"></div>
+    </sc-for>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px"><span>Refresh</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘R</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px"><span>Settings…</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘,</span></div>
+    <div style="height:1px;background:rgba(255,255,255,.14);margin:5px 9px"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px"><span>Quit Rations</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘Q</span></div>
+    <div style="position:absolute;top:60px;right:calc(100% + 3px);width:332px;padding:5px;background:rgba(50,50,52,.85);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-radius:7px;border:0.5px solid rgba(255,255,255,.15);box-shadow:0 8px 24px rgba(0,0,0,.5);color:rgba(255,255,255,.9);font-size:13px">
+      <div style="display:flex;align-items:baseline;gap:6px;height:22px;padding:0 9px"><span style="font-weight:600">Lab</span><span style="font-size:11px;color:rgba(255,255,255,.55)">Codex Pro · c•••@lab.ai</span></div>
+      <div style="padding:3px 9px 7px;display:flex;flex-direction:column;gap:4px;font-variant-numeric:tabular-nums">
+        <div style="display:flex;justify-content:space-between;font-size:12px"><span>5-hour</span><span style="color:#FF453A;font-weight:600">0% left · capped</span></div>
+        <div style="height:4px;border-radius:2px;background:rgba(255,69,58,.3)"></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.6)"><span>Resets Sun 13 Sep, 11:55 AM</span><span>in 2h 14m</span></div>
+      </div>
+      <div style="padding:3px 9px 7px;display:flex;flex-direction:column;gap:4px;font-variant-numeric:tabular-nums">
+        <div style="display:flex;justify-content:space-between;font-size:12px"><span>Weekly</span><span>38% left</span></div>
+        <div style="height:4px;border-radius:2px;background:rgba(255,255,255,.12);overflow:hidden"><div style="height:100%;width:38%;border-radius:2px;background:#0A84FF"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.6)"><span>Resets Thu 17 Sep, 9:00 AM</span><span>in 3d 23h</span></div>
+      </div>
+      <div style="height:1px;background:rgba(255,255,255,.14);margin:3px 9px 5px"></div>
+      <div style="display:flex;align-items:center;height:22px;padding:0 9px;font-size:12px;color:rgba(255,255,255,.55)">2 reset credits · redeem in Codex · Updated 2m ago</div>
+      <div style="height:1px;background:rgba(255,255,255,.14);margin:5px 9px"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px"><span>Usage page on chatgpt.com</span><span style="color:rgba(255,255,255,.5)">↗</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div id="3d" data-screen-label="3d Notes" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#3d" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">3d</a>What changed</div>
+<div style="width:380px;padding:18px 20px 20px;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);font-size:12px;line-height:1.5;color:#2a2a2a;display:flex;flex-direction:column;gap:9px;text-wrap:pretty">
+  <div><b>Words removed from the surface.</b> Window names are said once, in a column header under the title. Percentages lose “left” because the title says “what’s left” and every bar and ring drains. Freshness shrinks to “2m ago” beside the provider name. Reset credits are a bare count under ↺; blank when a vendor does not expose them.</div>
+  <div><b>Fixed columns.</b> 5-hour and Weekly are global columns, so a weekly-only Codex account simply shows “—” in the 5-hour column and the eye can run straight down the Weekly column across all accounts. Claude’s model-scoped weekly is an indented “↳ Opus” sub-row rather than a third column.</div>
+  <div><b>One countdown per row.</b> The Resets column shows only the tightest window’s countdown, in that window’s color. Everything else about time lives in the hover submenu.</div>
+  <div><b>Hover submenu.</b> Account, plan, redacted email; each window with its full label, exact percent, bar or ring, the local calendar date and time of the next reset and the relative countdown; reset credits spelled out; freshness and source; Open Dashboard. This is where the text went.</div>
+  <div><b>Menu bar.</b> <a href="#3a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:2px 6px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">3a</a> keeps the segmented meter, <a href="#3b" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:2px 6px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">3b</a> swaps it for a ring, <a href="#3c" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:2px 6px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">3c</a> drops the percent and shows only the meter and the countdown when capped.</div>
+</div>
+</div>
+
+</div>
+<p style="margin:22px 0 0;font:12px/1.5 system-ui,sans-serif;color:rgba(0,0,0,.5)">Try next: “<a href="#3a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">3a</a> without the provider header rows, monogram in front of each account instead” · “light appearance of <a href="#3b" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">3b</a>” · “submenu as a hover card with the account’s history of resets today”</p>
+</section>
+<section id="t2" style="padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:10px;margin:0 0 20px"><a href="#t2" style="font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none">2</a><span style="font:600 13px/1.2 system-ui,sans-serif;color:#1a1a1a">Condensed · one line per account · ↺ reset availability on every row · bars show what is left</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
+
+<div id="2a" data-screen-label="2a Ledger" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#2a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">2a</a>Ledger · accounts as rows, windows as columns · hovering a cell shows the absolute reset time</div>
+<div style="padding:34px 28px 28px;border-radius:8px;background:radial-gradient(120% 80% at 70% 10%,#4a4f58 0%,#2c3038 45%,#15171c 100%);box-shadow:0 1px 3px rgba(0,0,0,.1)">
+  <div style="position:relative;width:400px;font-size:13px;color:rgba(255,255,255,.85);background:rgba(40,40,42,.86);backdrop-filter:blur(40px) saturate(1.3);-webkit-backdrop-filter:blur(40px) saturate(1.3);border:0.5px solid rgba(255,255,255,.14);border-radius:11px;box-shadow:0 12px 40px rgba(0,0,0,.55),0 0 0 0.5px rgba(0,0,0,.6)">
+    <div style="position:absolute;top:-7px;left:50%;width:14px;height:14px;margin-left:-7px;transform:rotate(45deg);background:rgba(48,48,50,.98);border-left:0.5px solid rgba(255,255,255,.16);border-top:0.5px solid rgba(255,255,255,.16);border-radius:2px 0 0 0"></div>
+    <div style="display:flex;align-items:center;gap:8px;padding:11px 14px 9px;border-bottom:1px solid rgba(255,255,255,.09)">
+      <div style="font-weight:600;flex:1">Rations</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.55)">Updated 2m ago</div>
+      <div style="padding:2px 9px;font-size:12px;border-radius:5px;background:rgba(255,255,255,.13);box-shadow:0 0 0 0.5px rgba(255,255,255,.08),0 0.5px 1px rgba(0,0,0,.3)">Refresh</div>
+    </div>
+    <sc-for list="{{ ledger }}" as="p" hint-placeholder-count="4">
+      <div style="padding:9px 0 5px;border-bottom:1px solid rgba(255,255,255,.09)">
+        <div style="display:flex;align-items:center;gap:7px;padding:0 14px 5px">
+          <div style="width:18px;height:18px;border-radius:5px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:rgba(255,255,255,.7)">{{ p.mono }}</div>
+          <span style="font-weight:600">{{ p.name }}</span>
+          <span style="font-size:11px;color:rgba(255,255,255,.55)">{{ p.meta }}</span>
+          <span style="flex:1"></span>
+          <span style="font-size:11px;color:rgba(255,255,255,.55)">{{ p.fresh }}</span>
+          <span style="font-size:11px;color:rgba(255,255,255,.55)">↗</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:10px;padding:0 14px 2px;font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.4)">
+          <span style="width:92px;flex:none">Account</span>
+          <sc-for list="{{ p.cols }}" as="c" hint-placeholder-count="2"><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ c.name }}</span></sc-for>
+          <span style="width:24px;flex:none;text-align:right;font-size:11px;letter-spacing:0">↺</span>
+        </div>
+        <sc-for list="{{ p.rows }}" as="r" hint-placeholder-count="2">
+          <div style="display:flex;align-items:center;gap:10px;padding:5px 14px;min-height:30px" style-hover="background:rgba(255,255,255,.05)">
+            <div style="width:92px;flex:none;min-width:0"><div style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.label }}</div><div style="font-size:10px;color:rgba(255,255,255,.55);white-space:nowrap">{{ r.plan }}</div></div>
+            <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="2">
+              <div style="flex:1;min-width:0;position:relative">
+                <div style="display:flex;justify-content:space-between;align-items:baseline;gap:4px;font-size:11px;font-variant-numeric:tabular-nums;white-space:nowrap"><span style="font-weight:{{ c.weight }};color:{{ c.pctColor }}">{{ c.pct }}</span><span style="color:{{ c.cdColor }}">{{ c.cd }}</span></div>
+                <div style="height:3px;border-radius:1.5px;background:{{ c.track }};margin-top:4px;overflow:hidden"><div style="height:100%;border-radius:1.5px;width:{{ c.width }};background:{{ c.fill }}"></div></div>
+                <sc-if value="{{ c.cdBelow }}" hint-placeholder-val="{{ false }}"><div style="font-size:10px;margin-top:3px;white-space:nowrap;color:{{ c.cdColor }}">{{ c.cdBelow }}</div></sc-if>
+                <sc-if value="{{ c.tip }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:0;top:calc(100% + 5px);z-index:2;padding:3px 7px;border-radius:5px;background:rgba(62,62,66,.98);border:0.5px solid rgba(255,255,255,.16);box-shadow:0 4px 12px rgba(0,0,0,.45);font-size:11px;white-space:nowrap;color:rgba(255,255,255,.92)">{{ c.tip }}</div></sc-if>
+              </div>
+            </sc-for>
+            <div style="width:24px;flex:none;text-align:right;font-size:11px;font-variant-numeric:tabular-nums;color:{{ r.creditsColor }}">{{ r.credits }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-for>
+    <div style="display:flex;justify-content:space-between;padding:9px 14px 10px"><span>Settings…</span><span>Quit</span></div>
+  </div>
+</div>
+</div>
+
+<div id="2b" data-screen-label="2b Dual bars" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#2b" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">2b</a>Stacked bars · one line per account, numbers only for its tightest window · light</div>
+<div style="padding:34px 28px 28px;border-radius:8px;background:radial-gradient(120% 80% at 70% 10%,#e6e8ec 0%,#cfd3da 55%,#b8bdc7 100%);box-shadow:0 1px 3px rgba(0,0,0,.1)">
+  <div style="position:relative;width:400px;font-size:13px;color:rgba(0,0,0,.85);background:rgba(246,246,246,.88);backdrop-filter:blur(40px) saturate(1.3);-webkit-backdrop-filter:blur(40px) saturate(1.3);border:0.5px solid rgba(0,0,0,.12);border-radius:11px;box-shadow:0 12px 34px rgba(0,0,0,.24)">
+    <div style="position:absolute;top:-7px;left:50%;width:14px;height:14px;margin-left:-7px;transform:rotate(45deg);background:rgba(246,246,246,.98);border-left:0.5px solid rgba(0,0,0,.12);border-top:0.5px solid rgba(0,0,0,.12);border-radius:2px 0 0 0"></div>
+    <div style="display:flex;align-items:center;gap:8px;padding:11px 14px 9px;border-bottom:1px solid rgba(0,0,0,.08)">
+      <div style="font-weight:600;flex:1">Rations</div>
+      <div style="font-size:11px;color:rgba(0,0,0,.5)">Updated 2m ago</div>
+      <div style="padding:2px 9px;font-size:12px;border-radius:5px;background:#fff;box-shadow:0 0 0 0.5px rgba(0,0,0,.15),0 0.5px 1.5px rgba(0,0,0,.12)">Refresh</div>
+    </div>
+    <sc-for list="{{ dual }}" as="p" hint-placeholder-count="4">
+      <div style="padding:9px 0 5px;border-bottom:1px solid rgba(0,0,0,.08)">
+        <div style="display:flex;align-items:center;gap:7px;padding:0 14px 3px">
+          <div style="width:18px;height:18px;border-radius:5px;background:rgba(0,0,0,.07);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:rgba(0,0,0,.6)">{{ p.mono }}</div>
+          <span style="font-weight:600">{{ p.name }}</span>
+          <span style="font-size:11px;color:rgba(0,0,0,.5)">{{ p.meta }}</span>
+          <span style="flex:1"></span>
+          <span style="font-size:11px;color:rgba(0,0,0,.5)">{{ p.fresh }}</span>
+          <span style="font-size:11px;color:rgba(0,0,0,.5)">↗</span>
+        </div>
+        <sc-for list="{{ p.rows }}" as="r" hint-placeholder-count="2">
+          <div style="display:flex;align-items:center;gap:10px;padding:5px 14px;min-height:32px" style-hover="background:rgba(0,0,0,.04)">
+            <div style="width:88px;flex:none;min-width:0"><div style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.label }}</div><div style="font-size:10px;color:rgba(0,0,0,.5);white-space:nowrap">{{ r.plan }}</div></div>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px">
+              <sc-for list="{{ r.bars }}" as="b" hint-placeholder-count="2">
+                <div style="display:flex;align-items:center;gap:6px"><span style="width:16px;flex:none;font-size:9px;font-weight:600;color:rgba(0,0,0,.45);text-align:right">{{ b.short }}</span><div style="flex:1;height:3px;border-radius:1.5px;background:{{ b.track }};overflow:hidden"><div style="height:100%;border-radius:1.5px;width:{{ b.width }};background:{{ b.fill }}"></div></div></div>
+              </sc-for>
+            </div>
+            <div style="width:138px;flex:none;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap">
+              <div style="font-size:11px;font-weight:{{ r.topWeight }};color:{{ r.topColor }}">{{ r.top }}</div>
+              <div style="font-size:10px;color:rgba(0,0,0,.5)">{{ r.sub }}</div>
+            </div>
+            <div style="width:22px;flex:none;text-align:right;font-size:11px;font-variant-numeric:tabular-nums;color:{{ r.creditsColor }}">{{ r.credits }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-for>
+    <div style="display:flex;justify-content:space-between;padding:9px 14px 10px"><span>Settings…</span><span>Quit</span></div>
+  </div>
+</div>
+</div>
+
+<div id="2c" data-screen-label="2c Native menu" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#2c" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">2c</a>Native menu instead of a popover · one 22pt line per account · submenu carries the absolute times and the dashboard link</div>
+<div style="width:960px;height:520px;position:relative;overflow:hidden;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);background:radial-gradient(120% 80% at 70% 10%,#4a4f58 0%,#2c3038 45%,#15171c 100%)">
+  <div style="position:absolute;top:0;left:0;right:0;height:24px;display:flex;align-items:center;gap:18px;padding:0 10px 0 14px;background:rgba(30,30,32,.55);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);color:rgba(255,255,255,.92);font-size:13px">
+    <div style="width:13px;height:15px;border-radius:4px 4px 5px 5px;background:rgba(255,255,255,.9)"></div>
+    <span style="font-weight:700">Finder</span><span>File</span><span>Edit</span><span>View</span><span>Go</span><span>Window</span><span>Help</span>
+    <span style="flex:1"></span>
+    <div style="display:flex;align-items:center;gap:5px;height:22px;padding:0 6px;border-radius:4px;background:rgba(255,255,255,.28);font-variant-numeric:tabular-nums">
+      <div style="display:flex;gap:1.5px;align-items:flex-end"><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div></div>
+      <span style="color:#FF453A;font-weight:500">0%</span><span style="color:rgba(255,255,255,.6)">·</span><span>2h 14m</span>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-left:-4px"><div style="width:16px;height:11px;border-radius:2px;background:rgba(255,255,255,.55)"></div><div style="width:24px;height:11px;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55)"></div></div>
+    <span style="font-variant-numeric:tabular-nums;margin-left:-4px">Sun 13 Sep&nbsp;&nbsp;9:41 AM</span>
+  </div>
+  <div style="position:absolute;top:27px;right:84px;width:456px;padding:5px;background:rgba(50,50,52,.85);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-radius:7px;border:0.5px solid rgba(255,255,255,.15);box-shadow:0 8px 24px rgba(0,0,0,.5);color:rgba(255,255,255,.9);font-size:13px">
+    <sc-for list="{{ menu }}" as="p" hint-placeholder-count="4">
+      <div style="height:20px;display:flex;align-items:center;gap:6px;padding:0 9px;font-size:11px;font-weight:600;color:rgba(255,255,255,.5)"><span>{{ p.name }}</span><span style="font-weight:400">{{ p.fresh }}</span></div>
+      <sc-for list="{{ p.items }}" as="i" hint-placeholder-count="2">
+        <div style="display:flex;align-items:center;gap:8px;height:22px;padding:0 9px;border-radius:4px;background:{{ i.bg }};color:{{ i.fg }}">
+          <span style="width:90px;flex:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ i.label }}</span>
+          <sc-for list="{{ i.cells }}" as="c" hint-placeholder-count="2">
+            <div style="display:flex;align-items:center;gap:5px;flex:none;width:{{ c.w }};font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap">
+              <div style="display:flex;gap:1.5px;align-items:flex-end"><div style="width:3px;height:9px;border-radius:1px;background:{{ c.s1 }};box-shadow:inset 0 0 0 1px {{ c.ring }}"></div><div style="width:3px;height:9px;border-radius:1px;background:{{ c.s2 }};box-shadow:inset 0 0 0 1px {{ c.ring }}"></div><div style="width:3px;height:9px;border-radius:1px;background:{{ c.s3 }};box-shadow:inset 0 0 0 1px {{ c.ring }}"></div></div>
+              <span style="color:{{ c.color }}">{{ c.text }}</span>
+            </div>
+          </sc-for>
+          <span style="flex:1"></span>
+          <span style="font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap;color:{{ i.creditsColor }}">{{ i.credits }}</span>
+          <span style="font-size:9px;color:{{ i.chev }}">▶</span>
+        </div>
+      </sc-for>
+      <div style="height:1px;background:rgba(255,255,255,.14);margin:5px 9px"></div>
+    </sc-for>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px;border-radius:4px"><span>Refresh</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘R</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px;border-radius:4px"><span>Settings…</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘,</span></div>
+    <div style="height:1px;background:rgba(255,255,255,.14);margin:5px 9px"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px;border-radius:4px"><span>Quit Rations</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘Q</span></div>
+    <div style="position:absolute;top:22px;right:calc(100% + 3px);width:372px;padding:5px;background:rgba(50,50,52,.85);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-radius:7px;border:0.5px solid rgba(255,255,255,.15);box-shadow:0 8px 24px rgba(0,0,0,.5);color:rgba(255,255,255,.9);font-size:13px">
+      <div style="height:20px;display:flex;align-items:center;padding:0 9px;font-size:11px;font-weight:600;color:rgba(255,255,255,.5)">Lab · Codex Pro · Updated 2m ago</div>
+      <div style="display:flex;align-items:center;gap:6px;height:22px;padding:0 9px;white-space:nowrap;font-variant-numeric:tabular-nums"><span style="width:50px;flex:none;color:rgba(255,255,255,.6)">5-hour</span><span style="color:#FF453A;font-weight:600">0% left</span><span style="color:rgba(255,255,255,.6)">·</span><span>Sun 13 Sep, 11:55 AM</span><span style="color:rgba(255,255,255,.6)">in 2h 14m</span></div>
+      <div style="display:flex;align-items:center;gap:6px;height:22px;padding:0 9px;white-space:nowrap;font-variant-numeric:tabular-nums"><span style="width:50px;flex:none;color:rgba(255,255,255,.6)">Weekly</span><span>38% left</span><span style="color:rgba(255,255,255,.6)">·</span><span>Thu 17 Sep, 9:00 AM</span><span style="color:rgba(255,255,255,.6)">in 3d 23h</span></div>
+      <div style="height:1px;background:rgba(255,255,255,.14);margin:5px 9px"></div>
+      <div style="display:flex;align-items:center;gap:6px;height:22px;padding:0 9px"><span>↺</span><span>2 reset credits available</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px"><span>Usage page on chatgpt.com</span><span style="color:rgba(255,255,255,.5)">↗</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div id="2d" data-screen-label="2d Notes" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#2d" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">2d</a>What changed and why</div>
+<div style="width:380px;padding:18px 20px 20px;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);font-size:12px;line-height:1.5;color:#2a2a2a;display:flex;flex-direction:column;gap:9px;text-wrap:pretty">
+  <div><b>Model.</b> Provider → Account → Window. Every row is an account; Antigravity’s two shared pools sit in the same slot. Rows sort by pressure inside a provider, so a capped account is always first.</div>
+  <div><b>Bars show what is left.</b> Full bar = fresh window, empty red track = capped, text reads “62% left”, “0% left”. Warning at 25% left, critical at 10% (the 75/90 thresholds inverted). The menu bar meter drains the same way and goes hollow red at 0%. Used-percent remains a Tweak for anyone who prefers it.</div>
+  <div><b>Condensing.</b> One line per account carries every window. The countdown is the primary reset field; the absolute local date and time moves to hover (<a href="#2a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:2px 6px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">2a</a>), the tightest window’s second line (<a href="#2b" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:2px 6px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">2b</a>), or the submenu (<a href="#2c" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:2px 6px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">2c</a>). Nine accounts fit in about 500pt.</div>
+  <div><b>↺ on every row.</b> Same vocabulary everywhere: a number is reset credits available (Codex exposes this), “—” means the vendor does not expose it, “Ready” would mean the vendor reports the window already rolled. Nothing is invented.</div>
+  <div><b>Labels.</b> Account label is the nickname set in Settings, otherwise the redacted email. Plan sits under it.</div>
+  <div><b>Status item.</b> Unchanged: the tightest window across all accounts; tooltip and VoiceOver name the account.</div>
+</div>
+</div>
+
+</div>
+<p style="margin:22px 0 0;font:12px/1.5 system-ui,sans-serif;color:rgba(0,0,0,.5)">Try next: “<a href="#2a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">2a</a> in light” · “<a href="#2b" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">2b</a>’s bars inside <a href="#2a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">2a</a>’s columns” · “show the ↺ count on the menu bar when any account has a credit” · “settings for adding and nicknaming accounts”</p>
+</section>
+<section id="t1" style="padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:10px;margin:0 0 20px"><a href="#t1" style="font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none">1</a><span style="font:600 13px/1.2 system-ui,sans-serif;color:#1a1a1a">Rations · menu bar app · pass 1</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
+
+<div id="1a" data-screen-label="1a Desktop context" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#1a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">1a</a>Menu bar + popover, dark · Codex 5-hour at 0% left, countdown on the bar</div>
+<div style="width:960px;height:900px;position:relative;overflow:hidden;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);background:radial-gradient(120% 80% at 70% 10%,#4a4f58 0%,#2c3038 45%,#15171c 100%)">
+  <div style="position:absolute;top:0;left:0;right:0;height:24px;display:flex;align-items:center;gap:18px;padding:0 10px 0 14px;background:rgba(30,30,32,.55);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);color:rgba(255,255,255,.92);font-size:13px">
+    <div style="width:13px;height:15px;border-radius:4px 4px 5px 5px;background:rgba(255,255,255,.9)"></div>
+    <span style="font-weight:700">Finder</span><span>File</span><span>Edit</span><span>View</span><span>Go</span><span>Window</span><span>Help</span>
+    <span style="flex:1"></span>
+    <div style="display:flex;align-items:center;gap:5px;height:22px;padding:0 6px;border-radius:4px;background:rgba(255,255,255,.18);font-variant-numeric:tabular-nums">
+      <div style="display:flex;gap:1.5px;align-items:flex-end"><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div><div style="width:3.5px;height:10px;border-radius:1px;box-shadow:inset 0 0 0 1px #FF453A"></div></div>
+      <span style="color:#FF453A;font-weight:500">0%</span><span style="color:rgba(255,255,255,.6)">·</span><span>2h 14m</span>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-left:-4px"><div style="width:16px;height:11px;border-radius:2px;background:rgba(255,255,255,.55)"></div><div style="width:24px;height:11px;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55)"></div></div>
+    <span style="font-variant-numeric:tabular-nums;margin-left:-4px">Sun 13 Sep&nbsp;&nbsp;9:41 AM</span>
+  </div>
+
+  <div style="position:absolute;top:33px;right:84px;width:380px;font-size:13px;color:rgba(255,255,255,.85);background:rgba(40,40,42,.86);backdrop-filter:blur(40px) saturate(1.3);-webkit-backdrop-filter:blur(40px) saturate(1.3);border:0.5px solid rgba(255,255,255,.14);border-radius:11px;box-shadow:0 12px 40px rgba(0,0,0,.55),0 0 0 0.5px rgba(0,0,0,.6)">
+    <div style="position:absolute;top:-7px;left:50%;width:14px;height:14px;margin-left:-7px;transform:rotate(45deg);background:rgba(48,48,50,.98);border-left:0.5px solid rgba(255,255,255,.16);border-top:0.5px solid rgba(255,255,255,.16);border-radius:2px 0 0 0"></div>
+    <div style="display:flex;align-items:center;gap:8px;padding:11px 14px 9px;border-bottom:1px solid rgba(255,255,255,.09)">
+      <div style="font-weight:600;flex:1">Rations</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.55)">Updated 2m ago</div>
+      <div style="padding:2px 9px;font-size:12px;border-radius:5px;background:rgba(255,255,255,.13);box-shadow:0 0 0 0.5px rgba(255,255,255,.08),0 0.5px 1px rgba(0,0,0,.3)">Refresh</div>
+    </div>
+    <sc-for list="{{ heroDark }}" as="p" hint-placeholder-count="4">
+      <div style="padding:10px 14px 9px;border-bottom:1px solid rgba(255,255,255,.09)">
+        <div style="display:flex;align-items:center;gap:9px">
+          <div style="width:22px;height:22px;border-radius:6px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:600;color:rgba(255,255,255,.7)">{{ p.mono }}</div>
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;align-items:baseline;gap:6px"><span style="font-weight:600">{{ p.name }}</span><span style="font-size:11px;color:rgba(255,255,255,.55)">{{ p.plan }}</span></div>
+            <div style="font-size:11px;color:{{ p.freshColor }}">{{ p.fresh }}</div>
+          </div>
+          <span style="font-size:11px;color:rgba(255,255,255,.55)">Dashboard ↗</span>
+        </div>
+        <sc-for list="{{ p.windows }}" as="w" hint-placeholder-count="2">
+          <div style="padding:9px 0 1px 31px;opacity:{{ w.op }}">
+            <div style="display:flex;align-items:baseline;gap:6px">
+              <span>{{ w.label }}</span>
+              <span style="font-size:11px;color:rgba(255,255,255,.55)">{{ w.group }}</span>
+              <span style="flex:1"></span>
+              <span style="font-variant-numeric:tabular-nums;color:{{ w.pctColor }}">{{ w.pctText }}</span>
+            </div>
+            <div style="height:4px;border-radius:2px;background:{{ w.track }};margin:6px 0 5px;overflow:hidden"><div style="height:100%;border-radius:2px;width:{{ w.width }};background:{{ w.fill }}"></div></div>
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 6px;font-size:11px;color:rgba(255,255,255,.55)">
+              <span style="font-weight:600;white-space:nowrap;color:{{ w.statusColor }}">{{ w.status }}</span><span>{{ w.dot }}</span>
+              <span style="color:{{ w.countdownColor }};font-variant-numeric:tabular-nums;white-space:nowrap">{{ w.countdown }}</span>
+              <span style="flex:1"></span>
+              <span style="font-variant-numeric:tabular-nums;white-space:nowrap">{{ w.resetAt }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-for>
+    <div style="display:flex;justify-content:space-between;padding:9px 14px 10px"><span>Settings…</span><span>Quit</span></div>
+  </div>
+</div>
+</div>
+
+<div id="1b" data-screen-label="1b Popover light" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#1b" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">1b</a>Same popover, light appearance</div>
+<div style="padding:34px 28px 28px;border-radius:8px;background:radial-gradient(120% 80% at 70% 10%,#e6e8ec 0%,#cfd3da 55%,#b8bdc7 100%);box-shadow:0 1px 3px rgba(0,0,0,.1)">
+  <div style="position:relative;width:380px;font-size:13px;color:rgba(0,0,0,.85);background:rgba(246,246,246,.88);backdrop-filter:blur(40px) saturate(1.3);-webkit-backdrop-filter:blur(40px) saturate(1.3);border:0.5px solid rgba(0,0,0,.12);border-radius:11px;box-shadow:0 12px 34px rgba(0,0,0,.24),0 0 0 0.5px rgba(255,255,255,.5) inset">
+    <div style="position:absolute;top:-7px;left:50%;width:14px;height:14px;margin-left:-7px;transform:rotate(45deg);background:rgba(246,246,246,.98);border-left:0.5px solid rgba(0,0,0,.12);border-top:0.5px solid rgba(0,0,0,.12);border-radius:2px 0 0 0"></div>
+    <div style="display:flex;align-items:center;gap:8px;padding:11px 14px 9px;border-bottom:1px solid rgba(0,0,0,.08)">
+      <div style="font-weight:600;flex:1">Rations</div>
+      <div style="font-size:11px;color:rgba(0,0,0,.5)">Updated 2m ago</div>
+      <div style="padding:2px 9px;font-size:12px;border-radius:5px;background:#fff;box-shadow:0 0 0 0.5px rgba(0,0,0,.15),0 0.5px 1.5px rgba(0,0,0,.12)">Refresh</div>
+    </div>
+    <sc-for list="{{ heroLight }}" as="p" hint-placeholder-count="4">
+      <div style="padding:10px 14px 9px;border-bottom:1px solid rgba(0,0,0,.08)">
+        <div style="display:flex;align-items:center;gap:9px">
+          <div style="width:22px;height:22px;border-radius:6px;background:rgba(0,0,0,.07);display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:600;color:rgba(0,0,0,.6)">{{ p.mono }}</div>
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;align-items:baseline;gap:6px"><span style="font-weight:600">{{ p.name }}</span><span style="font-size:11px;color:rgba(0,0,0,.5)">{{ p.plan }}</span></div>
+            <div style="font-size:11px;color:{{ p.freshColor }}">{{ p.fresh }}</div>
+          </div>
+          <span style="font-size:11px;color:rgba(0,0,0,.5)">Dashboard ↗</span>
+        </div>
+        <sc-for list="{{ p.windows }}" as="w" hint-placeholder-count="2">
+          <div style="padding:9px 0 1px 31px;opacity:{{ w.op }}">
+            <div style="display:flex;align-items:baseline;gap:6px">
+              <span>{{ w.label }}</span>
+              <span style="font-size:11px;color:rgba(0,0,0,.5)">{{ w.group }}</span>
+              <span style="flex:1"></span>
+              <span style="font-variant-numeric:tabular-nums;color:{{ w.pctColor }}">{{ w.pctText }}</span>
+            </div>
+            <div style="height:4px;border-radius:2px;background:{{ w.track }};margin:6px 0 5px;overflow:hidden"><div style="height:100%;border-radius:2px;width:{{ w.width }};background:{{ w.fill }}"></div></div>
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 6px;font-size:11px;color:rgba(0,0,0,.5)">
+              <span style="font-weight:600;white-space:nowrap;color:{{ w.statusColor }}">{{ w.status }}</span><span>{{ w.dot }}</span>
+              <span style="color:{{ w.countdownColor }};font-variant-numeric:tabular-nums;white-space:nowrap">{{ w.countdown }}</span>
+              <span style="flex:1"></span>
+              <span style="font-variant-numeric:tabular-nums;white-space:nowrap">{{ w.resetAt }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-for>
+    <div style="display:flex;justify-content:space-between;padding:9px 14px 10px"><span>Settings…</span><span>Quit</span></div>
+  </div>
+</div>
+</div>
+
+<div id="1c" data-screen-label="1c Status item states" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#1c" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">1c</a>Status item · every state, both appearances</div>
+<div style="display:flex;flex-direction:column;gap:14px;padding:22px 24px;border-radius:8px;background:#fff;border:1px solid rgba(0,0,0,.08);box-shadow:0 1px 3px rgba(0,0,0,.06)">
+  <div style="display:flex;gap:10px;flex-wrap:wrap;max-width:1120px">
+    <sc-for list="{{ barDark }}" as="s" hint-placeholder-count="7">
+      <div style="display:flex;flex-direction:column;gap:6px;width:150px">
+        <div style="height:24px;border-radius:5px;background:linear-gradient(90deg,#3a3f48,#23262c);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.92);font-size:13px;font-variant-numeric:tabular-nums">
+          <div style="display:flex;align-items:center;gap:5px;height:22px;padding:0 6px;opacity:{{ s.op }}">
+            <div style="display:flex;gap:1.5px;align-items:flex-end"><div style="width:3.5px;height:10px;border-radius:1px;background:{{ s.s1 }};box-shadow:inset 0 0 0 1px {{ s.ring }}"></div><div style="width:3.5px;height:10px;border-radius:1px;background:{{ s.s2 }};box-shadow:inset 0 0 0 1px {{ s.ring }}"></div><div style="width:3.5px;height:10px;border-radius:1px;background:{{ s.s3 }};box-shadow:inset 0 0 0 1px {{ s.ring }}"></div></div>
+            <span style="color:{{ s.pctColor }};font-weight:500">{{ s.pct }}</span><span style="color:rgba(255,255,255,.6)">{{ s.dot }}</span><span>{{ s.extra }}</span>
+            <sc-if value="{{ s.markDot }}" hint-placeholder-val="{{ false }}"><div style="width:5px;height:5px;border-radius:50%;background:#FF9F0A;margin-left:1px"></div></sc-if>
+            <sc-if value="{{ s.markHollow }}" hint-placeholder-val="{{ false }}"><div style="width:6px;height:6px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.9);margin-left:1px"></div></sc-if>
+            <sc-if value="{{ s.markBang }}" hint-placeholder-val="{{ false }}"><span style="color:#FF453A;font-weight:700">!</span></sc-if>
+          </div>
+        </div>
+        <div style="font-size:11px;line-height:1.35;color:rgba(0,0,0,.6)"><span style="font-weight:600;color:#1a1a1a">{{ s.name }}</span><br>{{ s.caption }}</div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;max-width:1120px">
+    <sc-for list="{{ barLight }}" as="s" hint-placeholder-count="7">
+      <div style="display:flex;flex-direction:column;gap:6px;width:150px">
+        <div style="height:24px;border-radius:5px;background:linear-gradient(90deg,#e9ebef,#d7dae0);display:flex;align-items:center;justify-content:center;color:rgba(0,0,0,.85);font-size:13px;font-variant-numeric:tabular-nums">
+          <div style="display:flex;align-items:center;gap:5px;height:22px;padding:0 6px;opacity:{{ s.op }}">
+            <div style="display:flex;gap:1.5px;align-items:flex-end"><div style="width:3.5px;height:10px;border-radius:1px;background:{{ s.s1 }};box-shadow:inset 0 0 0 1px {{ s.ring }}"></div><div style="width:3.5px;height:10px;border-radius:1px;background:{{ s.s2 }};box-shadow:inset 0 0 0 1px {{ s.ring }}"></div><div style="width:3.5px;height:10px;border-radius:1px;background:{{ s.s3 }};box-shadow:inset 0 0 0 1px {{ s.ring }}"></div></div>
+            <span style="color:{{ s.pctColor }};font-weight:500">{{ s.pct }}</span><span style="color:rgba(0,0,0,.45)">{{ s.dot }}</span><span>{{ s.extra }}</span>
+            <sc-if value="{{ s.markDot }}" hint-placeholder-val="{{ false }}"><div style="width:5px;height:5px;border-radius:50%;background:#FF9500;margin-left:1px"></div></sc-if>
+            <sc-if value="{{ s.markHollow }}" hint-placeholder-val="{{ false }}"><div style="width:6px;height:6px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.8);margin-left:1px"></div></sc-if>
+            <sc-if value="{{ s.markBang }}" hint-placeholder-val="{{ false }}"><span style="color:#FF3B30;font-weight:700">!</span></sc-if>
+          </div>
+        </div>
+        <div style="font-size:11px;line-height:1.35;color:rgba(0,0,0,.6)"><span style="font-weight:600;color:#1a1a1a">{{ s.name }}</span></div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</div>
+
+<div id="1d" data-screen-label="1d Right-click menu" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#1d" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">1d</a>Right-click on the status item</div>
+<div style="display:flex;gap:16px">
+  <div style="position:relative;width:300px;height:150px;overflow:hidden;border-radius:8px;background:radial-gradient(120% 80% at 70% 10%,#4a4f58 0%,#2c3038 45%,#15171c 100%);box-shadow:0 1px 3px rgba(0,0,0,.1)">
+    <div style="position:absolute;top:0;left:0;right:0;height:24px;display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:0 10px;background:rgba(30,30,32,.55);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);color:rgba(255,255,255,.92);font-size:13px;font-variant-numeric:tabular-nums">
+      <div style="display:flex;align-items:center;gap:5px;height:22px;padding:0 6px;border-radius:4px;background:rgba(255,255,255,.18)">
+        <div style="display:flex;gap:1.5px;align-items:flex-end"><div style="width:3.5px;height:10px;border-radius:1px;background:rgba(255,255,255,.92)"></div><div style="width:3.5px;height:10px;border-radius:1px;background:rgba(255,255,255,.92)"></div><div style="width:3.5px;height:10px;border-radius:1px;background:rgba(255,255,255,.28)"></div></div>
+        <span style="font-weight:500">59%</span>
+      </div>
+      <div style="width:24px;height:11px;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55)"></div>
+      <span>9:41 AM</span>
+    </div>
+    <div style="position:absolute;top:27px;right:92px;width:186px;padding:5px;background:rgba(50,50,52,.85);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-radius:7px;border:0.5px solid rgba(255,255,255,.15);box-shadow:0 8px 24px rgba(0,0,0,.5);color:rgba(255,255,255,.9);font-size:13px">
+      <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px;border-radius:4px;background:#0A84FF;color:#fff"><span>Refresh</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px;border-radius:4px"><span>Settings…</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘,</span></div>
+      <div style="height:1px;background:rgba(255,255,255,.14);margin:5px 9px"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px;border-radius:4px"><span>Quit Rations</span><span style="color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums">⌘Q</span></div>
+    </div>
+  </div>
+  <div style="position:relative;width:300px;height:150px;overflow:hidden;border-radius:8px;background:radial-gradient(120% 80% at 70% 10%,#e6e8ec 0%,#cfd3da 55%,#b8bdc7 100%);box-shadow:0 1px 3px rgba(0,0,0,.1)">
+    <div style="position:absolute;top:0;left:0;right:0;height:24px;display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:0 10px;background:rgba(240,240,242,.55);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);color:rgba(0,0,0,.85);font-size:13px;font-variant-numeric:tabular-nums">
+      <div style="display:flex;align-items:center;gap:5px;height:22px;padding:0 6px;border-radius:4px;background:rgba(0,0,0,.12)">
+        <div style="display:flex;gap:1.5px;align-items:flex-end"><div style="width:3.5px;height:10px;border-radius:1px;background:rgba(0,0,0,.85)"></div><div style="width:3.5px;height:10px;border-radius:1px;background:rgba(0,0,0,.85)"></div><div style="width:3.5px;height:10px;border-radius:1px;background:rgba(0,0,0,.25)"></div></div>
+        <span style="font-weight:500">59%</span>
+      </div>
+      <div style="width:24px;height:11px;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(0,0,0,.5)"></div>
+      <span>9:41 AM</span>
+    </div>
+    <div style="position:absolute;top:27px;right:92px;width:186px;padding:5px;background:rgba(236,236,238,.85);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-radius:7px;border:0.5px solid rgba(0,0,0,.14);box-shadow:0 8px 24px rgba(0,0,0,.25);color:rgba(0,0,0,.85);font-size:13px">
+      <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px;border-radius:4px;background:#007AFF;color:#fff"><span>Refresh</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px;border-radius:4px"><span>Settings…</span><span style="color:rgba(0,0,0,.45);font-variant-numeric:tabular-nums">⌘,</span></div>
+      <div style="height:1px;background:rgba(0,0,0,.1);margin:5px 9px"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;height:22px;padding:0 9px;border-radius:4px"><span>Quit Rations</span><span style="color:rgba(0,0,0,.45);font-variant-numeric:tabular-nums">⌘Q</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div id="1e" data-screen-label="1e Popover degraded states" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#1e" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">1e</a>Partial failure · refreshing, stale, reset due, unknowns, signed out</div>
+<div style="padding:34px 28px 28px;border-radius:8px;background:radial-gradient(120% 80% at 70% 10%,#4a4f58 0%,#2c3038 45%,#15171c 100%);box-shadow:0 1px 3px rgba(0,0,0,.1)">
+  <div style="position:relative;width:380px;font-size:13px;color:rgba(255,255,255,.85);background:rgba(40,40,42,.86);backdrop-filter:blur(40px) saturate(1.3);-webkit-backdrop-filter:blur(40px) saturate(1.3);border:0.5px solid rgba(255,255,255,.14);border-radius:11px;box-shadow:0 12px 40px rgba(0,0,0,.55),0 0 0 0.5px rgba(0,0,0,.6)">
+    <div style="position:absolute;top:-7px;left:50%;width:14px;height:14px;margin-left:-7px;transform:rotate(45deg);background:rgba(48,48,50,.98);border-left:0.5px solid rgba(255,255,255,.16);border-top:0.5px solid rgba(255,255,255,.16);border-radius:2px 0 0 0"></div>
+    <div style="display:flex;align-items:center;gap:8px;padding:11px 14px 9px;border-bottom:1px solid rgba(255,255,255,.09)">
+      <div style="font-weight:600;flex:1">Rations</div>
+      <div style="width:11px;height:11px;border-radius:50%;border:1.5px solid rgba(255,255,255,.22);border-top-color:rgba(255,255,255,.85)"></div>
+      <div style="font-size:11px;color:rgba(255,255,255,.55)">Refreshing…</div>
+      <div style="padding:2px 9px;font-size:12px;border-radius:5px;background:rgba(255,255,255,.13);box-shadow:0 0 0 0.5px rgba(255,255,255,.08),0 0.5px 1px rgba(0,0,0,.3);opacity:.45">Refresh</div>
+    </div>
+    <sc-for list="{{ degradedDark }}" as="p" hint-placeholder-count="4">
+      <div style="padding:10px 14px 9px;border-bottom:1px solid rgba(255,255,255,.09)">
+        <div style="display:flex;align-items:center;gap:9px">
+          <div style="width:22px;height:22px;border-radius:6px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:600;color:rgba(255,255,255,.7)">{{ p.mono }}</div>
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;align-items:center;gap:6px"><span style="font-weight:600">{{ p.name }}</span><span style="font-size:11px;color:rgba(255,255,255,.55)">{{ p.plan }}</span>
+              <sc-if value="{{ p.tag }}" hint-placeholder-val="{{ false }}"><span style="font-size:10px;font-weight:600;padding:1px 5px;border-radius:4px;box-shadow:inset 0 0 0 1px rgba(255,159,10,.7);color:#FF9F0A">{{ p.tag }}</span></sc-if>
+            </div>
+            <div style="font-size:11px;color:{{ p.freshColor }}">{{ p.fresh }}</div>
+          </div>
+          <span style="font-size:11px;color:rgba(255,255,255,.55)">Dashboard ↗</span>
+        </div>
+        <sc-if value="{{ p.message }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:8px 0 3px 31px;font-size:12px;line-height:1.45;color:rgba(255,255,255,.7)">{{ p.message }}<span style="font-family:ui-monospace,Menlo,monospace;font-size:11.5px;white-space:nowrap;color:rgba(255,255,255,.85)">{{ p.code }}</span>{{ p.messageEnd }}</div>
+          <div style="padding:6px 0 2px 31px;font-size:11px;color:#0A84FF">{{ p.link }}</div>
+        </sc-if>
+        <sc-for list="{{ p.windows }}" as="w" hint-placeholder-count="2">
+          <div style="padding:9px 0 1px 31px;opacity:{{ w.op }}">
+            <div style="display:flex;align-items:baseline;gap:6px">
+              <span>{{ w.label }}</span>
+              <span style="font-size:11px;color:rgba(255,255,255,.55)">{{ w.group }}</span>
+              <span style="flex:1"></span>
+              <span style="font-variant-numeric:tabular-nums;color:{{ w.pctColor }}">{{ w.pctText }}</span>
+            </div>
+            <div style="height:4px;border-radius:2px;background:{{ w.track }};margin:6px 0 5px;overflow:hidden"><div style="height:100%;border-radius:2px;width:{{ w.width }};background:{{ w.fill }}"></div></div>
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 6px;font-size:11px;color:rgba(255,255,255,.55)">
+              <span style="font-weight:600;white-space:nowrap;color:{{ w.statusColor }}">{{ w.status }}</span><span>{{ w.dot }}</span>
+              <span style="color:{{ w.countdownColor }};font-variant-numeric:tabular-nums;white-space:nowrap">{{ w.countdown }}</span>
+              <span style="flex:1"></span>
+              <span style="font-variant-numeric:tabular-nums;white-space:nowrap">{{ w.resetAt }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-for>
+    <div style="display:flex;justify-content:space-between;padding:9px 14px 10px"><span>Settings…</span><span>Quit</span></div>
+  </div>
+</div>
+</div>
+
+<div id="1f" data-screen-label="1f Popover empty" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#1f" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">1f</a>Zero providers enabled</div>
+<div style="padding:34px 28px 28px;border-radius:8px;background:radial-gradient(120% 80% at 70% 10%,#e6e8ec 0%,#cfd3da 55%,#b8bdc7 100%);box-shadow:0 1px 3px rgba(0,0,0,.1)">
+  <div style="position:relative;width:380px;font-size:13px;color:rgba(0,0,0,.85);background:rgba(246,246,246,.88);backdrop-filter:blur(40px) saturate(1.3);-webkit-backdrop-filter:blur(40px) saturate(1.3);border:0.5px solid rgba(0,0,0,.12);border-radius:11px;box-shadow:0 12px 34px rgba(0,0,0,.24)">
+    <div style="position:absolute;top:-7px;left:50%;width:14px;height:14px;margin-left:-7px;transform:rotate(45deg);background:rgba(246,246,246,.98);border-left:0.5px solid rgba(0,0,0,.12);border-top:0.5px solid rgba(0,0,0,.12);border-radius:2px 0 0 0"></div>
+    <div style="display:flex;align-items:center;gap:8px;padding:11px 14px 9px;border-bottom:1px solid rgba(0,0,0,.08)">
+      <div style="font-weight:600;flex:1">Rations</div>
+      <div style="padding:2px 9px;font-size:12px;border-radius:5px;background:#fff;box-shadow:0 0 0 0.5px rgba(0,0,0,.15),0 0.5px 1.5px rgba(0,0,0,.12);opacity:.45">Refresh</div>
+    </div>
+    <div style="padding:18px 14px 20px;display:flex;flex-direction:column;align-items:flex-start;gap:12px">
+      <p style="margin:0;font-size:12px;line-height:1.5;color:rgba(0,0,0,.7);text-wrap:pretty">No providers enabled. Rations reads the Codex, Claude, Antigravity and Grok sign-ins that already exist on this Mac and shows their usage windows and reset times here.</p>
+      <div style="padding:3px 12px;border-radius:5px;background:#007AFF;color:#fff;font-size:13px;box-shadow:0 0.5px 1px rgba(0,0,0,.25)">Open Settings…</div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;padding:9px 14px 10px;border-top:1px solid rgba(0,0,0,.08)"><span>Quit</span></div>
+  </div>
+</div>
+</div>
+
+<div id="1g" data-screen-label="1g Settings window" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#1g" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">1g</a>Settings · one grouped form, no tabs</div>
+<div style="display:flex;gap:24px;align-items:flex-start;padding:28px;border-radius:8px;background:#dcdfe4;box-shadow:0 1px 3px rgba(0,0,0,.1)">
+
+  <div style="width:440px;border-radius:10px;overflow:hidden;background:#f0f0f0;color:rgba(0,0,0,.85);font-size:13px;box-shadow:0 22px 60px rgba(0,0,0,.35),0 0 0 0.5px rgba(0,0,0,.25)">
+    <div style="position:relative;height:30px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;background:#e8e8e8;border-bottom:1px solid rgba(0,0,0,.08)">
+      <div style="position:absolute;left:12px;top:9px;display:flex;gap:8px"><div style="width:12px;height:12px;border-radius:50%;background:#FF5F57;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,.15)"></div><div style="width:12px;height:12px;border-radius:50%;background:#FEBC2E;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,.15)"></div><div style="width:12px;height:12px;border-radius:50%;background:#28C840;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,.15)"></div></div>
+      Rations Settings
+    </div>
+    <div style="padding:14px 20px 20px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:12px;font-weight:600;color:rgba(0,0,0,.6);padding-left:2px">Providers</div>
+        <div style="background:#fff;border-radius:8px;box-shadow:0 0 0 0.5px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.05)">
+          <div style="display:flex;align-items:center;gap:12px;padding:9px 12px;border-bottom:1px solid rgba(0,0,0,.06)"><div style="flex:1"><div>Codex</div><div style="font-size:11px;color:rgba(0,0,0,.5)">Codex CLI · ~/.codex/auth.json</div></div><div style="width:26px;height:15px;border-radius:8px;background:#007AFF;position:relative"><div style="position:absolute;top:1px;left:12px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3)"></div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:9px 12px;border-bottom:1px solid rgba(0,0,0,.06)"><div style="flex:1"><div>Claude</div><div style="font-size:11px;color:rgba(0,0,0,.5)">Claude Code · Keychain item “Claude Code-credentials”</div></div><div style="width:26px;height:15px;border-radius:8px;background:#007AFF;position:relative"><div style="position:absolute;top:1px;left:12px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3)"></div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:9px 12px;border-bottom:1px solid rgba(0,0,0,.06)"><div style="flex:1"><div>Antigravity</div><div style="font-size:11px;color:rgba(0,0,0,.5)">Antigravity app running · agy 1.4.2</div></div><div style="width:26px;height:15px;border-radius:8px;background:#007AFF;position:relative"><div style="position:absolute;top:1px;left:12px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3)"></div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:9px 12px"><div style="flex:1"><div>Grok</div><div style="font-size:11px;color:rgba(0,0,0,.5)">Not signed in · run <span style="font-family:ui-monospace,Menlo,monospace">grok login</span> in Terminal, then Detect</div></div><div style="padding:1px 9px;height:20px;display:flex;align-items:center;border-radius:5px;background:#fff;font-size:12px;box-shadow:0 0 0 0.5px rgba(0,0,0,.18),0 0.5px 1.5px rgba(0,0,0,.12)">Detect</div><div style="width:26px;height:15px;border-radius:8px;background:rgba(0,0,0,.1);position:relative"><div style="position:absolute;top:1px;left:1px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3)"></div></div></div>
+        </div>
+        <div style="font-size:11px;color:rgba(0,0,0,.5);padding-left:2px;text-wrap:pretty">Rations reads sign-ins that already exist on this Mac. It stores no passwords.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:12px;font-weight:600;color:rgba(0,0,0,.6);padding-left:2px">Refresh</div>
+        <div style="background:#fff;border-radius:8px;box-shadow:0 0 0 0.5px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.05)">
+          <div style="display:flex;align-items:center;gap:12px;padding:8px 12px;border-bottom:1px solid rgba(0,0,0,.06)"><div style="flex:1">Refresh every</div><div style="display:flex;align-items:center;gap:8px;padding:1px 2px 1px 9px;height:20px;border-radius:5px;background:#fff;box-shadow:0 0 0 0.5px rgba(0,0,0,.18),0 0.5px 1.5px rgba(0,0,0,.15);font-size:12.5px"><span>5 minutes</span><div style="width:16px;height:16px;border-radius:4px;background:#007AFF;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><div style="width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-bottom:3px solid #fff"></div><div style="width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-top:3px solid #fff"></div></div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:9px 12px"><div style="flex:1"><div>Launch at login</div></div><div style="width:26px;height:15px;border-radius:8px;background:#007AFF;position:relative"><div style="position:absolute;top:1px;left:12px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3)"></div></div></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:12px;font-weight:600;color:rgba(0,0,0,.6);padding-left:2px">Display</div>
+        <div style="background:#fff;border-radius:8px;box-shadow:0 0 0 0.5px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.05)">
+          <div style="display:flex;align-items:center;gap:12px;padding:8px 12px;border-bottom:1px solid rgba(0,0,0,.06)"><div style="flex:1">Show usage as</div><div style="display:flex;background:rgba(0,0,0,.05);border-radius:6px;padding:1px;height:20px;font-size:12px"><div style="padding:0 10px;display:flex;align-items:center;border-radius:5px;background:#fff;font-weight:500;box-shadow:0 0 0 0.5px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.12)">Used</div><div style="padding:0 10px;display:flex;align-items:center">Remaining</div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:8px 12px;border-bottom:1px solid rgba(0,0,0,.06)"><div style="flex:1">Reset time</div><div style="display:flex;background:rgba(0,0,0,.05);border-radius:6px;padding:1px;height:20px;font-size:12px"><div style="padding:0 10px;display:flex;align-items:center">Absolute</div><div style="padding:0 10px;display:flex;align-items:center">Relative</div><div style="padding:0 10px;display:flex;align-items:center;border-radius:5px;background:#fff;font-weight:500;box-shadow:0 0 0 0.5px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.12)">Both</div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:8px 12px;border-bottom:1px solid rgba(0,0,0,.06)"><div style="flex:1">Warning at</div><div style="display:flex;align-items:center;gap:5px"><div style="width:44px;height:20px;padding:0 6px;display:flex;align-items:center;justify-content:flex-end;border-radius:5px;background:#fff;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,.25);font-variant-numeric:tabular-nums">75</div><span style="color:rgba(0,0,0,.6)">%</span><div style="width:14px;height:20px;border-radius:5px;background:#fff;box-shadow:0 0 0 0.5px rgba(0,0,0,.18),0 0.5px 1.5px rgba(0,0,0,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px"><div style="width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-bottom:3px solid rgba(0,0,0,.7)"></div><div style="width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-top:3px solid rgba(0,0,0,.7)"></div></div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:8px 12px"><div style="flex:1">Critical at</div><div style="display:flex;align-items:center;gap:5px"><div style="width:44px;height:20px;padding:0 6px;display:flex;align-items:center;justify-content:flex-end;border-radius:5px;background:#fff;box-shadow:inset 0 0 0 0.5px rgba(0,0,0,.25);font-variant-numeric:tabular-nums">90</div><span style="color:rgba(0,0,0,.6)">%</span><div style="width:14px;height:20px;border-radius:5px;background:#fff;box-shadow:0 0 0 0.5px rgba(0,0,0,.18),0 0.5px 1.5px rgba(0,0,0,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px"><div style="width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-bottom:3px solid rgba(0,0,0,.7)"></div><div style="width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-top:3px solid rgba(0,0,0,.7)"></div></div></div></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:12px;font-weight:600;color:rgba(0,0,0,.6);padding-left:2px">Privacy</div>
+        <div style="background:#fff;border-radius:8px;box-shadow:0 0 0 0.5px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.05)">
+          <div style="display:flex;align-items:center;gap:12px;padding:9px 12px"><div style="flex:1"><div>Hide personal information</div><div style="font-size:11px;color:rgba(0,0,0,.5)">Emails are redacted in the popover. Nothing personal is shown in the menu bar.</div></div><div style="width:26px;height:15px;border-radius:8px;background:#007AFF;position:relative"><div style="position:absolute;top:1px;left:12px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3)"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="width:440px;border-radius:10px;overflow:hidden;background:#2a2a2c;color:rgba(255,255,255,.85);font-size:13px;box-shadow:0 22px 60px rgba(0,0,0,.5),0 0 0 0.5px rgba(255,255,255,.18)">
+    <div style="position:relative;height:30px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;background:#333336;border-bottom:1px solid rgba(0,0,0,.4)">
+      <div style="position:absolute;left:12px;top:9px;display:flex;gap:8px"><div style="width:12px;height:12px;border-radius:50%;background:#FF5F57"></div><div style="width:12px;height:12px;border-radius:50%;background:#FEBC2E"></div><div style="width:12px;height:12px;border-radius:50%;background:#28C840"></div></div>
+      Rations Settings
+    </div>
+    <div style="padding:14px 20px 20px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:12px;font-weight:600;color:rgba(255,255,255,.6);padding-left:2px">Providers</div>
+        <div style="background:rgba(255,255,255,.06);border-radius:8px;box-shadow:0 0 0 0.5px rgba(255,255,255,.1)">
+          <div style="display:flex;align-items:center;gap:12px;padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.07)"><div style="flex:1"><div>Codex</div><div style="font-size:11px;color:rgba(255,255,255,.55)">Codex CLI · ~/.codex/auth.json</div></div><div style="width:26px;height:15px;border-radius:8px;background:#0A84FF;position:relative"><div style="position:absolute;top:1px;left:12px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.4)"></div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.07)"><div style="flex:1"><div>Claude</div><div style="font-size:11px;color:rgba(255,255,255,.55)">Claude Code · Keychain item “Claude Code-credentials”</div></div><div style="width:26px;height:15px;border-radius:8px;background:#0A84FF;position:relative"><div style="position:absolute;top:1px;left:12px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.4)"></div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.07)"><div style="flex:1"><div>Antigravity</div><div style="font-size:11px;color:rgba(255,255,255,.55)">Antigravity app running · agy 1.4.2</div></div><div style="width:26px;height:15px;border-radius:8px;background:#0A84FF;position:relative"><div style="position:absolute;top:1px;left:12px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.4)"></div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:9px 12px"><div style="flex:1"><div>Grok</div><div style="font-size:11px;color:rgba(255,255,255,.55)">Not signed in · run <span style="font-family:ui-monospace,Menlo,monospace">grok login</span> in Terminal, then Detect</div></div><div style="padding:1px 9px;height:20px;display:flex;align-items:center;border-radius:5px;background:rgba(255,255,255,.14);font-size:12px;box-shadow:0 0 0 0.5px rgba(255,255,255,.08),0 0.5px 1px rgba(0,0,0,.3)">Detect</div><div style="width:26px;height:15px;border-radius:8px;background:rgba(255,255,255,.2);position:relative"><div style="position:absolute;top:1px;left:1px;width:13px;height:13px;border-radius:50%;background:#d8d8d8;box-shadow:0 1px 2px rgba(0,0,0,.4)"></div></div></div>
+        </div>
+        <div style="font-size:11px;color:rgba(255,255,255,.5);padding-left:2px;text-wrap:pretty">Rations reads sign-ins that already exist on this Mac. It stores no passwords.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:12px;font-weight:600;color:rgba(255,255,255,.6);padding-left:2px">Refresh</div>
+        <div style="background:rgba(255,255,255,.06);border-radius:8px;box-shadow:0 0 0 0.5px rgba(255,255,255,.1)">
+          <div style="display:flex;align-items:center;gap:12px;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.07)"><div style="flex:1">Refresh every</div><div style="display:flex;align-items:center;gap:8px;padding:1px 2px 1px 9px;height:20px;border-radius:5px;background:rgba(255,255,255,.14);box-shadow:0 0 0 0.5px rgba(255,255,255,.08),0 0.5px 1px rgba(0,0,0,.3);font-size:12.5px"><span>5 minutes</span><div style="width:16px;height:16px;border-radius:4px;background:#0A84FF;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><div style="width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-bottom:3px solid #fff"></div><div style="width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-top:3px solid #fff"></div></div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:9px 12px"><div style="flex:1"><div>Launch at login</div></div><div style="width:26px;height:15px;border-radius:8px;background:#0A84FF;position:relative"><div style="position:absolute;top:1px;left:12px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.4)"></div></div></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:12px;font-weight:600;color:rgba(255,255,255,.6);padding-left:2px">Display</div>
+        <div style="background:rgba(255,255,255,.06);border-radius:8px;box-shadow:0 0 0 0.5px rgba(255,255,255,.1)">
+          <div style="display:flex;align-items:center;gap:12px;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.07)"><div style="flex:1">Show usage as</div><div style="display:flex;background:rgba(255,255,255,.08);border-radius:6px;padding:1px;height:20px;font-size:12px"><div style="padding:0 10px;display:flex;align-items:center;border-radius:5px;background:rgba(255,255,255,.26);font-weight:500;box-shadow:0 1px 2px rgba(0,0,0,.3)">Used</div><div style="padding:0 10px;display:flex;align-items:center">Remaining</div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.07)"><div style="flex:1">Reset time</div><div style="display:flex;background:rgba(255,255,255,.08);border-radius:6px;padding:1px;height:20px;font-size:12px"><div style="padding:0 10px;display:flex;align-items:center">Absolute</div><div style="padding:0 10px;display:flex;align-items:center">Relative</div><div style="padding:0 10px;display:flex;align-items:center;border-radius:5px;background:rgba(255,255,255,.26);font-weight:500;box-shadow:0 1px 2px rgba(0,0,0,.3)">Both</div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.07)"><div style="flex:1">Warning at</div><div style="display:flex;align-items:center;gap:5px"><div style="width:44px;height:20px;padding:0 6px;display:flex;align-items:center;justify-content:flex-end;border-radius:5px;background:rgba(0,0,0,.25);box-shadow:inset 0 0 0 0.5px rgba(255,255,255,.2);font-variant-numeric:tabular-nums">75</div><span style="color:rgba(255,255,255,.6)">%</span><div style="width:14px;height:20px;border-radius:5px;background:rgba(255,255,255,.14);box-shadow:0 0 0 0.5px rgba(255,255,255,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px"><div style="width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-bottom:3px solid rgba(255,255,255,.8)"></div><div style="width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-top:3px solid rgba(255,255,255,.8)"></div></div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:8px 12px"><div style="flex:1">Critical at</div><div style="display:flex;align-items:center;gap:5px"><div style="width:44px;height:20px;padding:0 6px;display:flex;align-items:center;justify-content:flex-end;border-radius:5px;background:rgba(0,0,0,.25);box-shadow:inset 0 0 0 0.5px rgba(255,255,255,.2);font-variant-numeric:tabular-nums">90</div><span style="color:rgba(255,255,255,.6)">%</span><div style="width:14px;height:20px;border-radius:5px;background:rgba(255,255,255,.14);box-shadow:0 0 0 0.5px rgba(255,255,255,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px"><div style="width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-bottom:3px solid rgba(255,255,255,.8)"></div><div style="width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-top:3px solid rgba(255,255,255,.8)"></div></div></div></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:12px;font-weight:600;color:rgba(255,255,255,.6);padding-left:2px">Privacy</div>
+        <div style="background:rgba(255,255,255,.06);border-radius:8px;box-shadow:0 0 0 0.5px rgba(255,255,255,.1)">
+          <div style="display:flex;align-items:center;gap:12px;padding:9px 12px"><div style="flex:1"><div>Hide personal information</div><div style="font-size:11px;color:rgba(255,255,255,.55)">Emails are redacted in the popover. Nothing personal is shown in the menu bar.</div></div><div style="width:26px;height:15px;border-radius:8px;background:#0A84FF;position:relative"><div style="position:absolute;top:1px;left:12px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.4)"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div id="1h" data-screen-label="1h Notes" style="flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)"><a href="#1h" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">1h</a>Assumptions and reasoning</div>
+<div style="width:380px;padding:18px 20px 20px;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);font-size:12px;line-height:1.5;color:#2a2a2a;display:flex;flex-direction:column;gap:9px;text-wrap:pretty">
+  <div><b>Sources.</b> QuotaBar PRD v0.1 and the ccheney/rations implementation plan. Name shown: Rations. Providers as the plan names them: Codex, Claude, Antigravity, Grok.</div>
+  <div><b>Stock macOS 14.</b> SF Pro, vibrancy, system controls, no brand color. Comfortable = accent blue (the stock ProgressView tint), warning ≥ 75% = systemOrange, critical ≥ 90% = systemRed, stale = dimmed. Monograms are two-letter and monochrome because vendor logos are off the table.</div>
+  <div><b>Menu bar.</b> The PRD’s ▮▮▯ meter, filled by thirds with what is left, plus the percent left; a drained meter is drawn hollow in red. The countdown appears on the bar only when the selected window is capped (FR-2, §10.1). A small orange dot means another provider is stale or failing; a hollow ring marks a stale reading.</div>
+  <div><b>Rows.</b> Bars show what is left, so a full bar is a fresh window and an empty red track is a capped one. Countdown first, then the local date and time; the countdown is what you glance at, the timestamp is what you trust. Capped rows say “Capped” in text as well as color. Unknowns are spelled out (“Usage unknown”, “Reset time unknown”, “Reset due · checking”) and never rendered as 0%.</div>
+  <div><b>Antigravity.</b> Its two shared pools stay as flat rows tagged Gemini or Claude &amp; GPT and sort by pressure with everything else; a sub-header per pool would break FR-9 sorting.</div>
+  <div><b>Privacy.</b> Emails are redacted by default, so only plan names appear. Reset credits are account-scoped and shown once in the provider header.</div>
+  <div><b>Fixture clock.</b> Sun 13 Sep 2026, 9:41 AM.</div>
+</div>
+</div>
+
+</div>
+<p style="margin:22px 0 0;font:12px/1.5 system-ui,sans-serif;color:rgba(0,0,0,.5)">Try next: “show <a href="#1a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">1a</a> with usage as remaining” · “try a ring or mini-bar glyph instead of ▮▮▯ in <a href="#1c" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">1c</a>” · “tighten <a href="#1g" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">1g</a> into two tabs”</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;usageMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;remaining&quot;,&quot;used&quot;],&quot;default&quot;:&quot;remaining&quot;,&quot;tsType&quot;:&quot;'remaining' | 'used'&quot;,&quot;section&quot;:&quot;Display&quot;},&quot;resetMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;both&quot;,&quot;relative&quot;,&quot;absolute&quot;],&quot;default&quot;:&quot;both&quot;,&quot;tsType&quot;:&quot;'both' | 'relative' | 'absolute'&quot;,&quot;section&quot;:&quot;Display&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const usageMode = this.props.usageMode ?? 'remaining';
+    const rem = usageMode === 'remaining';
+    const resetMode = this.props.resetMode ?? 'both';
+    const DARK = { label: 'rgba(255,255,255,.85)', sec: 'rgba(255,255,255,.55)', ok: '#0A84FF', warn: '#FF9F0A', crit: '#FF453A', empty: 'rgba(255,255,255,.28)', bar: 'rgba(255,255,255,.92)', faint: 'rgba(255,255,255,.3)', track: 'rgba(255,255,255,.12)', critTrack: 'rgba(255,69,58,.3)' };
+    const LIGHT = { label: 'rgba(0,0,0,.85)', sec: 'rgba(0,0,0,.5)', ok: '#007AFF', warn: '#FF9500', crit: '#FF3B30', empty: 'rgba(0,0,0,.25)', bar: 'rgba(0,0,0,.85)', faint: 'rgba(0,0,0,.28)', track: 'rgba(0,0,0,.09)', critTrack: 'rgba(255,59,48,.24)' };
+
+    // Fixture clock: Sun 13 Sep 2026, 9:41 AM local
+    const hero = [
+      { mono: 'Co', name: 'Codex', plan: 'Pro', fresh: 'Updated 2m ago · 2 reset credits', windows: [
+        { label: '5-hour', pct: 100, tone: 'crit', capped: true, countdown: 'in 2h 14m', resetAt: 'Sun 13 Sep, 11:55 AM' },
+        { label: 'Weekly', pct: 62, tone: 'ok', countdown: 'in 3d 23h', resetAt: 'Thu 17 Sep, 9:00 AM' } ] },
+      { mono: 'Cl', name: 'Claude', plan: 'Max 5x', fresh: 'Updated 2m ago', windows: [
+        { label: '5-hour', pct: 78, tone: 'warn', countdown: 'in 2h 49m', resetAt: 'Sun 13 Sep, 12:30 PM' },
+        { label: 'Weekly', pct: 41, tone: 'ok', countdown: 'in 1d 9h', resetAt: 'Mon 14 Sep, 7:00 PM' },
+        { label: 'Weekly', group: 'Opus', pct: 23, tone: 'ok', countdown: 'in 1d 9h', resetAt: 'Mon 14 Sep, 7:00 PM' } ] },
+      { mono: 'An', name: 'Antigravity', plan: 'Pro', fresh: 'Updated 1m ago', windows: [
+        { label: 'Weekly', group: 'Claude & GPT', pct: 88, tone: 'warn', countdown: 'in 2d 14h', resetAt: 'Wed 16 Sep, 12:00 AM' },
+        { label: '5-hour', group: 'Claude & GPT', pct: 54, tone: 'ok', countdown: 'in 3h 29m', resetAt: 'Sun 13 Sep, 1:10 PM' },
+        { label: 'Weekly', group: 'Gemini', pct: 35, tone: 'ok', countdown: 'in 2d 14h', resetAt: 'Wed 16 Sep, 12:00 AM' },
+        { label: '5-hour', group: 'Gemini', pct: 12, tone: 'ok', countdown: 'in 4h 19m', resetAt: 'Sun 13 Sep, 2:00 PM' } ] },
+      { mono: 'Gr', name: 'Grok', plan: 'SuperGrok', fresh: 'Updated 2m ago', windows: [
+        { label: 'Weekly', pct: 19, tone: 'ok', countdown: 'in 5d 0h', resetAt: 'Fri 18 Sep, 9:41 AM' } ] },
+    ];
+
+    const degraded = [
+      { mono: 'Co', name: 'Codex', plan: 'Pro', fresh: 'Refreshing… · last data 6m ago', windows: hero[0].windows },
+      { mono: 'Cl', name: 'Claude', plan: 'Max 5x', tag: 'Stale', fresh: 'Refresh failed · last data 24m ago', freshTone: 'warn', rowOp: 0.5, windows: hero[1].windows },
+      { mono: 'An', name: 'Antigravity', plan: 'Pro', fresh: 'Updated 1m ago', windows: [
+        { label: '5-hour', group: 'Gemini', pct: 100, tone: 'crit', capped: true, unconfirmed: true, countdown: 'Reset due · checking', resetAt: 'Sun 13 Sep, 9:30 AM' },
+        { label: 'Weekly', group: 'Claude & GPT', pct: null, tone: 'ok', countdown: 'in 2d 14h', resetAt: 'Wed 16 Sep, 12:00 AM' },
+        { label: '5-hour', group: 'Claude & GPT', pct: 54, tone: 'ok', countdown: 'Reset time unknown', resetAt: '' },
+        { label: 'Weekly', group: 'Gemini', pct: 35, tone: 'ok', countdown: 'in 2d 14h', resetAt: 'Wed 16 Sep, 12:00 AM' } ] },
+      { mono: 'Gr', name: 'Grok', plan: '', fresh: 'Not signed in', freshTone: 'warn', message: 'Rations found the Grok CLI but no sign-in. Run ', code: 'grok login', messageEnd: ' in Terminal, then Refresh.', link: 'Sign-in docs ↗', windows: [] },
+    ];
+
+    const paintW = (w, P) => {
+      const pct = w.pct;
+      const known = typeof pct === 'number';
+      const pctText = !known ? 'Usage unknown' : rem ? (100 - pct) + '% left' : pct + '% used';
+      let countdown = w.countdown || '';
+      let resetAt = w.resetAt || '';
+      const isRelative = countdown.startsWith('in ');
+      if (resetMode === 'absolute' && isRelative) countdown = '';
+      if (resetMode === 'relative') resetAt = '';
+      const status = w.capped ? (w.unconfirmed ? 'Unconfirmed' : 'Capped') : '';
+      return {
+        ...w, pctText, pctColor: w.capped ? P.crit : known ? P.label : P.sec, width: (known ? (rem ? 100 - pct : pct) : 0) + '%', fill: P[w.tone], track: w.capped ? P.critTrack : P.track,
+        status, statusColor: P.crit, dot: status && countdown ? '·' : '',
+        countdown, countdownColor: w.capped ? P.label : P.sec, resetAt, op: w.op ?? 1,
+      };
+    };
+    const paintP = (p, P) => ({
+      ...p, plan: p.plan || '', tag: p.tag || '', message: p.message || '', code: p.code || '', messageEnd: p.messageEnd || '', link: p.link || '',
+      freshColor: p.freshTone === 'warn' ? P.warn : P.sec,
+      windows: p.windows.map(w => paintW({ ...w, op: p.rowOp ?? 1 }, P)),
+    });
+
+    const states = [
+      { name: 'Healthy', caption: 'Tightest window across enabled providers', used: 41, tone: 'bar' },
+      { name: 'Warning', caption: '25% left or less (threshold is a setting)', used: 78, tone: 'warn' },
+      { name: 'Critical / capped', caption: 'Nothing left · countdown to reset joins the bar', used: 100, tone: 'crit', extra: '2h 14m' },
+      { name: 'Degraded', caption: 'Current reading; another provider stale or failing', used: 41, tone: 'bar', markDot: true },
+      { name: 'Stale', caption: 'Snapshot older than 20 min · dimmed, hollow mark', used: 78, tone: 'warn', dim: true, markHollow: true },
+      { name: 'Error', caption: 'No usable snapshot', hollow: true, markBang: true },
+      { name: 'No providers', caption: 'Neutral icon only', hollow: true },
+    ];
+    const paintS = (s, P) => {
+      const has = typeof s.used === 'number';
+      const shown = has ? (rem ? 100 - s.used : s.used) : null;
+      const n = has ? (shown >= 67 ? 3 : shown >= 34 ? 2 : shown > 0 ? 1 : 0) : 0;
+      const drained = has && n === 0;
+      const seg = i => (s.hollow || drained) ? 'transparent' : i < n ? P[s.tone] : P.empty;
+      return {
+        ...s, s1: seg(0), s2: seg(1), s3: seg(2), ring: s.hollow ? P.bar : drained ? P[s.tone] : 'transparent',
+        pctColor: s.tone === 'bar' || !s.tone ? 'inherit' : P[s.tone], pct: has ? shown + '%' : '', extra: s.extra || '', dot: s.extra ? '·' : '',
+        op: s.dim ? 0.45 : 1, markDot: !!s.markDot, markHollow: !!s.markHollow, markBang: !!s.markBang,
+      };
+    };
+    // Turn 2 — multi-account fixture. Rows are accounts; Antigravity's pools share the slot. Sorted by pressure.
+    const accounts = [
+      { mono: 'Co', name: 'Codex', meta: '4 accounts · 1 capped', fresh: 'Updated 2m ago', cols: ['5-hour', 'Weekly'], shorts: ['5h', 'Wk'], rows: [
+        { label: 'Lab', plan: 'Pro', credits: 2, hl: true, windows: [ { pct: 100, capped: true, cd: '2h 14m', abs: 'Sun 13 Sep, 11:55 AM', absShort: 'Sun 11:55 AM', tip: true }, { pct: 62, cd: '3d 23h', abs: 'Thu 17 Sep, 9:00 AM', absShort: 'Thu 9:00 AM' } ] },
+        { label: 'Acme', plan: 'Team', credits: 0, windows: [ { pct: 34, cd: '4h 2m', abs: 'Sun 13 Sep, 1:43 PM', absShort: 'Sun 1:43 PM' }, { pct: 91, cd: '1d 6h', abs: 'Mon 14 Sep, 3:41 PM', absShort: 'Mon 3:41 PM' } ] },
+        { label: 'Northwind', plan: 'Pro', credits: 0, windows: [ { pct: 5, cd: '4h 55m', abs: 'Sun 13 Sep, 2:36 PM', absShort: 'Sun 2:36 PM' }, { pct: 48, cd: '2d 11h', abs: 'Tue 15 Sep, 8:41 PM', absShort: 'Tue 8:41 PM' } ] },
+        { label: 'Personal', plan: 'Plus', credits: 1, windows: [ { pct: 12, cd: '4h 40m', abs: 'Sun 13 Sep, 2:21 PM', absShort: 'Sun 2:21 PM' }, { pct: 27, cd: '5d 2h', abs: 'Fri 18 Sep, 11:41 AM', absShort: 'Fri 11:41 AM' } ] } ] },
+      { mono: 'Cl', name: 'Claude', meta: '2 accounts', fresh: 'Updated 2m ago', cols: ['5-hour', 'Weekly', 'Weekly · Opus'], shorts: ['5h', 'Wk', 'Op'], rows: [
+        { label: 'Personal', plan: 'Max 5x', credits: null, windows: [ { pct: 78, cd: '2h 49m', abs: 'Sun 13 Sep, 12:30 PM', absShort: 'Sun 12:30 PM' }, { pct: 41, cd: '1d 9h', abs: 'Mon 14 Sep, 7:00 PM', absShort: 'Mon 7:00 PM' }, { pct: 23, cd: '1d 9h', abs: 'Mon 14 Sep, 7:00 PM', absShort: 'Mon 7:00 PM' } ] },
+        { label: 'Acme', plan: 'Team', credits: null, windows: [ { pct: 20, cd: '3h 10m', abs: 'Sun 13 Sep, 12:51 PM', absShort: 'Sun 12:51 PM' }, { pct: 55, cd: '4d 2h', abs: 'Thu 17 Sep, 12:00 PM', absShort: 'Thu 12:00 PM' }, { pct: 8, cd: '4d 2h', abs: 'Thu 17 Sep, 12:00 PM', absShort: 'Thu 12:00 PM' } ] } ] },
+      { mono: 'An', name: 'Antigravity', meta: '1 account · 2 pools', fresh: 'Updated 1m ago', cols: ['5-hour', 'Weekly'], shorts: ['5h', 'Wk'], rows: [
+        { label: 'Claude & GPT', plan: 'Pro · pool', credits: null, windows: [ { pct: 54, cd: '3h 29m', abs: 'Sun 13 Sep, 1:10 PM', absShort: 'Sun 1:10 PM' }, { pct: 88, cd: '2d 14h', abs: 'Wed 16 Sep, 12:00 AM', absShort: 'Wed 12:00 AM' } ] },
+        { label: 'Gemini', plan: 'Pro · pool', credits: null, windows: [ { pct: 12, cd: '4h 19m', abs: 'Sun 13 Sep, 2:00 PM', absShort: 'Sun 2:00 PM' }, { pct: 35, cd: '2d 14h', abs: 'Wed 16 Sep, 12:00 AM', absShort: 'Wed 12:00 AM' } ] } ] },
+      { mono: 'Gr', name: 'Grok', meta: '1 account', fresh: 'Updated 2m ago', cols: ['Weekly'], shorts: ['Wk'], rows: [
+        { label: 'Personal', plan: 'SuperGrok', credits: null, windows: [ { pct: 19, cd: '5d 0h', abs: 'Fri 18 Sep, 9:41 AM', absShort: 'Fri 9:41 AM' } ] } ] },
+    ];
+    const toneOf = w => (w.capped || w.pct >= 90) ? 'crit' : w.pct >= 75 ? 'warn' : 'ok';
+    const pctLabel = w => rem ? (100 - w.pct) + '% left' : w.capped ? 'Capped' : w.pct + '%';
+    const barPct = w => rem ? 100 - w.pct : w.pct;
+    const cdLabel = w => resetMode === 'absolute' ? w.absShort : w.cd;
+    const creditsText = c => c === null ? '—' : String(c);
+    const creditsColor = (c, P) => c === null ? P.faint : c > 0 ? P.label : P.sec;
+    const tightest = ws => ws.reduce((a, b) => (b.capped && !a.capped) || (!a.capped && b.pct > a.pct) ? b : a, ws[0]);
+    const segs = pct => pct >= 67 ? 3 : pct >= 34 ? 2 : pct > 0 ? 1 : 0;
+    const ledgerP = (p, P) => ({ ...p, cols: p.cols.map(name => ({ name })), rows: p.rows.map(r => ({ tight: tightest(r.windows),
+      label: r.label, plan: r.plan, credits: creditsText(r.credits), creditsColor: creditsColor(r.credits, P),
+      cells: r.windows.map(w => { const t = toneOf(w); const showCd = p.cols.length < 3 || w === tightest(r.windows); return { pct: pctLabel(w), pctColor: t === 'ok' ? P.label : P[t], weight: w.capped ? 600 : 400, cd: showCd && p.cols.length < 3 ? cdLabel(w) : '', cdBelow: showCd && p.cols.length >= 3 ? cdLabel(w) : '', cdColor: w.capped ? P.label : P.sec, width: barPct(w) + '%', fill: P[t], track: w.capped ? P.critTrack : P.track, tip: w.tip ? 'Resets ' + w.abs : '' }; }),
+    })) });
+    const dualP = (p, P) => ({ ...p, rows: p.rows.map(r => { const t = tightest(r.windows); const tone = toneOf(t); return {
+      label: r.label, plan: r.plan, credits: creditsText(r.credits), creditsColor: creditsColor(r.credits, P),
+      bars: r.windows.map((w, i) => ({ short: p.shorts[i], width: barPct(w) + '%', fill: P[toneOf(w)], track: w.capped ? P.critTrack : P.track })),
+      top: pctLabel(t) + ' · ' + cdLabel(t), topColor: tone === 'ok' ? P.label : P[tone], topWeight: t.capped ? 600 : 400,
+      sub: p.shorts[r.windows.indexOf(t)] + ' · ' + t.abs,
+    }; }) });
+    const HL = { label: '#fff', sec: 'rgba(255,255,255,.8)', faint: 'rgba(255,255,255,.5)', ok: '#fff', warn: '#fff', crit: '#fff', empty: 'rgba(255,255,255,.35)' };
+    const menuP = (p, P) => ({ ...p, items: p.rows.map(r => { const Q = r.hl ? HL : P; const t = tightest(r.windows); return {
+      label: r.label, bg: r.hl ? '#0A84FF' : 'transparent', fg: Q.label, chev: Q.faint,
+      credits: '↺ ' + creditsText(r.credits), creditsColor: creditsColor(r.credits, Q),
+      cells: r.windows.map(w => { const tone = toneOf(w); const n = segs(barPct(w)); const drained = n === 0; const seg = i => drained ? 'transparent' : i < n ? Q[tone] : Q.empty; const isT = w === t; return { s1: seg(0), s2: seg(1), s3: seg(2), ring: drained ? Q[tone] : 'transparent', text: isT ? pctLabel(w) + ' · ' + cdLabel(w) : pctLabel(w), color: tone === 'ok' ? Q.label : Q[tone], w: isT ? '128px' : '70px' }; }),
+    }; }) });
+
+    // Turn 3 — iterating on the menu (2c). Global columns 5-hour | Weekly; Codex has three weekly-only accounts and one with both.
+    const m3 = [
+      { name: 'Codex', fresh: '2m ago', rows: [
+        { label: 'Lab', plan: 'Pro', active: true, credits: 2, w5: { left: 0, capped: true, cd: '2h 14m' }, wk: { left: 38, cd: '3d 23h' } },
+        { label: 'Acme', plan: 'Team', credits: 0, wk: { left: 18, cd: '1d 6h' } },
+        { label: 'Northwind', plan: 'Plus', credits: 0, wk: { left: 52, cd: '2d 11h' } },
+        { label: 'Personal', plan: 'Plus', credits: 1, wk: { left: 73, cd: '5d 2h' } } ] },
+      { name: 'Claude', fresh: '2m ago', rows: [
+        { label: 'Personal', plan: 'Max 5x', w5: { left: 22, cd: '2h 49m' }, wk: { left: 59, cd: '1d 9h' } },
+        { label: '↳ Opus', sub: true, wk: { left: 77, cd: '1d 9h' } },
+        { label: 'Acme', plan: 'Team', w5: { left: 80, cd: '3h 10m' }, wk: { left: 45, cd: '4d 2h' } },
+        { label: '↳ Opus', sub: true, wk: { left: 92, cd: '4d 2h' } } ] },
+      { name: 'Antigravity', fresh: '1m ago', rows: [
+        { label: 'Claude & GPT', plan: 'Pro', w5: { left: 46, cd: '3h 29m' }, wk: { left: 12, cd: '2d 14h' } },
+        { label: 'Gemini', plan: 'Pro', w5: { left: 88, cd: '4h 19m' }, wk: { left: 65, cd: '2d 14h' } } ] },
+      { name: 'Grok', fresh: '2m ago', rows: [
+        { label: 'Personal', plan: 'SuperGrok', wk: { left: 81, cd: '5d 0h' } } ] },
+    ];
+    const toneL = w => (w.capped || w.left <= 10) ? 'crit' : w.left <= 25 ? 'warn' : 'ok';
+    const m3P = (p, hlLabel) => ({ ...p, items: p.rows.map(r => {
+      r = { ...r, hl: p.name === 'Codex' && r.label === hlLabel };
+      const Q = r.hl ? HL : DARK;
+      const present = [r.w5, r.wk].filter(Boolean);
+      const t = present.reduce((a, b) => (b.capped && !a.capped) || (!a.capped && b.left < a.left) ? b : a, present[0]);
+      const tt = toneL(t);
+      const cell = w => {
+        if (!w) return { has: false, none: !r.sub, dash: true, pctText: '', width: '0%', fill: 'transparent', track: 'transparent', ring: 'none', pctColor: Q.faint };
+        const tone = toneL(w); const shown = rem ? w.left : 100 - w.left; const fill = tone === 'ok' ? Q.ok : Q[tone];
+        const track = r.hl ? 'rgba(255,255,255,.28)' : w.capped ? DARK.critTrack : DARK.track;
+        return { has: true, none: false, pctText: shown + '%', pctColor: tone === 'ok' ? Q.label : Q[tone], width: shown + '%', fill, track, ring: 'conic-gradient(' + fill + ' 0 ' + (rem ? w.left : 100 - w.left) + '%, ' + track + ' 0)' };
+      };
+      return {
+        label: r.label, labelColor: r.sub ? Q.sec : Q.label, bg: r.hl ? '#0A84FF' : 'transparent', chev: r.sub ? 'transparent' : Q.faint, dot: r.active ? Q.ok : 'transparent',
+        c5: cell(r.w5), cwk: cell(r.wk),
+        reset: t.cd, resetColor: tt === 'ok' ? (r.sub ? Q.sec : Q.label) : Q[tt],
+        credits: r.credits === undefined ? '' : String(r.credits), creditsColor: r.credits > 0 ? Q.label : Q.sec,
+      };
+    }) });
+
+    return {
+      menu3: m3.map(p => m3P(p, 'Lab')),
+      menu5: m3.map(p => m3P(p, 'Acme')),
+      ledger: accounts.map(p => ledgerP(p, DARK)),
+      dual: accounts.map(p => dualP(p, LIGHT)),
+      menu: accounts.map(p => menuP(p, DARK)),
+      heroDark: hero.map(p => paintP(p, DARK)),
+      heroLight: hero.map(p => paintP(p, LIGHT)),
+      degradedDark: degraded.map(p => paintP(p, DARK)),
+      barDark: states.map(s => paintS(s, DARK)),
+      barLight: states.map(s => paintS(s, LIGHT)),
+    };
+  }
+}
+</script>
+</body>
+</html>
