@@ -63,6 +63,7 @@ public actor LiveAccountService {
         let id = incoming.profile.id
         let result = await AccountFetchResult.fetch(incoming, using: fetcher)
         try Task.checkCancellation()
+        if let failure = result.failure, case .notSignedIn = failure { throw failure }
         let account = ConnectionMerge.prepare(
             incoming, existing: connections[id], requestedName: name, alreadyConnected: alreadyConnected
         )
