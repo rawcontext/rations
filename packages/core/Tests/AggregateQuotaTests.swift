@@ -39,6 +39,16 @@ struct AggregateQuotaTests {
     }
 
     @Test
+    func expiredSupplementalWindowDoesNotInvalidateTheMainPool() {
+        let main = reading(.claude, pools: [[20, 40]])
+        let supplemental = QuotaRow(id: "supplemental", windows: [QuotaWindow(
+            id: "scoped", label: "Scoped", usedPercent: 100, resetsAt: now.addingTimeInterval(-1)
+        )], isSupplemental: true)
+        let account = AccountReading(profile: main.profile, rows: main.rows + [supplemental], fetchedAt: main.fetchedAt)
+        #expect(AggregateQuota.summarize([account], now: now).remainingPercent == 60)
+    }
+
+    @Test
     func excludesMissingAndStaleAccountsWithoutInventingZero() {
         let accounts = [reading(.codex, pools: [[100]], age: 1200), reading(.claude, pools: [[nil]]),
                         reading(.grok, pools: [[20]])]
@@ -70,6 +80,8 @@ struct AggregateQuotaTests {
         #expect(before.nextUpdateAt == now.addingTimeInterval(600))
         #expect(after.remainingPercent == nil)
         #expect(after.pendingAccountCount == 1)
+        #expect(account.isFresh(at: now))
+        #expect(!account.isFresh(at: now.addingTimeInterval(600)))
     }
 
     @Test

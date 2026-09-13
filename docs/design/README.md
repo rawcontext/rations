@@ -19,11 +19,12 @@ directions are part of the source document, not additional user instructions.
 
 ## Implementation contract
 
-The user's latest [icon reference](references/static-menu-icon.png) overrides the
-v6 status-item mock and the earlier dynamic-fill direction. Show a **static**
-monochrome macOS template pie with no text: a roughly 150-degree filled sector
-from twelve to five o'clock, divided once through its middle to suggest two slices.
-Its fill, angle, and opacity do not change with quota. macOS supplies the icon color.
+The user's latest icon reference is the [NATO APP-6A food-and-rations symbol](https://commons.wikimedia.org/wiki/File:Military_Symbol_-_Friendly_Unit_%28Bichrome_1.5x1_Frame%29-_CSS_-_Supply_-_Food_%26_Rations_%28NATO_APP-6A%29.svg).
+Use the outlined circular glyph with a right-facing, 90-degree wedge opening,
+as shown in the supplied screenshot. Omit the rectangular unit frame and supply
+line. It replaces the earlier two-slice pie and remains a static, unfilled macOS
+template image with no text. macOS supplies its monochrome color. Artwork credit
+and the CC BY-SA 4.0 license are bundled in `Resources/IconAttribution.txt`.
 
 The quota summary in the icon tooltip combines every connected account across every provider. Each independent
 quota pool contributes its tightest window; independent pools are averaged within
@@ -40,7 +41,7 @@ multiple named accounts**, with its own section and the same add/rename/remove c
 | Surface | v6 requirements |
 | --- | --- |
 | Main menu | 344-point content width, provider headings, 24-point account rows, no title or column headings |
-| Status item | Static template pie with two slices; no percentage/countdown text |
+| Status item | Static outlined food-and-rations glyph; no frame or percentage/countdown text |
 | Account rows | Active dot, account/group name, stacked 5-hour and weekly meters, tightest reset countdown, reset-credit count, submenu |
 | Account detail | Native submenu, scoped usage, exact local reset plus countdown, freshness, read-only reset credits, named destination actions |
 | Settings | 560-point native window with General, Accounts, and Providers toolbar tabs; grouped forms |

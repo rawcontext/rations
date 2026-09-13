@@ -5,6 +5,28 @@ import Testing
 
 struct ClaudeUsageParserTests {
     @Test
+    func sessionWithoutResetDoesNotBorrowTheWeeklyReset() throws {
+        let screen = """
+        Current session
+        0% used
+        Current week (all models)
+        20% used
+        Resets Sep 13 at 4pm (America/Chicago)
+        """
+        let now = try #require(ProviderJSON.date("2026-09-13T09:10:00Z"))
+        let reading = try ClaudeTerminalParser.parse(screen, profile: ProviderTestData.profile(.claude), now: now)
+        #expect(reading.menuRow.window(for: .session)?.resetsAt == nil)
+        #expect(reading.menuRow.window(for: .weekly)?.resetsAt == ProviderJSON.date("2026-09-13T21:00:00Z"))
+    }
+
+    @Test
+    func resetAcrossNewYearUsesTheNearestYear() throws {
+        let now = try #require(ProviderJSON.date("2026-12-31T20:00:00Z"))
+        let reset = ClaudeTerminalParser.resetDate("Resets Jan 1 at 4pm (America/Chicago)", now: now)
+        #expect(reset == ProviderJSON.date("2027-01-01T22:00:00Z"))
+    }
+
+    @Test
     func importedIdentityComesFromAuthenticatedProfile() throws {
         let data = try ProviderTestData.json([
             "account": ["email_address": "imported@example.invalid"], "organization": ["uuid": "imported-org"]

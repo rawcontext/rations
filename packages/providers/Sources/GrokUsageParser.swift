@@ -16,7 +16,8 @@ enum GrokUsageParser {
             profile: profile, rows: [QuotaRow(id: "main", windows: [window])], fetchedAt: now
         )
         if window.usedPercent == nil {
-            reading.notice = "Grok did not expose a usage percentage. The reset date is available."
+            reading.notice = "Grok did not expose a usage percentage."
+            if reset != nil { reading.notice?.append(" The reset date is available.") }
         }
         return reading
     }

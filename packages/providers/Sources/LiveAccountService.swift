@@ -8,6 +8,8 @@ public actor LiveAccountService {
     private var active: [ProviderID: String] = [:]
     private var errors: [ProviderID: String] = [:]
     private var schedule = RefreshSchedule()
+    private var activity = ProviderActivity()
+    private var revision: UInt64 = 0
     private var restored = false
 
     public init() {}
@@ -18,6 +20,8 @@ public actor LiveAccountService {
         openExternal: @escaping @Sendable () async throws -> Void, reconnecting accountID: String? = nil
     ) async throws -> ConnectionReceipt {
         try restore()
+        let operation = activity.begin(provider)
+        defer { activity.finish(provider, token: operation) }
         let target = try accountID.map { id in
             guard let saved = connections[id] else {
                 throw ProviderFailure.unavailable("This account is no longer saved. Add it again to sign in.")
@@ -42,22 +46,38 @@ public actor LiveAccountService {
         return snapshot()
     }
 
-    public func refresh(enabled: Set<ProviderID>) async -> LiveAccountState {
+    @preconcurrency public func refresh(
+        enabled: Set<ProviderID>, onUpdate: (@Sendable (LiveAccountState) async -> Void)? = nil
+    ) async -> LiveAccountState {
         do { try restore() } catch { return failureState(error) }
-        let due = schedule.reserve(enabled, now: .now)
-        await discover(due)
-        let accounts = connections.values.filter { due.contains($0.profile.provider) }
+        let due = schedule.reserve(enabled.subtracting(activity.busy), now: .now)
+        guard !due.isEmpty else { return snapshot() }
+        let versions = activity.versions
+        let blocked = await discover(due, versions: versions)
+        await onUpdate?(snapshot())
+        let accounts = connections.values.filter {
+            let provider = $0.profile.provider
+            return due.contains(provider) && !blocked.contains(provider)
+                && activity.accepts(provider, version: versions[provider])
+        }
         await withTaskGroup(of: AccountFetchResult.self) { group in
             for account in accounts {
                 group.addTask { await AccountFetchResult.fetch(account, using: self.fetcher) }
             }
-            for await result in group { accept(result) }
+            for await result in group {
+                guard let provider = connections[result.id]?.profile.provider,
+                      activity.accepts(provider, version: versions[provider]) else { continue }
+                accept(result)
+                await onUpdate?(snapshot())
+            }
         }
         return snapshot()
     }
 
     public func connect(_ provider: ProviderID, name: String, file: URL? = nil) async throws -> LiveAccountState {
         try restore()
+        let operation = activity.begin(provider)
+        defer { activity.finish(provider, token: operation) }
         let account = try await CredentialDiscovery.capture(provider, file: file, interactive: true)
         return try await finishConnection(
             account, name: name, alreadyConnected: connections[account.profile.id] != nil, isNative: file == nil
@@ -115,26 +135,35 @@ public actor LiveAccountService {
         restored = true
     }
 
-    private func discover(_ providers: Set<ProviderID>) async {
+    private func discover(_ providers: Set<ProviderID>, versions: [ProviderID: UUID]) async -> Set<ProviderID> {
+        var blocked: Set<ProviderID> = []
         await withTaskGroup(of: NativeDiscoveryResult.self) { group in
             for provider in providers { group.addTask { await NativeDiscoveryResult.capture(provider) } }
             for await result in group {
-                guard var account = result.account else {
-                    active[result.provider] = nil
-                    errors[result.provider] = result.error
-                    continue
-                }
-                active[result.provider] = account.profile.id
-                if let saved = connections[account.profile.id] {
-                    account.profile.name = saved.profile.name
-                    account.profile.plan = account.profile.plan ?? saved.profile.plan
-                    account.lastReading = saved.lastReading
-                }
-                connections[account.profile.id] = account
-                errors[result.provider] = nil
-                do { try vault.save(account) } catch { errors[result.provider] = Self.message(error) }
+                guard activity.accepts(result.provider, version: versions[result.provider]) else { continue }
+                if case .rateLimited = result.failure { blocked.insert(result.provider) }
+                acceptDiscovery(result)
             }
         }
+        return blocked
+    }
+
+    private func acceptDiscovery(_ result: NativeDiscoveryResult) {
+        guard var account = result.account else {
+            active[result.provider] = nil
+            errors[result.provider] = result.error
+            if case let .rateLimited(until) = result.failure { schedule.postpone(result.provider, until: until) }
+            return
+        }
+        active[result.provider] = account.profile.id
+        if let saved = connections[account.profile.id] {
+            account.profile.name = saved.profile.name
+            account.profile.plan = account.profile.plan ?? saved.profile.plan
+            account.lastReading = saved.lastReading
+        }
+        connections[account.profile.id] = account
+        errors[result.provider] = nil
+        do { try vault.save(account) } catch { errors[result.provider] = Self.message(error) }
     }
 
     private func accept(_ result: AccountFetchResult) {
@@ -156,10 +185,11 @@ public actor LiveAccountService {
     }
 
     private func snapshot() -> LiveAccountState {
+        revision += 1
         let accounts = connections.values.map { account in
             account.lastReading ?? emptyReading(account.profile)
         }.sorted { $0.profile.name.localizedStandardCompare($1.profile.name) == .orderedAscending }
-        return LiveAccountState(accounts: accounts, activeAccounts: active, providerErrors: errors)
+        return LiveAccountState(revision: revision, accounts: accounts, activeAccounts: active, providerErrors: errors)
     }
 
     private func emptyReading(_ profile: AccountProfile) -> AccountReading {

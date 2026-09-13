@@ -16,12 +16,12 @@ struct AccountDetailView: View {
                     .compactMap { $0 }.joined(separator: " · "))
                     .font(.system(size: 11)).foregroundStyle(.secondary)
             }
-            quotaGroups
+            quotaGroups.opacity(account.isFresh(at: store.displayTime) ? 1 : 0.45)
             Text(freshnessText)
                 .font(.system(size: 11)).foregroundStyle(.secondary)
             if let error = account.error {
                 Text(error).font(.system(size: 11)).foregroundStyle(.secondary)
-            } else if !account.isFresh(at: .now) {
+            } else if !account.isFresh(at: store.displayTime) {
                 Text("Stale data · refresh to verify").font(.system(size: 11)).foregroundStyle(.secondary)
             }
             if let notice = account.notice { Text(notice).font(.system(size: 11)).foregroundStyle(.secondary) }
@@ -37,14 +37,15 @@ struct AccountDetailView: View {
                     Text(label).font(.system(size: 12, weight: .semibold))
                 }
                 ForEach(row.windows) { window in
-                    WindowDetailView(window: window, preferences: preferences)
+                    WindowDetailView(window: window, preferences: preferences, now: store.displayTime)
                 }
             }
         }
     }
 
     private var freshnessText: String {
-        let updated = "Updated " + ResetText.age(of: account.fetchedAt, now: .now)
+        guard account.fetchedAt != nil else { return "Usage not yet available" }
+        let updated = "Updated " + ResetText.age(of: account.fetchedAt, now: store.displayTime)
         guard let count = account.resetCredits else { return updated }
         return "\(count) " + (count == 1 ? "reset" : "resets") + " · " + updated
     }

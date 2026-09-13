@@ -1,9 +1,11 @@
+import Foundation
 import RationsCore
 import SwiftUI
 
 struct WindowDetailView: View {
     let window: QuotaWindow
     let preferences: DisplayPreferences
+    let now: Date
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -18,7 +20,7 @@ struct WindowDetailView: View {
                 Text(ResetText.absolute(window.resetsAt)).font(.system(size: 11)).foregroundStyle(.secondary)
             }
             if preferences.resetMode != .absolute {
-                Text(ResetText.countdown(to: window.resetsAt, now: .now))
+                Text(ResetText.countdown(to: window.resetsAt, now: now))
                     .font(.system(size: 11)).foregroundStyle(.secondary)
             }
         }

@@ -8,6 +8,7 @@ alias(
 test_suite(
     name = "tests",
     tests = [
+        "//apps/macos:test",
         "//packages/core:test",
         "//packages/providers:test",
         "//tools/cognitive-complexity:test",

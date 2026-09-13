@@ -51,7 +51,7 @@ and lint executables, independently of any global pnpm installation.
 | Command | Purpose |
 | --- | --- |
 | `npm run build` | Build the app and shared Swift packages with Bazel |
-| `npm run test` | Run quota, provider, transport, and cognitive-complexity tests |
+| `npm run test` | Run app lifecycle, quota, provider, transport, and lint-tool tests |
 | `npm run lint` | Run the complete Eudoxus 3-derived lint policy, including JSCPD |
 | `npm run check` | Lint, build, and test the repository |
 | `npm run dev` | Stop the existing Rations process, build, and launch the `.app` |

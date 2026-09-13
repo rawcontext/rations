@@ -73,9 +73,11 @@ accounts require a matching sign-in or an exported OAuth credential.
 - Polling follows the refresh setting. Opening the menu requests a refresh when
   at least a minute has elapsed. Manual refresh shares the same one-minute gate.
 - Providers fetch independently; one failure does not discard successful readings.
-  The current refresh publishes after the pending provider requests complete.
+  After sign-in discovery, results appear as each usage request completes. Older
+  refresh results cannot overwrite credentials or usage from a newer sign-in.
 - HTTP 429 respects `Retry-After` seconds or HTTP dates. Cached readings remain
   visible on failure, clearly marked stale, and are excluded from the aggregate.
+  A cooldown during sign-in discovery also stops that provider's usage requests.
 - The static icon never changes shape. Its tooltip averages available percentages
   across accounts after combining independent pools within each account.
 - Credentials and last readings are stored under the exact Keychain service
@@ -84,6 +86,11 @@ accounts require a matching sign-in or an exported OAuth credential.
 - HTTP uses ephemeral sessions without cookie storage or redirects. Network errors
   never log bearer tokens or response bodies. Vendor subprocesses are bounded,
   run in an app-owned directory, and are stopped when Rations quits.
+  Output collection is nonblocking and responds to cancellation and timeouts.
+- A process lock prevents two copies of the same development or production bundle
+  from running at once. A second launch exits before creating a menu bar item.
+- Open menus update countdowns every 30 seconds and at known reset/freshness
+  boundaries. Stale usage is dimmed in both the menu row and account detail.
 
 ## Verified behavior and limitations
 

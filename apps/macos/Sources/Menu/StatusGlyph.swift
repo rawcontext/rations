@@ -1,31 +1,23 @@
 import AppKit
 
+// Food-and-rations artwork adapted from CdnMCG (CC BY-SA 4.0).
+// Attribution and modification details are bundled in IconAttribution.txt.
 @MainActor
 enum StatusGlyph {
     static let image: NSImage = {
         let image = NSImage(size: NSSize(width: 16, height: 16), flipped: false) { _ in
             NSColor.black.set()
-            let circle = NSBezierPath(ovalIn: NSRect(x: 1.5, y: 1.5, width: 13, height: 13))
-            circle.lineWidth = 1.1
-            circle.stroke()
-            let slice = NSBezierPath()
-            slice.move(to: NSPoint(x: 8, y: 8))
-            slice.appendArc(
-                withCenter: NSPoint(x: 8, y: 8), radius: 5.3,
-                startAngle: 90, endAngle: -60, clockwise: true
+            let center = NSPoint(x: 8.9, y: 8)
+            let symbol = NSBezierPath()
+            symbol.move(to: center)
+            symbol.appendArc(
+                withCenter: center, radius: 6.4,
+                startAngle: 45, endAngle: 315, clockwise: false
             )
-            slice.close()
-            slice.fill()
-            if let context = NSGraphicsContext.current?.cgContext {
-                context.saveGState()
-                context.setBlendMode(.clear)
-                context.setLineWidth(0.8)
-                context.move(to: CGPoint(x: 8, y: 8))
-                let angle = CGFloat.pi / 12
-                context.addLine(to: CGPoint(x: 8 + 5.5 * cos(angle), y: 8 + 5.5 * sin(angle)))
-                context.strokePath()
-                context.restoreGState()
-            }
+            symbol.close()
+            symbol.lineWidth = 1.2
+            symbol.lineJoinStyle = .miter
+            symbol.stroke()
             return true
         }
         image.isTemplate = true

@@ -13,7 +13,7 @@ struct GeneralSettingsView: View {
             Section("Privacy") {
                 Toggle(isOn: store.binding(\.hidePersonalInformation)) {
                     Text("Hide personal information")
-                    Text("Emails are redacted in the menu. Nothing personal is shown in the menu bar.")
+                    Text("Emails are redacted in the menu.")
                         .font(.caption).foregroundStyle(.secondary)
                 }
             }
@@ -23,7 +23,6 @@ struct GeneralSettingsView: View {
 
     private var menuSection: some View {
         Section("Menu bar") {
-            LabeledContent("Menu bar icon", value: "Two slices")
             Picker("Show usage as", selection: store.binding(\.usageMode)) {
                 ForEach(UsageDisplayMode.allCases, id: \.self) { Text($0.title).tag($0) }
             }
@@ -38,10 +37,10 @@ struct GeneralSettingsView: View {
     private var thresholdSection: some View {
         Section("Thresholds") {
             Stepper(value: store.binding(\.warningRemaining), in: (store.preferences.criticalRemaining + 1)...100) {
-                thresholdLabel("Warning when less than", value: store.preferences.warningRemaining)
+                thresholdLabel("Warning at or below", value: store.preferences.warningRemaining)
             }
             Stepper(value: store.binding(\.criticalRemaining), in: 0...(store.preferences.warningRemaining - 1)) {
-                thresholdLabel("Critical when less than", value: store.preferences.criticalRemaining)
+                thresholdLabel("Critical at or below", value: store.preferences.criticalRemaining)
             }
         }
     }
@@ -60,7 +59,7 @@ struct GeneralSettingsView: View {
         HStack {
             Text(title)
             Spacer()
-            Text("\(value) % left").monospacedDigit().foregroundStyle(.secondary)
+            Text("\(value)% left").monospacedDigit().foregroundStyle(.secondary)
         }
     }
 }

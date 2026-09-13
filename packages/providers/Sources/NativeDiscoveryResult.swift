@@ -3,13 +3,15 @@ import RationsCore
 struct NativeDiscoveryResult: Sendable {
     let provider: ProviderID
     let account: AccountConnection?
-    let error: String?
+    let failure: ProviderFailure?
+    var error: String? { failure?.errorDescription }
 
     static func capture(_ provider: ProviderID) async -> Self {
         do {
-            return Self(provider: provider, account: try await CredentialDiscovery.capture(provider), error: nil)
+            return Self(provider: provider, account: try await CredentialDiscovery.capture(provider), failure: nil)
         } catch {
-            return Self(provider: provider, account: nil, error: LiveAccountService.message(error))
+            let failure = error as? ProviderFailure ?? .unavailable(LiveAccountService.message(error))
+            return Self(provider: provider, account: nil, failure: failure)
         }
     }
 }

@@ -31,6 +31,7 @@ public struct AccountReading: Identifiable, Codable, Equatable, Sendable {
     public func isFresh(at now: Date) -> Bool {
         guard error == nil, let fetchedAt else { return false }
         let age = now.timeIntervalSince(fetchedAt)
-        return age >= 0 && age < 20 * 60
+        let resets = rows.filter { !$0.isSupplemental }.flatMap(\.windows).compactMap(\.resetsAt)
+        return age >= 0 && age < 20 * 60 && !resets.contains(where: { $0 <= now })
     }
 }

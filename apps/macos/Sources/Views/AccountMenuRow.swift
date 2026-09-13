@@ -13,7 +13,7 @@ struct AccountMenuRow: View {
 
     private var textColor: Color { highlighted ? .white : .primary }
     private var tone: UsageTone {
-        guard account.isFresh(at: .now) else { return .stale }
+        guard account.isFresh(at: store.displayTime) else { return .stale }
         return row.tightestWindow.map { preferences.tone(for: $0) } ?? .unknown
     }
 
@@ -25,7 +25,7 @@ struct AccountMenuRow: View {
                 .foregroundStyle(textColor)
                 .lineLimit(1).truncationMode(.tail).frame(width: 82, alignment: .leading)
             meters
-            Text(ResetText.countdown(to: row.resetWindow?.resetsAt, now: .now))
+            Text(ResetText.countdown(to: row.resetWindow?.resetsAt, now: store.displayTime))
                 .font(.system(size: 11.5).monospacedDigit())
                 .foregroundStyle(highlighted ? .white : tone.color)
                 .frame(width: 56, alignment: .trailing).lineLimit(1).minimumScaleFactor(0.8)
@@ -46,6 +46,6 @@ struct AccountMenuRow: View {
             QuotaMeter(window: row.window(for: .session), preferences: preferences, highlighted: highlighted)
             QuotaMeter(window: row.window(for: .weekly), preferences: preferences, highlighted: highlighted)
         }
-        .frame(width: 108).opacity(account.isFresh(at: .now) ? 1 : 0.45)
+        .frame(width: 108).opacity(account.isFresh(at: store.displayTime) ? 1 : 0.45)
     }
 }

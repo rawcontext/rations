@@ -8,12 +8,12 @@ struct ProvidersSettingsView: View {
         Form {
             Section {
                 ForEach(ProviderID.allCases) { provider in
-                    ProviderSettingsRow(provider: provider, store: store, showsToggle: true)
+                    ProviderSettingsRow(provider: provider, store: store)
                 }
             } header: {
                 Text("Providers")
             } footer: {
-                Text("Rations reuses vendor sign-ins. Saved accounts and credentials stay in your Mac's Keychain.")
+                Text("Saved accounts and credentials stay in your Mac's Keychain.")
             }
         }
         .formStyle(.grouped)

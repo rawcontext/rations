@@ -5,7 +5,14 @@ import RationsProviders
 
 @MainActor @Observable
 final class RationsStore {
-    var preferences: DisplayPreferences { didSet { persistPreferences(); scheduleRefresh() } }
+    var preferences: DisplayPreferences {
+        didSet {
+            persistPreferences()
+            if preferences.refreshMinutes != oldValue.refreshMinutes { scheduleRefresh() }
+            if preferences.disabledProviders != oldValue.disabledProviders { refresh() }
+        }
+    }
+    private(set) var displayTime = Date.now
     private(set) var accounts: [AccountReading] = []
     private(set) var activeAccounts: [ProviderID: String] = [:]
     private(set) var providerErrors: [ProviderID: String] = [:]
@@ -19,6 +26,7 @@ final class RationsStore {
     private let service = LiveAccountService()
     private var refreshTimer: Timer?
     private var lastRefresh = Date.distantPast
+    private var appliedRevision: UInt64 = 0
 
     init() {
         let saved = UserDefaults.standard.data(forKey: "displayPreferences")
@@ -44,6 +52,7 @@ final class RationsStore {
     }
 
     func refresh() { Task { await refreshNow() } }
+    func updateDisplayTime() { displayTime = .now }
 
     func refreshIfNeeded() {
         if Date.now.timeIntervalSince(lastRefresh) >= 60 { refresh() }
@@ -100,15 +109,20 @@ final class RationsStore {
         guard !isRefreshing else { return }
         isRefreshing = true
         let enabled = Set(ProviderID.allCases).subtracting(preferences.disabledProviders)
-        apply(await service.refresh(enabled: enabled))
+        apply(await service.refresh(enabled: enabled) { [weak self] state in
+            await self?.apply(state)
+        })
         lastRefresh = .now
         isRefreshing = false
     }
 
     private func apply(_ state: LiveAccountState) {
-        accounts = state.accounts
-        activeAccounts = state.activeAccounts
-        providerErrors = state.providerErrors
+        guard state.revision >= appliedRevision else { return }
+        appliedRevision = state.revision
+        if accounts != state.accounts { accounts = state.accounts }
+        if activeAccounts != state.activeAccounts { activeAccounts = state.activeAccounts }
+        if providerErrors != state.providerErrors { providerErrors = state.providerErrors }
+        updateDisplayTime()
         ConnectionDiagnostics.writeIfRequested(state)
     }
 

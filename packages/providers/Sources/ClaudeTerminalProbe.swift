@@ -3,7 +3,10 @@ import Foundation
 
 enum ClaudeTerminalProbe {
     static func read() async throws -> String {
-        try await Task.detached(priority: .utility) { try capture() }.value
+        let task = Task.detached(priority: .utility) { try capture() }
+        return try await withTaskCancellationHandler {
+            try await task.value
+        } onCancel: { task.cancel() }
     }
 
     private static func capture() throws -> String {
@@ -34,10 +37,19 @@ enum ClaudeTerminalProbe {
         var commandSent = false
         var trusted = false
         var cursorReplies = 0
+        var snapshot = ""
+        var lastOutput = Date.now
         var buffer = [UInt8](repeating: 0, count: 65_536)
         while process.isRunning, Date.now < deadline {
+            try Task.checkCancellation()
             let count = Darwin.read(controllerFD, &buffer, buffer.count)
-            if count > 0 { data.append(contentsOf: buffer.prefix(count)) }
+            if count <= 0 {
+                if ready(snapshot), Date.now.timeIntervalSince(lastOutput) >= 0.2 { return snapshot }
+                Thread.sleep(forTimeInterval: 0.1)
+                continue
+            }
+            data.append(contentsOf: buffer.prefix(count))
+            lastOutput = .now
             guard data.count < 1_000_000 else { throw ProviderFailure.invalidResponse }
             guard let raw = String(data: data, encoding: .utf8) else {
                 Thread.sleep(forTimeInterval: 0.1)
@@ -46,21 +58,22 @@ enum ClaudeTerminalProbe {
             var screen = TerminalScreen()
             screen.consume(data)
             let text = screen.text
+            snapshot = text
             respondToTerminal(controllerFD, raw: raw, text: text, trusted: &trusted, cursorReplies: &cursorReplies)
             if !commandSent, text.contains("❯"), !text.contains("trust this folder"),
                text.contains("Claude Code") {
                 send("/usage\r", to: controllerFD)
                 commandSent = true
             }
-            if text.localizedCaseInsensitiveContains("current week"), text.components(separatedBy: "% used").count >= 3,
-               text.lowercased().components(separatedBy: "resets").count >= 3 {
-                return text
-            }
             Thread.sleep(forTimeInterval: 0.1)
         }
         throw ProviderFailure.unavailable(
             "Claude usage could not be read. Open Claude Code and run /usage, then reconnect."
         )
+    }
+
+    private static func ready(_ text: String) -> Bool {
+        text.localizedCaseInsensitiveContains("current week") && text.components(separatedBy: "% used").count >= 3
     }
 
     private static func respondToTerminal(

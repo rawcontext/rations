@@ -21,7 +21,8 @@ enum CodexUsageParser {
             rows.append(row(limits, id: name, label: name))
         }
         guard rows.contains(where: { !$0.windows.isEmpty }) else { throw ProviderFailure.invalidResponse }
-        let count = root.object("rate_limit_reset_credits")?.number("available_count").map(Int.init)
+        let count = root.object("rate_limit_reset_credits")?.number("available_count")
+            .flatMap(Int.init(exactly:)).flatMap { $0 >= 0 ? $0 : nil }
         return AccountReading(profile: profile, rows: rows, fetchedAt: now, resetCredits: count)
     }
 
@@ -41,7 +42,7 @@ enum CodexUsageParser {
     }
 
     private static func durationLabel(_ seconds: Double?) -> String {
-        guard let seconds, seconds > 0 else { return "Session" }
-        return seconds.truncatingRemainder(dividingBy: 3600) == 0 ? "\(Int(seconds / 3600))-hour" : "Session"
+        guard let seconds, seconds > 0, let hours = Int(exactly: seconds / 3600) else { return "Session" }
+        return "\(hours)-hour"
     }
 }

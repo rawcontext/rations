@@ -4,6 +4,15 @@ import RationsCore
 import Testing
 
 struct CodexUsageParserTests {
+    @Test(arguments: [-1.0, 0.5, Double.greatestFiniteMagnitude])
+    func invalidResetCountsStayUnknown(_ count: Double) throws {
+        let data = try ProviderTestData.json([
+            "account_id": "test-account", "rate_limit_reset_credits": ["available_count": count],
+            "rate_limit": ["primary_window": ["used_percent": 25]]
+        ])
+        #expect(try parse(data).resetCredits == nil)
+    }
+
     @Test
     func primaryWindowCanBeWeeklyAndModelsBelongToOneAccount() throws {
         let weekly: [String: Any] = ["used_percent": 42, "limit_window_seconds": 604_800, "reset_at": 1_800_060_000]

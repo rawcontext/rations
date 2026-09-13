@@ -1,6 +1,6 @@
 load("@bazel_skylib//rules:common_settings.bzl", "bool_flag")
 load("@rules_apple//apple:macos.bzl", "macos_application")
-load("@rules_swift//swift:swift.bzl", "swift_library")
+load("@rules_swift//swift:swift.bzl", "swift_library", "swift_test")
 load("@rules_xcodeproj//xcodeproj:xcodeproj.bzl", "xcodeproj")
 
 package(default_visibility = ["//visibility:private"])
@@ -39,6 +39,13 @@ swift_library(
     ],
 )
 
+swift_test(
+    name = "test",
+    size = "small",
+    srcs = ["Sources/Services/AppInstanceLock.swift"] + glob(["Tests/*.swift"]),
+    visibility = ["//:__pkg__"],
+)
+
 macos_application(
     name = "app",
     bundle_id = select({
@@ -56,6 +63,7 @@ macos_application(
         ":team_signing_enabled": "//tools/apple-signing:development",
         "//conditions:default": None,
     }),
+    resources = ["Resources/IconAttribution.txt"],
     visibility = ["//visibility:public"],
     deps = [":sources"],
 )

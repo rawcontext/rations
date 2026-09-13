@@ -1,4 +1,5 @@
 import AppKit
+import Observation
 import RationsCore
 import SwiftUI
 
@@ -12,13 +13,27 @@ final class AccountMenuItemView: NSView {
         addSubview(hosting)
         setAccessibilityElement(true)
         setAccessibilityRole(.menuItem)
-        setAccessibilityLabel(content.row.label ?? content.account.profile.name)
-        setAccessibilityValue(content.row.windows.map { window in
+        observeAccessibility()
+    }
+
+    private func observeAccessibility() {
+        withObservationTracking {
+            let content = hosting.rootView
+            setAccessibilityLabel(content.account.profile.name)
+            let state = content.account.isFresh(at: content.store.displayTime) ? "" : "; stale usage"
+            setAccessibilityValue(accessibilitySummary(content) + state)
+        } onChange: { [weak self] in
+            Task { @MainActor in self?.observeAccessibility() }
+        }
+    }
+
+    private func accessibilitySummary(_ content: AccountMenuRow) -> String {
+        content.row.windows.map { window in
             let percent = content.preferences.usageMode.percent(for: window).map { "\(Int($0.rounded()))%" }
                 ?? "unknown"
             return window.label + ": " + percent + " " + content.preferences.usageMode.title.lowercased()
-                + ", " + ResetText.countdown(to: window.resetsAt, now: .now)
-        }.joined(separator: "; "))
+                + ", " + ResetText.countdown(to: window.resetsAt, now: content.store.displayTime)
+        }.joined(separator: "; ")
     }
 
     @available(*, unavailable)
