@@ -1,6 +1,6 @@
 import Foundation
 
-public struct QuotaWindow: Equatable, Identifiable, Sendable {
+public struct QuotaWindow: Codable, Equatable, Identifiable, Sendable {
     public let id: String
     public let label: String
     public let usedPercent: Double?

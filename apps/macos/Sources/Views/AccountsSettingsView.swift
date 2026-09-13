@@ -22,14 +22,12 @@ struct AccountsSettingsView: View {
                 Text("No saved accounts").foregroundStyle(.secondary)
             }
             Button("Add Another Account", systemImage: "plus") { addingProvider = provider }
-                .buttonStyle(.plain).foregroundStyle(Color.accentColor).disabled(!store.isPreview)
+                .buttonStyle(.plain).foregroundStyle(Color.accentColor)
                 .accessibilityLabel("Add " + provider.displayName + " account")
         } header: {
             Text(provider.displayName)
         } footer: {
-            Text(store.isPreview
-                ? "Design preview. Rename or remove sample accounts; the signed-in account cannot be removed."
-                : "Named account sign-in and switching are still being implemented.")
+            if let error = store.providerErrors[provider] { Text(error) }
         }
     }
 }

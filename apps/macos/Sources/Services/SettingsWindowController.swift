@@ -9,7 +9,7 @@ final class SettingsWindowController: NSWindowController, NSToolbarDelegate {
 
     init(store: RationsStore) {
         self.store = store
-        let content = RationsSettings(store: store, loginItem: LoginItemManager(isPreview: store.isPreview))
+        let content = RationsSettings(store: store, loginItem: LoginItemManager())
         let window = NSWindow(contentViewController: NSHostingController(rootView: content))
         window.styleMask = [.titled, .closable, .miniaturizable]
         window.setContentSize(NSSize(width: 560, height: 450))
@@ -66,7 +66,7 @@ final class SettingsWindowController: NSWindowController, NSToolbarDelegate {
     private func observeSelection() {
         withObservationTracking {
             settingsToolbar.selectedItemIdentifier = NSToolbarItem.Identifier(store.selectedTab.rawValue)
-            window?.title = store.selectedTab.title + (store.isPreview ? " — Design Preview" : "")
+            window?.title = store.selectedTab.title
         } onChange: { [weak self] in
             Task { @MainActor in self?.observeSelection() }
         }

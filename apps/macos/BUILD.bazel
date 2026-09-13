@@ -33,7 +33,10 @@ swift_library(
         "6",
     ],
     module_name = "RationsApp",
-    deps = ["//packages/core:lib"],
+    deps = [
+        "//packages/core:lib",
+        "//packages/providers:lib",
+    ],
 )
 
 macos_application(

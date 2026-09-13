@@ -4,9 +4,11 @@ Date: 13 September 2026
 
 Repository: `ccheney/rations`
 
-Status: Native v6 UI in progress; live provider implementation remains planned
+Status: Native UI and live account adapters implemented; distribution and account switching remain planned
 
-The [authoritative v6 handoff and subsequent user corrections](docs/design/README.md) govern interface details. All providers support multiple named accounts, the icon is a static two-slice pie with an aggregate quota tooltip, the menu uses compact provider sections, and Settings has General/Accounts/Providers tabs. Live saved-account authentication and switching remain separate from this first UI slice.
+The [authoritative v6 handoff and subsequent user corrections](docs/design/README.md) govern interface details. All providers support multiple named accounts, the icon is static with an aggregate quota tooltip, and Settings has General/Accounts/Providers tabs. Each account occupies one menu row; model-specific limits appear in its hover detail. Preview data and preview mode have been deleted.
+
+The signed app now reads real Codex, Claude, Antigravity, and Grok accounts. Codex, Claude, and Antigravity provide quota percentages; the verified Grok response provides its plan and reset but omits usage percentage. See [the current connection implementation and limitations](docs/account-connections.md), which supersedes the planned transport details below. Native sign-ins are discovered automatically, account records persist in Keychain, and refresh handles stale results and provider cooldowns. Automatic vendor account switching and distribution remain future work.
 
 ## 1. Outcome and scope
 

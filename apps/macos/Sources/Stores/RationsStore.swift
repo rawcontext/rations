@@ -1,31 +1,35 @@
 import Foundation
 import Observation
 import RationsCore
+import RationsProviders
 
 @MainActor @Observable
 final class RationsStore {
-    var preferences: DisplayPreferences {
-        didSet { persistPreferences() }
-    }
-    var accounts: [AccountReading]
-    var activeAccounts: [ProviderID: String] = [:]
+    var preferences: DisplayPreferences { didSet { persistPreferences(); scheduleRefresh() } }
+    private(set) var accounts: [AccountReading] = []
+    private(set) var activeAccounts: [ProviderID: String] = [:]
+    private(set) var providerErrors: [ProviderID: String] = [:]
+    private(set) var isRefreshing = false
     var selectedTab = SettingsTab.general
     var message: String?
-    let isPreview: Bool
-    private let defaults: UserDefaults?
+    private let service = LiveAccountService()
+    private var refreshTimer: Timer?
+    private var lastRefresh = Date.distantPast
 
-    init(isPreview: Bool) {
-        self.isPreview = isPreview
-        defaults = isPreview ? nil : .standard
-        let saved = defaults?.data(forKey: "displayPreferences")
+    init() {
+        let saved = UserDefaults.standard.data(forKey: "displayPreferences")
         var preferences = saved.flatMap { try? JSONDecoder().decode(DisplayPreferences.self, from: $0) }
             ?? DisplayPreferences()
         preferences.normalize()
         self.preferences = preferences
-        accounts = isPreview ? DesignFixtures.accounts(now: .now) : []
-        for account in accounts where activeAccounts[account.profile.provider] == nil {
-            activeAccounts[account.profile.provider] = account.id
+    }
+
+    func start() {
+        Task {
+            do { apply(try await service.state()) } catch { message = error.localizedDescription }
+            await refreshNow()
         }
+        scheduleRefresh()
     }
 
     func updatePreferences(_ update: (inout DisplayPreferences) -> Void) {
@@ -35,35 +39,68 @@ final class RationsStore {
         preferences = value
     }
 
+    func refresh() { Task { await refreshNow() } }
+
+    func refreshIfNeeded() {
+        if Date.now.timeIntervalSince(lastRefresh) >= 60 { refresh() }
+    }
+
+    func connect(_ provider: ProviderID, name: String, file: URL? = nil) async throws {
+        apply(try await service.connect(provider, name: name, file: file))
+    }
+
     func rename(_ accountID: String, to name: String) {
-        let name = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !name.isEmpty, let index = accounts.firstIndex(where: { $0.id == accountID }) else { return }
-        accounts[index].profile.name = name
+        Task {
+            do { apply(try await service.rename(accountID, to: name)) } catch { message = error.localizedDescription }
+        }
     }
 
     func remove(_ accountID: String) {
-        guard let account = accounts.first(where: { $0.id == accountID }), !isActive(account) else { return }
-        accounts.removeAll { $0.id == accountID }
-    }
-
-    func isActive(_ account: AccountReading) -> Bool {
-        activeAccounts[account.profile.provider] == account.id
-    }
-
-    func accounts(for provider: ProviderID) -> [AccountReading] {
-        accounts.filter { $0.profile.provider == provider }
-    }
-
-    func refresh() {
-        guard isPreview else {
-            message = "Connect an account to see its usage. Provider connections are still being implemented."
-            return
+        Task {
+            do { apply(try await service.remove(accountID)) } catch { message = error.localizedDescription }
         }
-        for index in accounts.indices { accounts[index].fetchedAt = .now }
+    }
+
+    func reconnect(_ accountID: String) {
+        Task {
+            do { apply(try await service.reconnect(accountID)) } catch { message = error.localizedDescription }
+        }
+    }
+
+    func signIn(_ provider: ProviderID) {
+        do { try ProviderSignIn.open(provider) } catch { message = error.localizedDescription }
+    }
+
+    func isActive(_ account: AccountReading) -> Bool { activeAccounts[account.profile.provider] == account.id }
+    func accounts(for provider: ProviderID) -> [AccountReading] { accounts.filter { $0.profile.provider == provider } }
+
+    private func refreshNow() async {
+        guard !isRefreshing else { return }
+        isRefreshing = true
+        let enabled = Set(ProviderID.allCases).subtracting(preferences.disabledProviders)
+        apply(await service.refresh(enabled: enabled))
+        lastRefresh = .now
+        isRefreshing = false
+    }
+
+    private func apply(_ state: LiveAccountState) {
+        accounts = state.accounts
+        activeAccounts = state.activeAccounts
+        providerErrors = state.providerErrors
+        ConnectionDiagnostics.writeIfRequested(state)
+    }
+
+    private func scheduleRefresh() {
+        refreshTimer?.invalidate()
+        let timer = Timer(timeInterval: Double(preferences.refreshMinutes) * 60, repeats: true) { [weak self] _ in
+            Task { @MainActor in self?.refresh() }
+        }
+        RunLoop.main.add(timer, forMode: .common)
+        refreshTimer = timer
     }
 
     private func persistPreferences() {
         guard let data = try? JSONEncoder().encode(preferences) else { return }
-        defaults?.set(data, forKey: "displayPreferences")
+        UserDefaults.standard.set(data, forKey: "displayPreferences")
     }
 }

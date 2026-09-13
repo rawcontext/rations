@@ -5,15 +5,12 @@ import ServiceManagement
 final class LoginItemManager {
     private(set) var enabled: Bool
     private(set) var error: String?
-    private let isPreview: Bool
 
-    init(isPreview: Bool) {
-        self.isPreview = isPreview
-        enabled = isPreview || SMAppService.mainApp.status == .enabled
+    init() {
+        enabled = SMAppService.mainApp.status == .enabled
     }
 
     func setEnabled(_ value: Bool) {
-        if isPreview { enabled = value; return }
         do {
             if value { try SMAppService.mainApp.register() } else { try SMAppService.mainApp.unregister() }
             enabled = SMAppService.mainApp.status == .enabled

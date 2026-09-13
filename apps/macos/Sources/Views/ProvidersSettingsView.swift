@@ -13,7 +13,7 @@ struct ProvidersSettingsView: View {
             } header: {
                 Text("Providers")
             } footer: {
-                Text("Rations uses existing sign-ins on this Mac. Provider connections are still being implemented.")
+                Text("Rations reuses vendor sign-ins. Saved accounts and credentials stay in your Mac's Keychain.")
             }
         }
         .formStyle(.grouped)

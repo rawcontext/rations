@@ -1,4 +1,4 @@
-public struct QuotaRow: Identifiable, Equatable, Sendable {
+public struct QuotaRow: Identifiable, Codable, Equatable, Sendable {
     public let id: String
     public let label: String?
     public let windows: [QuotaWindow]
@@ -13,6 +13,12 @@ public struct QuotaRow: Identifiable, Equatable, Sendable {
 
     public var tightestWindow: QuotaWindow? {
         windows.filter { $0.usedPercent != nil }.max { ($0.usedPercent ?? 0) < ($1.usedPercent ?? 0) }
+    }
+
+    public var resetWindow: QuotaWindow? {
+        tightestWindow ?? windows.filter { $0.resetsAt != nil }.min {
+            ($0.resetsAt ?? .distantFuture) < ($1.resetsAt ?? .distantFuture)
+        }
     }
 
     public func window(for period: QuotaPeriod) -> QuotaWindow? {

@@ -1,4 +1,4 @@
-load("@rules_swift//swift:swift.bzl", "swift_library")
+load("@rules_swift//swift:swift.bzl", "swift_library", "swift_test")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -12,4 +12,15 @@ swift_library(
     module_name = "RationsProviders",
     visibility = ["//apps:__subpackages__"],
     deps = ["//packages/core:lib"],
+)
+
+swift_test(
+    name = "test",
+    size = "small",
+    srcs = glob(["Tests/*.swift"]),
+    visibility = ["//:__pkg__"],
+    deps = [
+        ":lib",
+        "//packages/core:lib",
+    ],
 )

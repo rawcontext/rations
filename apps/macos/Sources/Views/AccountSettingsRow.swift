@@ -22,10 +22,24 @@ struct AccountSettingsRow: View {
                     .foregroundStyle(.secondary).opacity(hovering ? 1 : 0)
                     .accessibilityLabel("Remove " + account.profile.name)
             }
-            Text(active ? "Signed in" : "Connected").font(.system(size: 12, weight: .semibold))
-                .foregroundStyle(active ? Color.accentColor : .green)
+            if account.error != nil {
+                Button("Reconnect") { store.reconnect(account.id) }.controlSize(.small)
+            }
+            Text(statusLabel)
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundStyle(statusColor)
         }
         .frame(minHeight: 32).onHover { hovering = $0 }
+    }
+
+    private var statusLabel: String {
+        if account.error != nil { return "Needs attention" }
+        return active ? "Signed in" : "Connected"
+    }
+
+    private var statusColor: Color {
+        if account.error != nil { return .orange }
+        return active ? .accentColor : .green
     }
 
     private var accountDescription: String {

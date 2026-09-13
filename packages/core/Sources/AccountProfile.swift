@@ -1,8 +1,8 @@
-public struct AccountProfile: Identifiable, Equatable, Sendable {
+public struct AccountProfile: Identifiable, Codable, Equatable, Sendable {
     public let id: String
     public let provider: ProviderID
     public var name: String
-    public let plan: String?
+    public var plan: String?
     public let email: String?
 
     public init(id: String, provider: ProviderID, name: String, plan: String?, email: String?) {

@@ -53,10 +53,12 @@ Screen 6d's original restriction to one non-Codex account no longer applies.
 Antigravity model groups remain part of each Google account's subscription,
 separate from Anthropic and OpenAI accounts.
 
-The first implementation slice covers the native menu, detail views, persistent
-display preferences, account-management presentation, and an isolated design
-preview. Live usage fetching and real credential-switch execution follow behind
-the provider boundary. Preview data must never appear as verified live usage.
+The native menu reads live provider data and persists account records in Keychain.
+Each account occupies one menu row; model quotas are nested inside its hover detail.
+Reset counts use “0 resets,” “1 reset,” or “2 resets.” Preview mode and sample
+accounts have been removed. See [account connections](../account-connections.md)
+for supported sign-in sources and current limitations. Vendor account switching
+remains a separate future feature.
 
 ## Application identities
 

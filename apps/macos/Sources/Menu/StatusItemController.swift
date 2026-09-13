@@ -21,6 +21,7 @@ final class StatusItemController: NSObject, NSMenuDelegate {
     }
 
     func menuNeedsUpdate(_ menu: NSMenu) {
+        store.refreshIfNeeded()
         menu.removeAllItems()
         for provider in ProviderID.allCases where !store.preferences.disabledProviders.contains(provider) {
             addSection(provider, to: menu)
@@ -28,12 +29,11 @@ final class StatusItemController: NSObject, NSMenuDelegate {
         if menu.items.isEmpty {
             menu.addItem(NSMenuItem(title: "No providers enabled", action: nil, keyEquivalent: ""))
         }
-        if store.isPreview {
-            let preview = NSMenuItem(title: "Design preview · sample data", action: nil, keyEquivalent: "")
-            preview.isEnabled = false
-            menu.addItem(preview)
+        let refresh = MenuCommand(store.isRefreshing ? "Refreshing…" : "Refresh", key: "r") { [weak self] in
+            self?.store.refresh()
         }
-        menu.addItem(MenuCommand("Refresh", key: "r") { [weak self] in self?.store.refresh() })
+        refresh.isEnabled = !store.isRefreshing
+        menu.addItem(refresh)
         menu.addItem(MenuCommand("Settings…", key: ",", handler: showSettings))
         menu.addItem(.separator())
         menu.addItem(MenuCommand("Quit Rations", key: "q") { NSApp.terminate(nil) })
@@ -52,12 +52,15 @@ final class StatusItemController: NSObject, NSMenuDelegate {
         let header = NSMenuItem.sectionHeader(title: title)
         menu.addItem(header)
         if accounts.isEmpty {
-            let empty = NSMenuItem(title: "Not connected", action: nil, keyEquivalent: "")
+            let title = store.isRefreshing ? "Connecting…" : "Not connected"
+            let empty = NSMenuItem(title: title, action: nil, keyEquivalent: "")
             empty.isEnabled = false
+            empty.toolTip = store.providerErrors[provider]
             menu.addItem(empty)
+            menu.addItem(MenuCommand("Open Sign-In…") { [weak self] in self?.store.signIn(provider) })
         }
         for account in accounts {
-            for row in account.rows { menu.addItem(AccountMenuBuilder.item(account: account, row: row, store: store)) }
+            menu.addItem(AccountMenuBuilder.item(account: account, store: store))
         }
         menu.addItem(.separator())
     }
@@ -83,7 +86,7 @@ final class StatusItemController: NSObject, NSMenuDelegate {
         let pending = aggregate.pendingAccountCount == 0
             ? "" : "; \(aggregate.pendingAccountCount) awaiting current usage"
         button.toolTip = "Rations · " + text + pending
-        button.setAccessibilityLabel("Rations, " + text + pending + (store.isPreview ? ", design preview" : ""))
+        button.setAccessibilityLabel("Rations, " + text + pending)
         scheduleBoundaryUpdate(at: aggregate.nextUpdateAt)
     }
 

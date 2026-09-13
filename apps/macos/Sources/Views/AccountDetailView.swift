@@ -2,9 +2,11 @@ import RationsCore
 import SwiftUI
 
 struct AccountDetailView: View {
-    let account: AccountReading
-    let row: QuotaRow
-    let preferences: DisplayPreferences
+    let initialAccount: AccountReading
+    let store: RationsStore
+
+    private var account: AccountReading { store.accounts.first { $0.id == initialAccount.id } ?? initialAccount }
+    private var preferences: DisplayPreferences { store.preferences }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -14,20 +16,36 @@ struct AccountDetailView: View {
                     .compactMap { $0 }.joined(separator: " · "))
                     .font(.system(size: 11)).foregroundStyle(.secondary)
             }
-            ForEach(row.windows) { window in
-                WindowDetailView(window: window, preferences: preferences)
-            }
-            Text(creditsText + " · Updated " + ResetText.age(of: account.fetchedAt, now: .now))
+            quotaGroups
+            Text(freshnessText)
                 .font(.system(size: 11)).foregroundStyle(.secondary)
-            if !account.isFresh(at: .now) {
+            if let error = account.error {
+                Text(error).font(.system(size: 11)).foregroundStyle(.secondary)
+            } else if !account.isFresh(at: .now) {
                 Text("Stale data · refresh to verify").font(.system(size: 11)).foregroundStyle(.secondary)
             }
+            if let notice = account.notice { Text(notice).font(.system(size: 11)).foregroundStyle(.secondary) }
         }
         .font(.system(size: 13)).padding(10).frame(width: 336, alignment: .leading)
     }
 
-    private var creditsText: String {
-        guard let count = account.resetCredits else { return "Reset credits unavailable" }
-        return count == 0 ? "No reset credits" : "\(count) reset credits (read-only)"
+    private var quotaGroups: some View {
+        ForEach(account.rows) { row in
+            VStack(alignment: .leading, spacing: 10) {
+                if let label = row.label {
+                    Divider()
+                    Text(label).font(.system(size: 12, weight: .semibold))
+                }
+                ForEach(row.windows) { window in
+                    WindowDetailView(window: window, preferences: preferences)
+                }
+            }
+        }
+    }
+
+    private var freshnessText: String {
+        let updated = "Updated " + ResetText.age(of: account.fetchedAt, now: .now)
+        guard let count = account.resetCredits else { return updated }
+        return "\(count) " + (count == 1 ? "reset" : "resets") + " · " + updated
     }
 }

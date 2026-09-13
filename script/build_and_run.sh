@@ -4,12 +4,19 @@ set -euo pipefail
 mode=run
 app_args=()
 build_args=(//apps/macos:app)
-for argument in "$@"; do
+while (($#)); do
+  argument="$1"
+  shift
   case "$argument" in
     run|--debug|--logs|--telemetry|--verify) mode="$argument" ;;
-    --design-preview|--settings) app_args+=("$argument") ;;
+    --settings) app_args+=("$argument") ;;
+    --connection-report)
+      if (($# == 0)); then echo "--connection-report requires a path" >&2; exit 2; fi
+      app_args+=(--connection-report "$1")
+      shift
+      ;;
     --signed) build_args+=(--config=signed) ;;
-    *) echo "usage: $0 [--verify|--debug|--logs|--telemetry] [--signed] [--design-preview] [--settings]" >&2; exit 2 ;;
+    *) echo "usage: $0 [--verify|--debug|--logs|--telemetry] [--signed] [--settings]" >&2; exit 2 ;;
   esac
 done
 

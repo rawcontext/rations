@@ -19,6 +19,7 @@ struct ProviderSettingsRow: View {
             if showsToggle {
                 Button("Accounts ›") { store.selectedTab = .accounts }.buttonStyle(.link)
             }
+            if accounts.isEmpty { Button("Sign In…") { store.signIn(provider) }.controlSize(.small) }
             Text(accounts.isEmpty ? "Not signed in" : "Connected")
                 .font(.system(size: 12, weight: .semibold))
                 .foregroundStyle(accounts.isEmpty ? .orange : .green)

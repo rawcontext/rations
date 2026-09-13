@@ -1,9 +1,10 @@
 import AppKit
 import Observation
+import RationsProviders
 
 @MainActor
 final class RationsAppDelegate: NSObject, NSApplicationDelegate {
-    private let store = RationsStore(isPreview: CommandLine.arguments.contains("--design-preview"))
+    private let store = RationsStore()
     private var settings: SettingsWindowController?
     private var status: StatusItemController?
 
@@ -14,7 +15,10 @@ final class RationsAppDelegate: NSObject, NSApplicationDelegate {
         NSApp.mainMenu = ApplicationMenu.make()
         if CommandLine.arguments.contains("--settings") { settings.show() }
         observeMessages()
+        store.start()
     }
+
+    func applicationWillTerminate(_ notification: Notification) { ProviderProcesses.shared.stopAll() }
 
     private func observeMessages() {
         withObservationTracking {

@@ -9,6 +9,7 @@ test_suite(
     name = "tests",
     tests = [
         "//packages/core:test",
+        "//packages/providers:test",
         "//tools/cognitive-complexity:test",
     ],
 )
