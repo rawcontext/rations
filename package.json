@@ -1,0 +1,20 @@
+{
+  "name": "rations",
+  "private": true,
+  "packageManager": "pnpm@12.4.1",
+  "scripts": {
+    "prepare": "lefthook install",
+    "build": "bazel build //apps/... //packages/...",
+    "test": "bazel test //...",
+    "lint": "bash scripts/lint.sh",
+    "check": "pnpm run lint && pnpm run build && pnpm test",
+    "dev": "./script/build_and_run.sh",
+    "xcode": "bazel run //apps/macos:xcodeproj"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.13",
+    "jscpd": "5.2.0",
+    "lefthook": "2.1.12",
+    "pnpm": "12.4.1"
+  }
+}

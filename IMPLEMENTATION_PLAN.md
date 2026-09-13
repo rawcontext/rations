@@ -1,16 +1,16 @@
-# QuotaBar implementation plan
+# Rations implementation plan
 
 Date: 13 September 2026
 
 Repository: `ccheney/rations`
 
-Status: Proposed implementation; no application code implemented yet
+Status: Development scaffold in place; live provider implementation remains planned
 
 ## 1. Outcome and scope
 
 Build a small native macOS menu bar app that answers two questions: **how much subscription quota is used, and exactly when does it reset?** Reuse the relevant data-access implementations from existing open-source monitors, then build a focused interface and stricter handling of incomplete data around them.
 
-Product input is `QuotaBar-PRD.md`, draft v0.1, dated 12 September 2026. This plan incorporates the subsequent user decisions: investigate and reuse public implementations, and use **Google Antigravity subscriptions instead of Gemini CLI**. QuotaBar remains the working product name; the repository name stays `rations` until naming is settled.
+Product input is `QuotaBar-PRD.md`, draft v0.1, dated 12 September 2026. This plan incorporates the subsequent user decisions: investigate and reuse public implementations, use **Google Antigravity subscriptions instead of Gemini CLI**, and scaffold a **Bazel monorepo**. The product name is **Rations**, matching the `rations` repository.
 
 The four v1 integrations are:
 
@@ -25,7 +25,7 @@ These sources expose particular product entitlements. A Codex window is not ever
 
 Ship one menu bar item, a narrow popover, native settings, provider detection, manual and automatic refresh, accurate local reset dates, reset-credit visibility where available, offline snapshots, and launch at login. Keep one active identity per provider. Additional providers remain adapter work after v1; Gemini CLI is not part of this implementation.
 
-Exclude spend charts, session-log estimates, account rotation, browser-cookie extraction, custom OAuth sign-in screens, reset-credit redemption, notifications, widgets, a public CLI, plugins, and a backend. Reusing an installed vendor CLI internally is compatible with having no QuotaBar CLI product.
+Exclude spend charts, session-log estimates, account rotation, browser-cookie extraction, custom OAuth sign-in screens, reset-credit redemption, notifications, widgets, a public CLI, plugins, and a backend. Reusing an installed vendor CLI internally is compatible with having no Rations CLI product.
 
 **Release cuts:** resolve the PRD's different provider-count checklists explicitly. An internal preview can ship with Codex + Claude. MVP requires those two plus Antigravity or Grok. The intended v1 includes all four; an unavailable adapter must be reported as unfinished rather than counted as working support.
 
@@ -106,24 +106,22 @@ CodexBar's [adapter notes](https://github.com/steipete/CodexBar/blob/afa483f2a28
 
 ## 4. Native architecture
 
-Use Swift and SwiftUI targeting macOS 14+, with Foundation networking, Security for credential access, and ServiceManagement for launch at login. Start with an Xcode macOS app target plus a local Swift package for core logic and adapters; pin the tested stable Xcode/Swift toolchain at bootstrap. Prefer system frameworks and existing vendor installations over bundled third-party runtimes.
+Use Swift and SwiftUI targeting macOS 14+, with Foundation networking, Security for credential access, and ServiceManagement for launch at login. Bazel owns the app, core, and provider targets and generates the Xcode project. The scaffold pins Bazel 9.2.0 and the tested Apple/Swift rules, and selects Xcode 27 beta as requested. Prefer system frameworks and existing vendor installations over bundled third-party runtimes.
 
 Use [`MenuBarExtra`](https://developer.apple.com/documentation/swiftui/menubarextra) with window-style content and `LSUIElement = true`. Implement Refresh, Settings, and Quit in the popover footer, satisfying the PRD's overflow alternative without a custom right-click system. Validate status-label coloring and popover lifecycle in M0; use a narrow `NSStatusItem` / `NSPopover` bridge only if native SwiftUI cannot meet those requirements on macOS 14.
 
 ```text
-QuotaBar.xcodeproj              App bundle, signing, shared build scheme
-App/                           Entry point, menu item, popover, settings, assets
-Packages/QuotaBarCore/Sources/
-  Domain/                      Snapshots, windows, reset evidence, selection rules
-  Providers/                   Codex, Claude, Antigravity, Grok adapters
-  Services/                    Scheduling, HTTP, processes, credentials, persistence
-Packages/QuotaBarCore/Tests/     Domain, scheduler, adapter tests and sanitized fixtures
-Tests/QuotaBarUITests/          Fixture-driven smoke and accessibility tests
+apps/macos/                    SwiftUI app, popover, settings, bundle resources
+packages/core/                 Normalized models and domain behavior
+packages/providers/            Provider contract and future vendor adapters
+tools/cognitive-complexity/     Shared Swift lint tool and regression tests
+tools/testing/                 Bazel test runtime support
 docs/                          Adapter notes, reuse record, release checklist
-scripts/                       Normal checks and release packaging
+scripts/                       Bootstrap and normal checks
+script/                        Native build/run/debug entry point
 ```
 
-Keep provider adapters as folders in one package initially. The dependency direction is UI → application state → provider protocol → transport; the domain depends on none of the UI or vendor response types. An `@MainActor` observable store publishes immutable view data. A refresh actor owns per-provider work and deadlines; file, Keychain, and process operations do not block rendering.
+Keep provider adapters as folders in the `packages/providers` Bazel package initially. The dependency direction is UI → application state → provider protocol → transport; the domain depends on none of the UI or vendor response types. An `@MainActor` observable store publishes immutable view data. A refresh actor owns per-provider work and deadlines; file, Keychain, and process operations do not block rendering.
 
 The adapter contract supplies provider metadata, detection results, capabilities, a minimum refresh spacing, and an async snapshot fetch. Each adapter owns its credential reader, wire DTOs, normalization, and source preference. Shared services cover HTTP, process lifetime, clock, and cache—not a general-purpose plugin system. A provider failure becomes a typed result rather than escaping and cancelling sibling providers.
 
@@ -179,7 +177,7 @@ On sleep, suspend scheduled work. On wake or restored connectivity, perform one 
 
 Persist one normalized last-good snapshot per active provider to an atomic, versioned file under Application Support, plus preferences in UserDefaults. Store no history, raw HTTP bodies, tokens, or emails in that file. Restore it as unverified until identity and freshness can be checked; offline startup still shows its age. Disablement stops requests and clears transient credential state. Unreadable/old cache schemas must not prevent launch.
 
-Use ephemeral HTTP sessions without cookie storage or disk response caches. Request credentials stay in memory; any app-owned secret that proves necessary belongs in a clearly named Keychain service. Log only fixed error categories, timings, and provider IDs. Direct network usage goes to the relevant vendor; there is no QuotaBar server or analytics service.
+Use ephemeral HTTP sessions without cookie storage or disk response caches. Request credentials stay in memory; any app-owned secret that proves necessary belongs in a clearly named Keychain service. Log only fixed error categories, timings, and provider IDs. Direct network usage goes to the relevant vendor; there is no Rations server or analytics service.
 
 Initial performance targets, to be measured in release builds: cached popover opens within 150 ms; app process averages below 1% CPU when idle; app memory below roughly 100 MB after warm-up; no sustained memory growth over an eight-hour run. Measure helper CPU and memory separately and as a combined total, and verify helpers actually stop after their idle grace period. These are engineering targets, not claims about the current repository.
 
@@ -216,13 +214,13 @@ Create meaningful regression tests for quota semantics and asynchronous behavior
 | Grok | Included usage versus on-demand spending; period-only response; unknown/team entitlement; stale token; unavailable ACP extension; incompatible reset period |
 | macOS | macOS 14 and current supported macOS; light/dark/high contrast; VoiceOver and keyboard; long dates/names; multi-display placement; sleep/wake; login-item state changed in System Settings; clean-Mac launch |
 
-Set up `swift test` for the package and `xcodebuild test` for the app scheme. Add formatting/lint and Lefthook using the repository's chosen normal check command; that workflow invokes jscpd. Never invoke jscpd separately or weaken lint/coverage/duplication settings to get a pass. The repository currently has no app build or test configuration, so M1 creates the workflow rather than assuming one already exists.
+Use `bazel test //...` for the test graph. The scaffold copies Eudoxus 3's formatting/lint rules, Swift cognitive-complexity checker, JSCPD configuration, and Lefthook entry point. `npm run check` runs the normal lint, build, and test workflow; that workflow invokes jscpd. Never invoke jscpd separately or weaken lint/coverage/duplication settings to get a pass. Bazel owns build and test definitions; generated Xcode projects do not introduce a parallel build system.
 
 For each provider, record a timestamped manual comparison with the vendor's own usage surface: account matched, percentage matched within displayed rounding, reset instant matched, and source/version recorded without credentials. Exercise an actual naturally occurring reset boundary where possible; simulated clock tests cover all boundaries regardless of account usage. Do not consume quota or reset credits merely to manufacture a test.
 
 Distribution uses a Developer ID signed, hardened-runtime application and Apple's [notarization workflow](https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution), with the ticket stapled and Gatekeeper validation on the downloaded artifact. Target direct distribution without App Sandbox initially because the design reads vendor-owned local state and may spawn vendor tools. Build both arm64 and x86_64 if supported by the selected toolchain; record runtime coverage per architecture rather than equating a successful cross-build with testing.
 
-Implement launch at login with [`SMAppService.mainApp`](https://developer.apple.com/documentation/servicemanagement/smappservice), displaying actual registration/approval state. Start with manual release downloads; Sparkle and Homebrew are later work. Do not change repository visibility as a side effect of development. Lock the shipping name and bundle identifier before external beta packaging.
+Implement launch at login with [`SMAppService.mainApp`](https://developer.apple.com/documentation/servicemanagement/smappservice), displaying actual registration/approval state. Start with manual release downloads; Sparkle and Homebrew are later work. Do not change repository visibility as a side effect of development. The shipping name is Rations; finalize the production bundle identifier before external beta packaging.
 
 Final release checklist:
 
@@ -240,7 +238,7 @@ Final release checklist:
 
 | Decision | Working choice | When it must be settled |
 |---|---|---|
-| Shipping name and bundle ID | QuotaBar as a placeholder; keep the current repository name | Before signing external beta builds |
+| Shipping name and bundle ID | Rations is confirmed; development ID is `com.ccheney.rations.dev` | Production bundle ID before external beta |
 | App source license | MIT for original code, preserving upstream notices | Before the first code import |
 | Antigravity fallback breadth | App service plus installed `agy`; add remote access only for a demonstrated coverage gap | M0/M4 |
 | Grok fallback breadth | Credits proxy first; only adopt another bearer/CLI source when necessary and proven | M0/M5 |

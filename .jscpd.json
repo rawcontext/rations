@@ -1,0 +1,22 @@
+{
+  "mode": "strict",
+  "blame": true,
+  "reporters": ["ai"],
+  "threshold": 0,
+  "minLines": 5,
+  "minTokens": 50,
+  "gitignore": true,
+  "path": ["."],
+  "ignore": [
+    ".git/hooks/pre-commit",
+    ".git/hooks/prepare-commit-msg",
+    "docs/design/ui-screens/project/**",
+    "**/node_modules/**",
+    "**/bazel-*/**",
+    "**/.build/**",
+    "**/*.xcodeproj/**",
+    "**/migrations/meta/**",
+    "pnpm-lock.yaml",
+    "MODULE.bazel.lock"
+  ]
+}

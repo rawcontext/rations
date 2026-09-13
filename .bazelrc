@@ -1,0 +1,7 @@
+build --incompatible_strict_action_env
+build --macos_minimum_os=14.0
+build --xcode_version=27.0
+build:release --compilation_mode=opt
+test --test_output=errors
+test --test_env=DEVELOPER_DIR
+test --run_under=//tools/testing:with_xcode

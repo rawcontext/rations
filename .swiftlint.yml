@@ -1,0 +1,59 @@
+swiftlint_version: 0.65.1
+strict: true
+included:
+  - apps
+  - packages
+  - tools
+excluded:
+  - node_modules
+opt_in_rules:
+  - closure_body_length
+  - closure_end_indentation
+  - closure_spacing
+  - contains_over_filter_count
+  - empty_count
+  - empty_string
+  - explicit_init
+  - fatal_error_message
+  - first_where
+  - force_unwrapping
+  - function_default_parameter_at_end
+  - incompatible_concurrency_annotation
+  - modifier_order
+  - one_declaration_per_file
+  - prefer_self_in_static_references
+  - private_swiftui_state
+  - redundant_nil_coalescing
+  - sorted_imports
+  - unhandled_throwing_task
+  - vertical_whitespace_closing_braces
+file_length:
+  warning: 350
+  error: 350
+type_body_length:
+  warning: 250
+  error: 250
+function_body_length:
+  warning: 50
+  error: 50
+closure_body_length:
+  warning: 30
+  error: 30
+function_parameter_count:
+  warning: 5
+  error: 5
+cyclomatic_complexity:
+  warning: 10
+  error: 10
+  ignores_case_statements: false
+nesting:
+  type_level: 1
+  function_level: 1
+line_length:
+  warning: 120
+  error: 120
+  ignores_urls: true
+identifier_name:
+  excluded: [id, db]
+one_declaration_per_file: error
+force_unwrapping: error

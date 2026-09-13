@@ -1,0 +1,13 @@
+module(name = "rations")
+
+bazel_dep(name = "apple_support", version = "2.8.2")
+
+bazel_dep(name = "buildifier_prebuilt", version = "8.5.1.4", dev_dependency = True)
+
+bazel_dep(name = "platforms", version = "1.1.0")
+bazel_dep(name = "rules_apple", version = "5.0.0")
+bazel_dep(name = "rules_shell", version = "0.8.0")
+bazel_dep(name = "rules_swift", version = "4.0.1")
+
+bazel_dep(name = "rules_xcodeproj", version = "4.1.0", dev_dependency = True)
+bazel_dep(name = "swift-syntax", version = "603.0.2", dev_dependency = True)

@@ -1,3 +1,17 @@
 .DS_Store
 node_modules/
 dist/
+bazel-*
+.build/
+.swiftlint_cache/
+DerivedData/
+*.xcodeproj/
+*.xcworkspace/
+*.xcuserstate
+xcuserdata/
+report/
+coverage/
+*.log
+.env
+.env.*
+!.env.example
