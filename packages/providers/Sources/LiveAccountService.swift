@@ -15,15 +15,22 @@ public actor LiveAccountService {
     @preconcurrency public func signIn(
         _ provider: ProviderID, name: String,
         progress: @escaping @Sendable (SignInProgress) -> Void,
-        openExternal: @escaping @Sendable () async throws -> Void
+        openExternal: @escaping @Sendable () async throws -> Void, reconnecting accountID: String? = nil
     ) async throws -> ConnectionReceipt {
         try restore()
+        let target = try accountID.map { id in
+            guard let saved = connections[id] else {
+                throw ProviderFailure.unavailable("This account is no longer saved. Add it again to sign in.")
+            }
+            return saved.profile
+        }
         let existingIDs = Set(connections.keys)
         let account = if provider == .antigravity {
             try await ExternalSignInWatcher.run(provider, open: openExternal, progress: progress)
         } else {
             try await ManagedSignIn.run(provider, progress: progress)
         }
+        try ConnectionMerge.validate(account.profile, reconnecting: target)
         return try await finishConnection(
             account, name: name, alreadyConnected: existingIDs.contains(account.profile.id),
             isNative: provider != .codex
@@ -85,23 +92,6 @@ public actor LiveAccountService {
         account.lastReading?.profile.name = name
         try vault.save(account)
         connections[id] = account
-        return snapshot()
-    }
-
-    public func reconnect(_ id: String) async throws -> LiveAccountState {
-        try restore()
-        guard let saved = connections[id] else { return snapshot() }
-        var current = try await CredentialDiscovery.capture(saved.profile.provider, interactive: true)
-        guard current.profile.id == saved.profile.id else {
-            throw ProviderFailure.unavailable(
-                "The vendor is signed in to a different account. Connect it as another account."
-            )
-        }
-        current.profile.name = saved.profile.name
-        current.lastReading = saved.lastReading
-        connections[id] = current
-        active[current.profile.provider] = id
-        accept(await AccountFetchResult.fetch(current, using: fetcher))
         return snapshot()
     }
 

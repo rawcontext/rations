@@ -58,10 +58,13 @@ Temporary quota-fetch failures leave the authenticated account saved with an
 explicit usage error instead of requiring another browser sign-in.
 
 Rations discovers changes to the active native sign-in during refresh. It does not
-switch or log out vendor tools in the background. Reconnect reads the current
-vendor sign-in and verifies the account identity before replacing credentials.
-If an inactive saved token expires, sign in to that account in the vendor tool and
-reconnect it. Rations does not independently rotate copied vendor refresh tokens.
+switch or log out vendor tools in the background. Reconnect opens the managed
+sign-in sheet and immediately starts a fresh browser login for the selected saved
+account. It verifies the returned identity before replacing credentials, preserves
+the account's name, and closes automatically on success. Selecting a different
+account shows a retryable error inside the sheet and does not replace the selected
+record. Both Settings and the account menu use this flow. Rations does not
+independently rotate copied vendor refresh tokens.
 Claude's CLI-only fallback can read only its active account; inactive CLI-only
 accounts require a matching sign-in or an exported OAuth credential.
 

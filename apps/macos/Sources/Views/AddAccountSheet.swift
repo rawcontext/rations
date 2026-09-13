@@ -7,6 +7,7 @@ import UniformTypeIdentifiers
 struct AddAccountSheet: View {
     let store: RationsStore
     let provider: ProviderID
+    let reconnectingAccount: AccountProfile?
     @Environment(\.dismiss) private var dismiss
     @State private var name = ""
     @State private var importing = false
@@ -15,14 +16,12 @@ struct AddAccountSheet: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Add \(provider.displayName) Account").font(.headline)
-            TextField("Account name (optional)", text: $name).textFieldStyle(.roundedBorder)
-                .disabled(operation.isRunning)
+            accountHeading
             status
             if let error = operation.error ?? importError {
                 Text(error).font(.caption).foregroundStyle(.red).fixedSize(horizontal: false, vertical: true)
             }
-            if !operation.isRunning { otherOptions }
+            if !operation.isRunning, reconnectingAccount == nil { otherOptions }
             actions
         }
         .padding(20).frame(width: 400)
@@ -32,13 +31,32 @@ struct AddAccountSheet: View {
             case let .failure(error): importError = error.localizedDescription
             }
         }
-        .onAppear { if store.automaticallyStartSignIn { signIn() } }
+        .onAppear {
+            if reconnectingAccount != nil || store.automaticallyStartSignIn { signIn() }
+        }
         .onDisappear { operation.cancel() }
         .onChange(of: operation.completed) { _, completed in
             if completed { NSApp.activate(ignoringOtherApps: true); dismiss() }
         }
         .onChange(of: operation.error) { _, error in
             if error != nil { NSApp.activate(ignoringOtherApps: true) }
+        }
+    }
+
+    private var accountHeading: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            if let account = reconnectingAccount {
+                Text("Reconnect \(account.name)").font(.headline)
+                if let email = account.displayEmail(redacted: store.preferences.hidePersonalInformation) {
+                    Text(email).font(.callout).foregroundStyle(.secondary)
+                }
+                Text("Sign in to the same \(provider.displayName) account to restore access.")
+                    .font(.callout).foregroundStyle(.secondary)
+            } else {
+                Text("Add \(provider.displayName) Account").font(.headline)
+                TextField("Account name (optional)", text: $name).textFieldStyle(.roundedBorder)
+                    .disabled(operation.isRunning)
+            }
         }
     }
 
@@ -88,10 +106,12 @@ struct AddAccountSheet: View {
     }
 
     private func signIn() {
-        let accountName = name
+        let accountName = reconnectingAccount?.name ?? name
         importError = nil
         operation.start { progress in
-            try await store.completeSignIn(provider, name: accountName, progress: progress)
+            try await store.completeSignIn(
+                provider, name: accountName, progress: progress, reconnecting: reconnectingAccount?.id
+            )
         }
     }
 

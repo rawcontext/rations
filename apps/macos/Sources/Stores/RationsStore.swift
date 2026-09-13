@@ -12,6 +12,7 @@ final class RationsStore {
     private(set) var isRefreshing = false
     var selectedTab = SettingsTab.general
     var addingProvider: ProviderID?
+    var reconnectingAccount: AccountProfile?
     var automaticallyStartSignIn = false
     var connectionNotice: String?
     var message: String?
@@ -65,24 +66,27 @@ final class RationsStore {
     }
 
     func reconnect(_ accountID: String) {
-        Task {
-            do { apply(try await service.reconnect(accountID)) } catch { message = error.localizedDescription }
-        }
+        guard let account = accounts.first(where: { $0.id == accountID }) else { return }
+        signIn(account.profile.provider)
+        reconnectingAccount = account.profile
     }
 
     func signIn(_ provider: ProviderID, startImmediately: Bool = true) {
         connectionNotice = nil
+        reconnectingAccount = nil
         selectedTab = .accounts
         automaticallyStartSignIn = startImmediately
         addingProvider = provider
     }
 
     func completeSignIn(
-        _ provider: ProviderID, name: String, progress: @escaping @Sendable (SignInProgress) -> Void
+        _ provider: ProviderID, name: String, progress: @escaping @Sendable (SignInProgress) -> Void,
+        reconnecting accountID: String? = nil
     ) async throws {
-        let receipt = try await service.signIn(provider, name: name, progress: progress) {
-            try await ProviderSignIn.open(provider)
-        }
+        let receipt = try await service.signIn(
+            provider, name: name, progress: progress,
+            openExternal: { try await ProviderSignIn.open(provider) }, reconnecting: accountID
+        )
         apply(receipt.state)
         connectionNotice = receipt.alreadyConnected
             ? "\(receipt.account.name) is already connected. Its sign-in has been refreshed."

@@ -10,7 +10,9 @@ struct AccountsSettingsView: View {
             ForEach(ProviderID.allCases) { provider in accountSection(provider) }
         }
         .formStyle(.grouped)
-        .sheet(item: $store.addingProvider) { provider in AddAccountSheet(store: store, provider: provider) }
+        .sheet(item: $store.addingProvider) { provider in
+            AddAccountSheet(store: store, provider: provider, reconnectingAccount: store.reconnectingAccount)
+        }
     }
 
     private func accountSection(_ provider: ProviderID) -> some View {
