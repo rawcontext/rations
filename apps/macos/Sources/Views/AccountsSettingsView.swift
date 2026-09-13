@@ -2,15 +2,15 @@ import RationsCore
 import SwiftUI
 
 struct AccountsSettingsView: View {
-    let store: RationsStore
-    @State private var addingProvider: ProviderID?
+    @Bindable var store: RationsStore
 
     var body: some View {
         Form {
+            if let notice = store.connectionNotice { Text(notice).foregroundStyle(.secondary) }
             ForEach(ProviderID.allCases) { provider in accountSection(provider) }
         }
         .formStyle(.grouped)
-        .sheet(item: $addingProvider) { provider in AddAccountSheet(store: store, provider: provider) }
+        .sheet(item: $store.addingProvider) { provider in AddAccountSheet(store: store, provider: provider) }
     }
 
     private func accountSection(_ provider: ProviderID) -> some View {
@@ -21,7 +21,7 @@ struct AccountsSettingsView: View {
             if store.accounts(for: provider).isEmpty {
                 Text("No saved accounts").foregroundStyle(.secondary)
             }
-            Button("Add Another Account", systemImage: "plus") { addingProvider = provider }
+            Button("Add Another Account", systemImage: "plus") { store.signIn(provider, startImmediately: false) }
                 .buttonStyle(.plain).foregroundStyle(Color.accentColor)
                 .accessibilityLabel("Add " + provider.displayName + " account")
         } header: {

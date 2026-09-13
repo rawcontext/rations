@@ -11,6 +11,9 @@ final class RationsStore {
     private(set) var providerErrors: [ProviderID: String] = [:]
     private(set) var isRefreshing = false
     var selectedTab = SettingsTab.general
+    var addingProvider: ProviderID?
+    var automaticallyStartSignIn = false
+    var connectionNotice: String?
     var message: String?
     private let service = LiveAccountService()
     private var refreshTimer: Timer?
@@ -67,8 +70,23 @@ final class RationsStore {
         }
     }
 
-    func signIn(_ provider: ProviderID) {
-        do { try ProviderSignIn.open(provider) } catch { message = error.localizedDescription }
+    func signIn(_ provider: ProviderID, startImmediately: Bool = true) {
+        connectionNotice = nil
+        selectedTab = .accounts
+        automaticallyStartSignIn = startImmediately
+        addingProvider = provider
+    }
+
+    func completeSignIn(
+        _ provider: ProviderID, name: String, progress: @escaping @Sendable (SignInProgress) -> Void
+    ) async throws {
+        let receipt = try await service.signIn(provider, name: name, progress: progress) {
+            try await ProviderSignIn.open(provider)
+        }
+        apply(receipt.state)
+        connectionNotice = receipt.alreadyConnected
+            ? "\(receipt.account.name) is already connected. Its sign-in has been refreshed."
+            : "\(receipt.account.name) connected."
     }
 
     func isActive(_ account: AccountReading) -> Bool { activeAccounts[account.profile.provider] == account.id }

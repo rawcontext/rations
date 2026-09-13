@@ -22,7 +22,7 @@ final class RationsAppDelegate: NSObject, NSApplicationDelegate {
 
     private func observeMessages() {
         withObservationTracking {
-            if store.message != nil { settings?.show() }
+            if store.message != nil || store.addingProvider != nil { settings?.show() }
         } onChange: { [weak self] in
             Task { @MainActor in self?.observeMessages() }
         }

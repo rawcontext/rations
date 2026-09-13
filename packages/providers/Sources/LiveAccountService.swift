@@ -12,6 +12,24 @@ public actor LiveAccountService {
 
     public init() {}
 
+    @preconcurrency public func signIn(
+        _ provider: ProviderID, name: String,
+        progress: @escaping @Sendable (SignInProgress) -> Void,
+        openExternal: @escaping @Sendable () async throws -> Void
+    ) async throws -> ConnectionReceipt {
+        try restore()
+        let existingIDs = Set(connections.keys)
+        let account = if provider == .antigravity {
+            try await ExternalSignInWatcher.run(provider, open: openExternal, progress: progress)
+        } else {
+            try await ManagedSignIn.run(provider, progress: progress)
+        }
+        return try await finishConnection(
+            account, name: name, alreadyConnected: existingIDs.contains(account.profile.id),
+            isNative: provider != .codex
+        )
+    }
+
     public func state() throws -> LiveAccountState {
         try restore()
         return snapshot()
@@ -33,18 +51,29 @@ public actor LiveAccountService {
 
     public func connect(_ provider: ProviderID, name: String, file: URL? = nil) async throws -> LiveAccountState {
         try restore()
-        var account = try await CredentialDiscovery.capture(provider, file: file, interactive: true)
-        if connections[account.profile.id] != nil {
-            throw ProviderFailure.unavailable("This account is already connected. Sign in to another account first.")
-        }
-        let name = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !name.isEmpty { account.profile.name = name }
-        let result = await AccountFetchResult.fetch(account, using: fetcher)
-        guard result.reading != nil else { throw result.failure ?? ProviderFailure.invalidResponse }
-        connections[account.profile.id] = account
-        if file == nil { active[provider] = account.profile.id }
+        let account = try await CredentialDiscovery.capture(provider, file: file, interactive: true)
+        return try await finishConnection(
+            account, name: name, alreadyConnected: connections[account.profile.id] != nil, isNative: file == nil
+        ).state
+    }
+
+    private func finishConnection(
+        _ incoming: AccountConnection, name: String, alreadyConnected: Bool, isNative: Bool
+    ) async throws -> ConnectionReceipt {
+        let id = incoming.profile.id
+        let result = await AccountFetchResult.fetch(incoming, using: fetcher)
+        try Task.checkCancellation()
+        let account = ConnectionMerge.prepare(
+            incoming, existing: connections[id], requestedName: name, alreadyConnected: alreadyConnected
+        )
+        try vault.save(account)
+        connections[id] = account
+        if isNative { active[account.profile.provider] = id }
+        errors[account.profile.provider] = nil
         accept(result)
-        return snapshot()
+        return ConnectionReceipt(
+            state: snapshot(), account: connections[id]?.profile ?? account.profile, alreadyConnected: alreadyConnected
+        )
     }
 
     public func rename(_ id: String, to name: String) throws -> LiveAccountState {

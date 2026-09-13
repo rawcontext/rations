@@ -1,4 +1,6 @@
+import AppKit
 import RationsCore
+import RationsProviders
 import SwiftUI
 import UniformTypeIdentifiers
 
@@ -7,54 +9,100 @@ struct AddAccountSheet: View {
     let provider: ProviderID
     @Environment(\.dismiss) private var dismiss
     @State private var name = ""
-    @State private var connecting = false
     @State private var importing = false
-    @State private var error: String?
+    @State private var operation = SignInOperation()
+    @State private var importError: String?
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 14) {
+        VStack(alignment: .leading, spacing: 16) {
             Text("Add \(provider.displayName) Account").font(.headline)
-            TextField("Name", text: $name).textFieldStyle(.roundedBorder)
-            Text("Sign in using the vendor's tool, then connect the account here. Existing accounts stay saved.")
-                .font(.callout).foregroundStyle(.secondary)
-            HStack {
-                Button("Open Sign-In…") { store.signIn(provider) }
-                Button("Import Sign-In File…") { importing = true }
-            }
-            if let error {
+            TextField("Account name (optional)", text: $name).textFieldStyle(.roundedBorder)
+                .disabled(operation.isRunning)
+            status
+            if let error = operation.error ?? importError {
                 Text(error).font(.caption).foregroundStyle(.red).fixedSize(horizontal: false, vertical: true)
             }
+            if !operation.isRunning { otherOptions }
             actions
         }
         .padding(20).frame(width: 400)
         .fileImporter(isPresented: $importing, allowedContentTypes: [.json]) { result in
             switch result {
             case let .success(url): connect(file: url)
-            case let .failure(error): self.error = error.localizedDescription
+            case let .failure(error): importError = error.localizedDescription
+            }
+        }
+        .onAppear { if store.automaticallyStartSignIn { signIn() } }
+        .onDisappear { operation.cancel() }
+        .onChange(of: operation.completed) { _, completed in
+            if completed { NSApp.activate(ignoringOtherApps: true); dismiss() }
+        }
+        .onChange(of: operation.error) { _, error in
+            if error != nil { NSApp.activate(ignoringOtherApps: true) }
+        }
+    }
+
+    private var status: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 8) {
+                if operation.isRunning { ProgressView().controlSize(.small) }
+                Text(statusText).font(.callout).foregroundStyle(.secondary)
+            }
+            if operation.isRunning, case let .waitingForBrowser(url) = operation.progress, let url {
+                Button("Open browser again") { NSWorkspace.shared.open(url) }.buttonStyle(.link)
             }
         }
     }
 
+    private var statusText: String {
+        guard operation.isRunning else { return "Finish signing in and this account will connect automatically." }
+        switch operation.progress {
+        case .starting: return "Starting sign-in…"
+        case .waitingForBrowser:
+            return provider == .antigravity
+                ? "Finish signing in through Antigravity…" : "Complete sign-in in your browser…"
+        case .connecting: return "Connecting your account…"
+        }
+    }
+
+    private var otherOptions: some View {
+        DisclosureGroup("Other options") {
+            HStack {
+                Button("Use existing sign-in") { connect() }
+                Button("Import sign-in file…") { importing = true }
+            }
+            .padding(.top, 8)
+        }
+        .font(.callout)
+    }
+
     private var actions: some View {
         HStack {
-            if connecting { ProgressView().controlSize(.small) }
             Spacer()
-            Button("Cancel", role: .cancel) { dismiss() }.keyboardShortcut(.cancelAction)
-            Button("Connect Current Account") { connect() }.buttonStyle(.borderedProminent)
-                .disabled(connecting).keyboardShortcut(.defaultAction)
+            Button("Cancel", role: .cancel) { operation.cancel(); dismiss() }.keyboardShortcut(.cancelAction)
+            if !operation.isRunning {
+                Button("Sign in with \(provider.displayName)") { signIn() }
+                    .buttonStyle(.borderedProminent).keyboardShortcut(.defaultAction)
+            }
+        }
+    }
+
+    private func signIn() {
+        let accountName = name
+        importError = nil
+        operation.start { progress in
+            try await store.completeSignIn(provider, name: accountName, progress: progress)
         }
     }
 
     private func connect(file: URL? = nil) {
-        connecting = true
-        error = nil
-        Task {
+        let accountName = name
+        importError = nil
+        operation.start { progress in
+            progress(.connecting)
             let scoped = file?.startAccessingSecurityScopedResource() ?? false
-            defer { if scoped { file?.stopAccessingSecurityScopedResource() }; connecting = false }
-            do {
-                try await store.connect(provider, name: name, file: file)
-                dismiss()
-            } catch { self.error = error.localizedDescription }
+            defer { if scoped { file?.stopAccessingSecurityScopedResource() } }
+            try await store.connect(provider, name: accountName, file: file)
         }
     }
 }
