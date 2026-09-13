@@ -19,7 +19,7 @@ public actor LiveAccountService {
         progress: @escaping @Sendable (SignInProgress) -> Void,
         openExternal: @escaping @Sendable () async throws -> Void, reconnecting accountID: String? = nil
     ) async throws -> ConnectionReceipt {
-        try restore()
+        try restore(interactive: true)
         let operation = activity.begin(provider)
         defer { activity.finish(provider, token: operation) }
         let target = try accountID.map { id in
@@ -30,7 +30,7 @@ public actor LiveAccountService {
         }
         let existingIDs = Set(connections.keys)
         let account = if provider == .antigravity {
-            try await ExternalSignInWatcher.run(provider, open: openExternal, progress: progress)
+            try await ExternalSignInWatcher.run(provider, open: openExternal, progress: progress, reconnecting: target)
         } else {
             try await ManagedSignIn.run(provider, progress: progress)
         }
@@ -75,7 +75,7 @@ public actor LiveAccountService {
     }
 
     public func connect(_ provider: ProviderID, name: String, file: URL? = nil) async throws -> LiveAccountState {
-        try restore()
+        try restore(interactive: true)
         let operation = activity.begin(provider)
         defer { activity.finish(provider, token: operation) }
         let account = try await CredentialDiscovery.capture(provider, file: file, interactive: true)
@@ -94,7 +94,7 @@ public actor LiveAccountService {
         let account = ConnectionMerge.prepare(
             incoming, existing: connections[id], requestedName: name, alreadyConnected: alreadyConnected
         )
-        try vault.save(account)
+        try vault.save(account, interactive: true)
         connections[id] = account
         if isNative { active[account.profile.provider] = id }
         errors[account.profile.provider] = nil
@@ -105,18 +105,18 @@ public actor LiveAccountService {
     }
 
     public func rename(_ id: String, to name: String) throws -> LiveAccountState {
-        try restore()
+        try restore(interactive: true)
         let name = name.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !name.isEmpty, var account = connections[id] else { return snapshot() }
         account.profile.name = name
         account.lastReading?.profile.name = name
-        try vault.save(account)
+        try vault.save(account, interactive: true)
         connections[id] = account
         return snapshot()
     }
 
     public func remove(_ id: String) throws -> LiveAccountState {
-        try restore()
+        try restore(interactive: true)
         guard let account = connections[id], active[account.profile.provider] != id else {
             throw ProviderFailure.unavailable(
                 "This is the active vendor sign-in. Switch accounts in the vendor tool first."
@@ -127,9 +127,9 @@ public actor LiveAccountService {
         return snapshot()
     }
 
-    private func restore() throws {
+    private func restore(interactive: Bool = false) throws {
         guard !restored else { return }
-        let accounts = try vault.load().map { ($0.profile.id, $0) }
+        let accounts = try vault.load(interactive: interactive).map { ($0.profile.id, $0) }
         connections = Dictionary(accounts, uniquingKeysWith: { _, latest in latest })
         for id in connections.keys { connections[id]?.lastReading?.error = "Verifying the saved account…" }
         restored = true

@@ -15,6 +15,8 @@ a substitute for subscription allowance. No sample accounts ship in the app.
 
 Antigravity uses the Antigravity sign-in and quota product, not Gemini CLI. Its
 legacy Keychain service and protocol metadata include the word `gemini`.
+In macOS permission dialogs this vendor-owned item is therefore named “gemini,”
+even though its account is `antigravity` and the executable Rations uses is `agy`.
 Both Antigravity requests require the vendor user-agent header. The code-assist
 request also includes Antigravity IDE metadata. Without those values, Google can
 return a different product's licensing error for a valid Antigravity subscription.
@@ -46,6 +48,10 @@ the credential is captured; the connected record is stored in Keychain.
 Antigravity currently opens its interactive vendor sign-in window. Rations watches
 for a changed native credential and connects it automatically. Unlike the other
 three providers, this path still requires the vendor's interactive tool.
+Reconnecting an existing Antigravity account first requests access to its native
+credential and renews it if needed. A matching credential reconnects directly;
+another browser login is not needed just to repair Keychain access. A user-started
+sign-in watcher can request access once if the vendor replaces its Keychain item.
 
 Cancel stops the managed login and prevents late callbacks from completing the
 sheet. Browser logins time out after five minutes with a retryable message.
@@ -83,6 +89,12 @@ accounts require a matching sign-in or an exported OAuth credential.
 - Credentials and last readings are stored under the exact Keychain service
   `com.rawcontext.rations.accounts`. Display preferences use UserDefaults.
   Keychain enumeration requests attributes first, then reads each scoped item.
+  Both steps, and background writes, run through a serialized access gate with
+  legacy Keychain interaction disabled. `LAContext.interactionNotAllowed` alone
+  does not cover file-based login-keychain dialogs. Explicit connection actions
+  can request approval; the previous process interaction setting is restored when
+  the operation finishes. An access refusal leaves the saved account available
+  instead of retrying with a prompt during polling.
 - HTTP uses ephemeral sessions without cookie storage or redirects. Network errors
   never log bearer tokens or response bodies. Vendor subprocesses are bounded,
   run in an app-owned directory, and are stopped when Rations quits.
@@ -119,6 +131,14 @@ Login tests run isolated fake vendor processes and cover successful completion,
 browser prompts, nonzero exits, cancellation, timeout, stale callbacks, account
 name preservation, and Codex home isolation. Tests never query real
 Keychain entries, CLI sessions, or provider endpoints.
+
+Keychain policy tests use an injected interaction state to verify silent
+background access, explicit user approval, restoration after errors, fail-closed
+behavior, and concurrent requests. The gate uses Apple's deprecated legacy
+`SecKeychainGetUserInteractionAllowed` / `SecKeychainSetUserInteractionAllowed`
+APIs because the vendor-owned login-keychain entry requires that policy; its
+storage cannot be migrated by Rations. The compiler's deprecation warnings are
+expected for those two compatibility calls.
 
 For a local signed smoke check:
 

@@ -4,11 +4,17 @@ import Security
 
 enum NativeKeychain {
     static func read(service: String, account: String? = nil, interactive: Bool = false) throws -> [Data] {
+        try KeychainAccess.shared.perform(interactive: interactive) {
+            try readItems(service: service, account: account, interactive: interactive)
+        }
+    }
+
+    private static func readItems(service: String, account: String?, interactive: Bool) throws -> [Data] {
         let context = LAContext()
         context.interactionNotAllowed = !interactive
         var query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword, kSecAttrService: service,
-            kSecMatchLimit: kSecMatchLimitAll, kSecReturnAttributes: true
+            kSecMatchLimit: kSecMatchLimitAll, kSecReturnAttributes: true, kSecUseAuthenticationContext: context
         ]
         if let account { query[kSecAttrAccount] = account }
         var result: CFTypeRef?

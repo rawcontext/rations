@@ -4,11 +4,17 @@ import Security
 struct AccountVault {
     private let service = "com.rawcontext.rations.accounts"
 
-    func load() throws -> [AccountConnection] {
-        try NativeKeychain.read(service: service).map { try JSONDecoder().decode(AccountConnection.self, from: $0) }
+    func load(interactive: Bool = false) throws -> [AccountConnection] {
+        try NativeKeychain.read(service: service, interactive: interactive).map {
+            try JSONDecoder().decode(AccountConnection.self, from: $0)
+        }
     }
 
-    func save(_ account: AccountConnection) throws {
+    func save(_ account: AccountConnection, interactive: Bool = false) throws {
+        try KeychainAccess.shared.perform(interactive: interactive) { try saveItem(account) }
+    }
+
+    private func saveItem(_ account: AccountConnection) throws {
         var query = baseQuery()
         query[kSecAttrAccount] = account.profile.id
         let data = try JSONEncoder().encode(account)
@@ -21,10 +27,14 @@ struct AccountVault {
     }
 
     func remove(_ id: String) throws {
-        var query = baseQuery()
-        query[kSecAttrAccount] = id
-        let status = SecItemDelete(query as CFDictionary)
-        guard status == errSecSuccess || status == errSecItemNotFound else { throw ProviderFailure.keychain(status) }
+        try KeychainAccess.shared.perform(interactive: true) {
+            var query = baseQuery()
+            query[kSecAttrAccount] = id
+            let status = SecItemDelete(query as CFDictionary)
+            guard status == errSecSuccess || status == errSecItemNotFound else {
+                throw ProviderFailure.keychain(status)
+            }
+        }
     }
 
     private func baseQuery() -> [CFString: Any] {
