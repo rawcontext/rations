@@ -57,6 +57,10 @@ struct AddAccountSheet: View {
                 TextField("Account name (optional)", text: $name).textFieldStyle(.roundedBorder)
                     .disabled(operation.isRunning)
             }
+            if provider == .antigravity {
+                Text("macOS calls Antigravity’s saved sign-in “gemini” in Keychain prompts.")
+                    .font(.caption).foregroundStyle(.secondary)
+            }
         }
     }
 

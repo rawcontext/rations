@@ -9,18 +9,30 @@ enum NativeKeychain {
         }
     }
 
-    private static func readItems(service: String, account: String?, interactive: Bool) throws -> [Data] {
+    static func readItems(
+        service: String, account: String?, interactive: Bool,
+        copyMatching: (CFDictionary, UnsafeMutablePointer<CFTypeRef?>?) -> OSStatus = SecItemCopyMatching
+    ) throws -> [Data] {
         let context = LAContext()
         context.interactionNotAllowed = !interactive
         var query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword, kSecAttrService: service,
             kSecMatchLimit: kSecMatchLimitAll, kSecReturnAttributes: true, kSecUseAuthenticationContext: context
         ]
-        if let account { query[kSecAttrAccount] = account }
+        if let account {
+            query[kSecAttrAccount] = account
+            query[kSecMatchLimit] = kSecMatchLimitOne
+            query[kSecReturnAttributes] = nil
+            query[kSecReturnData] = true
+        }
         var result: CFTypeRef?
-        let status = SecItemCopyMatching(query as CFDictionary, &result)
+        let status = copyMatching(query as CFDictionary, &result)
         if status == errSecItemNotFound { return [] }
         guard status == errSecSuccess else { throw ProviderFailure.keychain(status) }
+        if account != nil {
+            guard let data = result as? Data else { throw ProviderFailure.invalidResponse }
+            return [data]
+        }
         return try (result as? [[CFString: Any]] ?? []).map { attributes in
             var item: [CFString: Any] = [
                 kSecClass: kSecClassGenericPassword, kSecAttrService: service,
@@ -29,7 +41,7 @@ enum NativeKeychain {
             ]
             item[kSecAttrAccount] = attributes[kSecAttrAccount]
             var value: CFTypeRef?
-            let status = SecItemCopyMatching(item as CFDictionary, &value)
+            let status = copyMatching(item as CFDictionary, &value)
             guard status == errSecSuccess else { throw ProviderFailure.keychain(status) }
             guard let data = value as? Data else { throw ProviderFailure.invalidResponse }
             return data

@@ -17,6 +17,9 @@ Antigravity uses the Antigravity sign-in and quota product, not Gemini CLI. Its
 legacy Keychain service and protocol metadata include the word `gemini`.
 In macOS permission dialogs this vendor-owned item is therefore named “gemini,”
 even though its account is `antigravity` and the executable Rations uses is `agy`.
+The connection sheet explains this legacy name. The CLI still requires the
+`gemini` service key, and the macOS prompt uses the item's access-control
+description; changing only its display label would not reliably rename that prompt.
 Both Antigravity requests require the vendor user-agent header. The code-assist
 request also includes Antigravity IDE metadata. Without those values, Google can
 return a different product's licensing error for a valid Antigravity subscription.
@@ -49,8 +52,12 @@ Antigravity currently opens its interactive vendor sign-in window. Rations watch
 for a changed native credential and connects it automatically. Unlike the other
 three providers, this path still requires the vendor's interactive tool.
 Reconnecting an existing Antigravity account first requests access to its native
-credential and renews it if needed. A matching credential reconnects directly;
-another browser login is not needed just to repair Keychain access. A user-started
+credential silently. A current, readable credential reconnects directly. If it
+has expired or needs approval, `agy models` runs before Rations requests access to
+the resulting credential. This avoids requesting permission on both sides of a
+vendor renewal. Rations makes at most one interactive credential read per capture;
+the vendor command has its own Keychain access. Cancellation or renewal failure
+ends reconnect instead of falling through to another vendor sign-in. A user-started
 sign-in watcher can request access once if the vendor replaces its Keychain item.
 
 Cancel stops the managed login and prevents late callbacks from completing the
@@ -90,8 +97,9 @@ accounts require a matching sign-in or an exported OAuth credential.
   across accounts after combining independent pools within each account.
 - Credentials and last readings are stored under the exact Keychain service
   `com.rawcontext.rations.accounts`. Display preferences use UserDefaults.
-  Keychain enumeration requests attributes first, then reads each scoped item.
-  Both steps, and background writes, run through a serialized access gate with
+  A known service/account pair is read with one scoped data query. Multi-account
+  enumeration requests attributes first, then reads each scoped item.
+  All queries and background writes run through a serialized access gate with
   legacy Keychain interaction disabled. `LAContext.interactionNotAllowed` alone
   does not cover file-based login-keychain dialogs. Explicit connection actions
   can request approval; the previous process interaction setting is restored when

@@ -55,12 +55,11 @@ enum CredentialDiscovery {
     }
 
     private static func antigravity(file: URL?, interactive: Bool) async throws -> AccountConnection {
-        var data = try file.map { try read($0, hint: "Select an Antigravity sign-in file.") }
-            ?? antigravityCredential(interactive: interactive)
-        let expiry = try ProviderJSON(data).object("token")?.string("expiry").flatMap(ProviderJSON.date)
-        if file == nil, let expiry, expiry <= Date.now.addingTimeInterval(60) {
-            _ = try await VendorProcess.run(try VendorExecutable.locate(.antigravity), arguments: ["models"])
-            data = try antigravityCredential(interactive: interactive)
+        let data: Data
+        if let file {
+            data = try read(file, hint: "Select an Antigravity sign-in file.")
+        } else {
+            data = try await AntigravityCredentialSource().capture(interactive: interactive)
         }
         let root = try ProviderJSON(data)
         guard let claims = ProviderJSON.claims(root.string("id_token")), let id = claims.string("sub"),
@@ -96,15 +95,6 @@ enum CredentialDiscovery {
         return AccountConnection(
             profile: profile, credential: data, sourcePath: path?.path
         )
-    }
-
-    private static func antigravityCredential(interactive: Bool) throws -> Data {
-        guard let stored = try NativeKeychain.read(
-            service: "gemini", account: "antigravity", interactive: interactive
-        ).first else {
-            throw ProviderFailure.notSignedIn("Sign in with Antigravity or agy, then connect the account.")
-        }
-        return NativeKeychain.unwrapGoKeyring(stored)
     }
 
     private static func read(_ path: URL, hint: String) throws -> Data {

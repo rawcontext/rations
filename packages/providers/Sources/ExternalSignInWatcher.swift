@@ -43,7 +43,8 @@ enum ExternalSignInWatcher {
     ) async throws -> AccountConnection? {
         do {
             return try await captureCredentials(provider, interactive)
-        } catch let error as ProviderFailure where interactive && error.needsKeychainApproval {
+        } catch let error as ProviderFailure where interactive {
+            if case .notSignedIn = error { return nil }
             throw error
         } catch is CancellationError {
             throw CancellationError()

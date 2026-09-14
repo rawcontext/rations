@@ -5,9 +5,12 @@ import Security
 import Testing
 
 struct ExternalSignInWatcherTests {
-    @Test
-    func deniedKeychainRepairDoesNotOpenAnotherSignInOrRetryThePrompt() async {
-        let fixture = ExternalSignInFixture([.failure(.keychain(errSecAuthFailed))])
+    @Test(arguments: [
+        ProviderFailure.keychain(errSecAuthFailed), .keychain(errSecUserCanceled),
+        .keychain(errSecInteractionNotAllowed), .timedOut
+    ])
+    func failedReconnectDoesNotOpenAnotherSignInOrRetryThePrompt(_ failure: ProviderFailure) async {
+        let fixture = ExternalSignInFixture([.failure(failure)])
         await #expect(throws: ProviderFailure.self) {
             try await ExternalSignInWatcher.run(
                 .antigravity, open: { await fixture.openBrowser() }, progress: { _ in },
