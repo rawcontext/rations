@@ -51,7 +51,7 @@ final class RationsStore {
         preferences = value
     }
 
-    func refresh() { Task { await refreshNow() } }
+    func refresh(manual: Bool = false) { Task { await refreshNow(manual: manual) } }
     func updateDisplayTime() { displayTime = .now }
 
     func refreshIfNeeded() {
@@ -105,11 +105,11 @@ final class RationsStore {
     func isActive(_ account: AccountReading) -> Bool { activeAccounts[account.profile.provider] == account.id }
     func accounts(for provider: ProviderID) -> [AccountReading] { accounts.filter { $0.profile.provider == provider } }
 
-    private func refreshNow() async {
+    private func refreshNow(manual: Bool = false) async {
         guard !isRefreshing else { return }
         isRefreshing = true
         let enabled = Set(ProviderID.allCases).subtracting(preferences.disabledProviders)
-        apply(await service.refresh(enabled: enabled) { [weak self] state in
+        apply(await service.refresh(enabled: enabled, manual: manual) { [weak self] state in
             await self?.apply(state)
         })
         lastRefresh = .now

@@ -34,7 +34,7 @@ final class StatusItemController: NSObject, NSMenuDelegate {
             menu.addItem(NSMenuItem(title: "No providers enabled", action: nil, keyEquivalent: ""))
         }
         let refresh = MenuCommand(store.isRefreshing ? "Refreshing…" : "Refresh", key: "r") { [weak self] in
-            self?.store.refresh()
+            self?.store.refresh(manual: true)
         }
         refresh.isEnabled = !store.isRefreshing
         refreshItem = refresh

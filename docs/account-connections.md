@@ -77,7 +77,9 @@ accounts require a matching sign-in or an exported OAuth credential.
 ## Refresh, storage, and failure behavior
 
 - Polling follows the refresh setting. Opening the menu requests a refresh when
-  at least a minute has elapsed. Manual refresh shares the same one-minute gate.
+  at least a minute has elapsed. Manual refresh immediately requests fresh usage
+  and reset-credit counts, even within that minute, while still respecting provider
+  `Retry-After` cooldowns and avoiding overlapping refreshes.
 - Providers fetch independently; one failure does not discard successful readings.
   After sign-in discovery, results appear as each usage request completes. Older
   refresh results cannot overwrite credentials or usage from a newer sign-in.
@@ -146,9 +148,10 @@ For a local signed smoke check:
 ./script/build_and_run.sh --signed --settings --verify --connection-report "$PWD/dist/connections.json"
 ```
 
-The optional report includes provider, plan, errors, quota percentages, and reset
-dates. It excludes credentials, account IDs, emails, and CLI output. `dist` is
-ignored by Git. The running app updates this report after each state publication.
+The optional report includes provider, plan, errors, quota percentages, reset
+dates, reset-credit counts, and fetch timestamps. It excludes credentials, account
+IDs, emails, and CLI output. `dist` is ignored by Git. The running app updates this
+report after each state publication.
 
 ## Research provenance
 

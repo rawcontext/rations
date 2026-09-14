@@ -47,10 +47,11 @@ public actor LiveAccountService {
     }
 
     @preconcurrency public func refresh(
-        enabled: Set<ProviderID>, onUpdate: (@Sendable (LiveAccountState) async -> Void)? = nil
+        enabled: Set<ProviderID>, manual: Bool = false,
+        onUpdate: (@Sendable (LiveAccountState) async -> Void)? = nil
     ) async -> LiveAccountState {
         do { try restore() } catch { return failureState(error) }
-        let due = schedule.reserve(enabled.subtracting(activity.busy), now: .now)
+        let due = schedule.reserve(enabled.subtracting(activity.busy), now: .now, manual: manual)
         guard !due.isEmpty else { return snapshot() }
         let versions = activity.versions
         let blocked = await discover(due, versions: versions)

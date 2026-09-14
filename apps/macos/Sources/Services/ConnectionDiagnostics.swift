@@ -13,6 +13,8 @@ enum ConnectionDiagnostics {
                 "accounts": accounts.map { account in
                     ["plan": account.profile.plan ?? "unknown", "error": account.error ?? "",
                      "notice": account.notice ?? "",
+                     "fetchedAt": account.fetchedAt?.ISO8601Format() as Any? ?? NSNull(),
+                     "resetCredits": account.resetCredits as Any? ?? NSNull(),
                      "windows": account.rows.flatMap(\.windows).map { window -> [String: Any] in
                          ["label": window.label, "usedPercent": window.usedPercent as Any? ?? NSNull(),
                           "resetsAt": window.resetsAt?.ISO8601Format() as Any? ?? NSNull()]
