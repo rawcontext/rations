@@ -60,6 +60,9 @@ struct AddAccountSheet: View {
             if provider == .antigravity {
                 Text("macOS calls Antigravity’s saved sign-in “gemini” in Keychain prompts.")
                     .font(.caption).foregroundStyle(.secondary)
+            } else if provider == .cursor {
+                Text("Sign in inside Cursor. Rations connects automatically when its saved sign-in changes.")
+                    .font(.caption).foregroundStyle(.secondary)
             }
         }
     }
@@ -81,8 +84,8 @@ struct AddAccountSheet: View {
         switch operation.progress {
         case .starting: return "Starting sign-in…"
         case .waitingForBrowser:
-            return provider == .antigravity
-                ? "Finish signing in through Antigravity…" : "Complete sign-in in your browser…"
+            return provider == .antigravity || provider == .cursor
+                ? "Finish signing in through \(provider.displayName)…" : "Complete sign-in in your browser…"
         case .connecting: return "Connecting your account…"
         }
     }

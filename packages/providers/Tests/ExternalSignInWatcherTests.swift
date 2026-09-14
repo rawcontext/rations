@@ -22,17 +22,30 @@ struct ExternalSignInWatcherTests {
         #expect(await !fixture.browserOpened)
     }
 
-    @Test
-    func reconnectCanRepairKeychainAccessWithoutAnotherBrowserLogin() async throws {
-        let account = account()
+    @Test(arguments: [ProviderID.antigravity, .cursor])
+    func reconnectCanReuseTheMatchingNativeSignIn(_ provider: ProviderID) async throws {
+        let account = AccountConnection(profile: ProviderTestData.profile(provider), credential: Data("fixture".utf8))
         let fixture = ExternalSignInFixture([.success(account)])
         let captured = try await ExternalSignInWatcher.run(
-            .antigravity, open: { await fixture.openBrowser() }, progress: { _ in }, reconnecting: account.profile,
+            provider, open: { await fixture.openBrowser() }, progress: { _ in }, reconnecting: account.profile,
             captureCredentials: { _, interactive in try await fixture.capture(interactive: interactive) }
         )
         #expect(captured.profile.id == account.profile.id)
         #expect(await fixture.interactionRequests == [true])
         #expect(await !fixture.browserOpened)
+    }
+
+    @Test
+    func cursorConnectionWaitsForTheNewNativeSignIn() async throws {
+        let account = AccountConnection(profile: ProviderTestData.profile(.cursor), credential: Data("new".utf8))
+        let fixture = ExternalSignInFixture([.failure(.notSignedIn("Sign in inside Cursor")), .success(account)])
+        let captured = try await ExternalSignInWatcher.run(
+            .cursor, open: { await fixture.openBrowser() }, progress: { _ in },
+            captureCredentials: { _, interactive in try await fixture.capture(interactive: interactive) }
+        )
+        #expect(captured.profile.id == account.profile.id)
+        #expect(await fixture.browserOpened)
+        #expect(await fixture.interactionRequests == [false, false])
     }
 
     @Test

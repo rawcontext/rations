@@ -20,6 +20,7 @@ struct LoginCommand: Sendable {
         case .claude: arguments = ["auth", "login", "--claudeai"]
         case .grok: arguments = ["login", "--oauth"]
         case .antigravity: throw ProviderFailure.unavailable("Use Antigravity's sign-in window.")
+        case .cursor: throw ProviderFailure.unavailable("Use Cursor's sign-in window.")
         }
         return Self(
             executable: try executable ?? VendorExecutable.locate(provider), arguments: arguments,

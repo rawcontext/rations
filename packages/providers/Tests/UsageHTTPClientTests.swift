@@ -24,6 +24,16 @@ struct UsageHTTPClientTests {
     }
 
     @Test
+    func cursorRequestUsesOnlyItsExplicitSessionCookie() async throws {
+        let url = try #require(URL(string: "https://example.invalid/200"))
+        let cookie = "WorkosCursorSessionToken=fixture%3A%3Atoken"
+        let response = try ProviderJSON(await client().request(url, headers: ["Cookie": cookie]))
+        #expect(response.string("method") == "GET")
+        #expect(response.string("authorization") == nil)
+        #expect(response.string("cookie") == cookie)
+    }
+
+    @Test
     func retryAfterSupportsSecondsAndHTTPDates() throws {
         let now = try #require(ProviderJSON.date("2026-09-13T09:00:00Z"))
         #expect(UsageHTTPClient.retryDate("600", now: now) == now.addingTimeInterval(600))

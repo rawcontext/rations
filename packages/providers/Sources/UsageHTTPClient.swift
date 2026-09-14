@@ -13,11 +13,13 @@ struct UsageHTTPClient: Sendable {
         )
     }
 
-    func request(_ url: URL, token: String, body: Data? = nil, headers: [String: String] = [:]) async throws -> Data {
+    func request(
+        _ url: URL, token: String? = nil, body: Data? = nil, headers: [String: String] = [:]
+    ) async throws -> Data {
         var request = URLRequest(url: url)
         request.httpMethod = body == nil ? "GET" : "POST"
         request.httpBody = body
-        request.setValue("Bearer " + token, forHTTPHeaderField: "Authorization")
+        if let token { request.setValue("Bearer " + token, forHTTPHeaderField: "Authorization") }
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Rations/0.1", forHTTPHeaderField: "User-Agent")

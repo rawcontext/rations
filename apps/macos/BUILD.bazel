@@ -63,7 +63,10 @@ macos_application(
         ":team_signing_enabled": "//tools/apple-signing:development",
         "//conditions:default": None,
     }),
-    resources = ["Resources/IconAttribution.txt"],
+    resources = [
+        "Resources/CodexBarAttribution.txt",
+        "Resources/IconAttribution.txt",
+    ],
     visibility = ["//visibility:public"],
     deps = [":sources"],
 )

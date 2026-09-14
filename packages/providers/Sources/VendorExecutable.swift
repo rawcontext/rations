@@ -9,6 +9,7 @@ public enum VendorExecutable {
         case .claude: name = "claude"
         case .antigravity: name = "agy"
         case .grok: name = "grok"
+        case .cursor: throw ProviderFailure.unavailable("Open Cursor to sign in.")
         }
         let home = FileManager.default.homeDirectoryForCurrentUser
         let candidates = [home.appendingPathComponent(".local/bin/\(name)"),

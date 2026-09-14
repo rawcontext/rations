@@ -3,6 +3,7 @@ public enum ProviderID: String, CaseIterable, Codable, Identifiable, Sendable {
     case claude
     case antigravity
     case grok
+    case cursor
 
     public var id: String { rawValue }
 
@@ -12,6 +13,7 @@ public enum ProviderID: String, CaseIterable, Codable, Identifiable, Sendable {
         case .claude: "Claude"
         case .antigravity: "Antigravity"
         case .grok: "Grok"
+        case .cursor: "Cursor"
         }
     }
 }

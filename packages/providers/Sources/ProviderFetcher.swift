@@ -10,6 +10,7 @@ struct ProviderFetcher: Sendable {
         case .claude: return try await claude(account)
         case .antigravity: return try await antigravity(account)
         case .grok: return try await grok(account)
+        case .cursor: return try await CursorProvider.fetch(account, using: http)
         }
     }
 

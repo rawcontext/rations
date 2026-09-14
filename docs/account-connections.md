@@ -12,6 +12,7 @@ a substitute for subscription allowance. No sample accounts ship in the app.
 | Claude | Claude Code credentials file or `Claude Code-credentials` Keychain service; native `claude auth status` fallback | OAuth `/api/oauth/profile` and `/api/oauth/usage` at `api.anthropic.com`; built-in `/usage` in a bounded safe-mode PTY when the OAuth store is unavailable |
 | Antigravity | `agy`'s Keychain entry: service `gemini`, account `antigravity` | `loadCodeAssist`, then `retrieveUserQuotaSummary` at `cloudcode-pa.googleapis.com/v1internal` |
 | Grok | `~/.grok/auth.json` | `GET /v1/billing?format=credits` and `/v1/settings` at `cli-chat-proxy.grok.com` |
+| Cursor | Cursor.app's local `state.vscdb` sign-in | `GET https://cursor.com/api/usage-summary` using the app session as a Cursor session cookie |
 
 Antigravity uses the Antigravity sign-in and quota product, not Gemini CLI. Its
 legacy Keychain service and protocol metadata include the word `gemini`.
@@ -32,6 +33,24 @@ keeps the shared model groups reported by its API. Every account gets one menu r
 all returned groups appear in its hover detail. The account row uses the main pool,
 or the tightest returned window for each period when there are several model pools.
 
+Cursor's account row shows the overall monthly allowance and billing-cycle reset.
+Its detail includes Cursor Models and Other Models percentages when returned, plus
+extra spending and its cap. Percentage fields are already percentages: `0.25`
+means 0.25%, not 25%. The reported overall percentage takes precedence over model
+breakdowns and dollar ratios. Model breakdowns are supplemental so the aggregate
+counts the allowance once. Team accounts can use a reported personal cap or shared
+pool when included-plan data is absent. Missing allowances remain unknown.
+
+Cursor authentication follows CodexBar's local-app approach. Rations reads only
+`cursorAuth/accessToken` from
+`~/Library/Application Support/Cursor/User/globalStorage/state.vscdb`, using SQLite
+read-only access. A live WAL is included; an idle database is opened without
+recreating sidecars. UTF-8 text/blobs and ASCII UTF-16LE blobs are supported. The
+token's subject supplies the stable account identity, and the token is validated
+by the usage endpoint. Expired tokens require reconnecting through Cursor.
+Rations keeps a copy in its own Keychain vault for named and inactive accounts.
+It does not change Cursor's database, renew Cursor tokens, or import browser cookies.
+
 ## Adding and retaining accounts
 
 Open Settings → Accounts → Add Another Account, optionally name the account,
@@ -49,8 +68,8 @@ does not replace the active CLI sign-in. The temporary directory is removed afte
 the credential is captured; the connected record is stored in Keychain.
 
 Antigravity currently opens its interactive vendor sign-in window. Rations watches
-for a changed native credential and connects it automatically. Unlike the other
-three providers, this path still requires the vendor's interactive tool.
+for a changed native credential and connects it automatically. This path requires
+the vendor's interactive tool.
 Reconnecting an existing Antigravity account first requests access to its native
 credential silently. A current, readable credential reconnects directly. If it
 has expired or needs approval, `agy models` runs before Rations requests access to
@@ -59,6 +78,13 @@ vendor renewal. Rations makes at most one interactive credential read per captur
 the vendor command has its own Keychain access. Cancellation or renewal failure
 ends reconnect instead of falling through to another vendor sign-in. A user-started
 sign-in watcher can request access once if the vendor replaces its Keychain item.
+
+Cursor opens the installed Cursor app. Sign in to the desired account inside
+Cursor; Rations watches for the new credential and connects automatically.
+Reconnect reuses a current native credential when it matches the selected account.
+Use existing sign-in imports the current app account directly. Import sign-in file
+accepts JSON containing `accessToken`. Adding another account requires signing in
+to that account in Cursor; saved Rations accounts keep their aliases and credentials.
 
 Cancel stops the managed login and prevents late callbacks from completing the
 sheet. Browser logins time out after five minutes with a retryable message.
@@ -131,6 +157,8 @@ The current adapters depend on vendor CLI credential formats and private usage
 endpoints; they may need updates when those contracts change. Expired inactive
 credentials require reconnecting. Automatic account switching, Developer ID
 distribution, notarization, and independent OAuth onboarding remain future work.
+Cursor currently reads usage-summary allowances; legacy request-count plans and
+the optional Grok Bot allowance are not included in this adapter.
 
 ## Validation and diagnostics
 
@@ -169,6 +197,12 @@ Rations implements its own transport, credential storage, parsers, and native UI
 The relevant reference adapters are Codex OAuth usage, Claude OAuth profile/usage,
 Antigravity remote quota summary, and Grok credits proxy. Do not copy vendor token
 values, user CLI logs, or live account responses into regression fixtures.
+
+The Cursor database reader, session-cookie construction, and usage-summary mapping
+are adapted from MIT-licensed
+[CodexBar at a5f2c581](https://github.com/steipete/CodexBar/tree/a5f2c581ce2e859dab983e28af50c03351db7dd3/Sources/CodexBarCore/Providers/Cursor).
+The copyright and license are bundled in `Resources/CodexBarAttribution.txt`.
+Rations retains unknown usage instead of adopting the reference's zero fallback.
 
 The sign-in lifecycle follows the pattern in CodexBar's
 [CLILoginRunner](https://github.com/steipete/CodexBar/blob/afa483f2a287ebb999adbfaa060a2c3d0cfa1cc8/Sources/CodexBar/CLILoginRunner.swift)

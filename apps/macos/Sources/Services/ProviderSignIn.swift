@@ -5,6 +5,13 @@ import RationsProviders
 @MainActor
 enum ProviderSignIn {
     static func open(_ provider: ProviderID) throws {
+        if provider == .cursor {
+            guard let url = NSWorkspace.shared.urlForApplication(withBundleIdentifier: "com.todesktop.230313mzl4w4u92"),
+                  NSWorkspace.shared.open(url) else {
+                throw ProviderFailure.notSignedIn("Install Cursor and sign in, then connect the account.")
+            }
+            return
+        }
         guard provider == .antigravity else { return }
         let executable = try VendorExecutable.locate(provider)
         let directory = FileManager.default.homeDirectoryForCurrentUser

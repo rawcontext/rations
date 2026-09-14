@@ -1,7 +1,7 @@
 # Rations
 
 A native Swift macOS menu bar app for subscription usage and reset times across
-Codex, Claude, Antigravity, and Grok.
+Codex, Claude, Antigravity, Grok, and Cursor.
 
 The native UI follows the [authoritative v6 design](docs/design/README.md):
 compact account rows, stacked quota meters, hover submenus, and General/Accounts/Providers

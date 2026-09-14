@@ -46,7 +46,7 @@ multiple named accounts**, with its own section and the same add/rename/remove c
 | Account detail | Native submenu, scoped usage, exact local reset plus countdown, freshness, read-only reset credits, named destination actions |
 | Settings | 560-point native window with General, Accounts, and Providers toolbar tabs; grouped forms |
 | General | Remaining usage by default, absolute + relative reset times, 25%/10% remaining thresholds, refresh interval, login, privacy |
-| Accounts | Separate sections for all four providers; multiple named accounts, active marker, rename, add sheet, remove inactive accounts |
+| Accounts | Separate sections for every provider; multiple named accounts, active marker, rename, add sheet, remove inactive accounts |
 | Switching | Progress and failure presentations, no forced termination of a busy Codex app, identity verification and rollback before success |
 | Materials | System glass on floating menus/panels; ordinary grouped forms in Settings; no glass layered on glass |
 
@@ -55,6 +55,8 @@ Antigravity model groups remain part of each Google account's subscription,
 separate from Anthropic and OpenAI accounts.
 
 The native menu reads live provider data and persists account records in Keychain.
+Cursor is a separate provider. Its row uses one monthly total meter; model-pool
+breakdowns and extra spending appear in the account detail.
 Each account occupies one menu row; model quotas are nested inside its hover detail.
 Reset counts use “0 resets,” “1 reset,” or “2 resets.” Preview mode and sample
 accounts have been removed. See [account connections](../account-connections.md)

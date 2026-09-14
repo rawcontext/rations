@@ -29,7 +29,7 @@ public actor LiveAccountService {
             return saved.profile
         }
         let existingIDs = Set(connections.keys)
-        let account = if provider == .antigravity {
+        let account = if provider == .antigravity || provider == .cursor {
             try await ExternalSignInWatcher.run(provider, open: openExternal, progress: progress, reconnecting: target)
         } else {
             try await ManagedSignIn.run(provider, progress: progress)

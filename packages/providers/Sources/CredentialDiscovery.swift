@@ -17,6 +17,11 @@ enum CredentialDiscovery {
             return try await claude(file: file, interactive: interactive)
         case .antigravity:
             return try await antigravity(file: file, interactive: interactive)
+        case .cursor:
+            let credential = try file.map {
+                try CursorCredential(data: read($0, hint: "Select a Cursor sign-in file."))
+            } ?? CursorCredential(CursorAppAuth.readToken())
+            return try credential.connection(sourcePath: file?.path)
         }
     }
 

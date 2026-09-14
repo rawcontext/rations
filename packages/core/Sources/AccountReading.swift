@@ -12,7 +12,7 @@ public struct AccountReading: Identifiable, Codable, Equatable, Sendable {
     public var menuRow: QuotaRow {
         if let main = rows.first(where: { $0.id == "main" }) { return main }
         let pools = rows.filter { !$0.isSupplemental }
-        let windows = [QuotaPeriod.session, .weekly].compactMap { period in
+        let windows = [QuotaPeriod.session, .weekly, .monthly].compactMap { period in
             pools.compactMap { $0.window(for: period) }.max { ($0.usedPercent ?? -1) < ($1.usedPercent ?? -1) }
         }
         return QuotaRow(id: "summary", windows: windows)

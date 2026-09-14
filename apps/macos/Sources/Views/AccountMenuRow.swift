@@ -43,8 +43,12 @@ struct AccountMenuRow: View {
 
     private var meters: some View {
         VStack(spacing: 3) {
-            QuotaMeter(window: row.window(for: .session), preferences: preferences, highlighted: highlighted)
-            QuotaMeter(window: row.window(for: .weekly), preferences: preferences, highlighted: highlighted)
+            if let monthly = row.window(for: .monthly) {
+                QuotaMeter(window: monthly, preferences: preferences, highlighted: highlighted)
+            } else {
+                QuotaMeter(window: row.window(for: .session), preferences: preferences, highlighted: highlighted)
+                QuotaMeter(window: row.window(for: .weekly), preferences: preferences, highlighted: highlighted)
+            }
         }
         .frame(width: 108).opacity(account.isFresh(at: store.displayTime) ? 1 : 0.45)
     }
