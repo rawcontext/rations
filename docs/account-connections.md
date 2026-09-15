@@ -155,8 +155,9 @@ An unknown percentage is informational and does not trigger a reconnect warning.
 
 The current adapters depend on vendor CLI credential formats and private usage
 endpoints; they may need updates when those contracts change. Expired inactive
-credentials require reconnecting. Automatic account switching, Developer ID
-distribution, notarization, and independent OAuth onboarding remain future work.
+credentials require reconnecting. Automatic account switching and independent
+OAuth onboarding remain future work. Developer ID distribution and notarization
+use the [direct-release workflow](releases.md).
 Cursor currently reads usage-summary allowances; legacy request-count plans and
 the optional Grok Bot allowance are not included in this adapter.
 
@@ -181,7 +182,7 @@ expected for those two compatibility calls.
 For a local signed smoke check:
 
 ```sh
-./script/build_and_run.sh --signed --settings --verify --connection-report "$PWD/dist/connections.json"
+./scripts/build_and_run.sh --signed --settings --verify --connection-report "$PWD/dist/connections.json"
 ```
 
 The optional report includes provider, plan, errors, quota percentages, reset

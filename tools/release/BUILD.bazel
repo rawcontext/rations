@@ -1,0 +1,9 @@
+load("@rules_shell//shell:sh_test.bzl", "sh_test")
+
+sh_test(
+    name = "test",
+    size = "small",
+    srcs = ["test.sh"],
+    data = glob(["*.py"]),
+    visibility = ["//:__pkg__"],
+)

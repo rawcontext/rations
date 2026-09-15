@@ -17,6 +17,13 @@ account first. The summary updates when readings change without double-counting
 overlapping windows. Expired or incomplete readings remain unknown until a provider
 publishes current data.
 
+## Install
+
+[Download Rations for macOS](https://github.com/rawcontext/rations/releases/latest/download/Rations.dmg),
+open the disk image, and drag Rations into Applications. Requires macOS 14 or later
+on Apple Silicon or Intel. Connect your installed vendor tools from Settings.
+Direct downloads include signed updates through Sparkle.
+
 ## Development setup
 
 Use macOS with **Xcode 27 beta** installed and its first-launch setup completed.
@@ -57,13 +64,16 @@ and lint executables, independently of any global pnpm installation.
 | `npm run dev` | Stop the existing Rations process, build, and launch the `.app` |
 | `npm run dev -- --signed --settings` | Open Settings with real account connections |
 | `npm run dev -- --signed` | Build and run with Raw Context's local development signing profile |
-| `./script/build_and_run.sh --verify` | Build, launch, and verify the process is running |
-| `./script/build_and_run.sh --debug` | Build and launch under LLDB |
-| `./script/build_and_run.sh --logs` | Launch and stream process logs |
-| `./script/build_and_run.sh --telemetry` | Launch and stream the Rations log subsystem |
+| `./scripts/build_and_run.sh --verify` | Build, launch, and verify the process is running |
+| `./scripts/build_and_run.sh --debug` | Build and launch under LLDB |
+| `./scripts/build_and_run.sh --logs` | Launch and stream process logs |
+| `./scripts/build_and_run.sh --telemetry` | Launch and stream the Rations log subsystem |
 | `npm run xcode` | Generate the Xcode project from Bazel targets |
 | `bazel test //packages/core:test` | Run the quota model tests during development |
-| `bazel build --config=release //apps/macos:app` | Build an optimized development bundle |
+| `bazel build --config=release //apps/macos:app` | Build an optimized production bundle without distribution signing |
+| `npm run release:prepare` | Build the universal production app with Sparkle |
+| `npm run release` | Sign, notarize, staple, and package the DMG and update feed |
+| `npm run release:publish` | Publish and verify the prepared GitHub release |
 
 Rations intentionally has no Dock icon or main window. Click the pie icon in
 the menu bar to open it, then choose Settings or Quit. The development bundle is
@@ -74,10 +84,9 @@ Development uses `com.rawcontext.rations.dev`; `--config=release` uses
 `com.rawcontext.rations`. Xcode Debug and Release use Raw Context LLC's team
 `U65DCW9TAK` and a local Mac development profile. Ordinary Bazel/CI builds remain
 ad-hoc signed; add `--config=signed` for team signing. See
-[signing configuration](tools/apple-signing/README.md). Developer ID distribution
-and notarization are separate future work.
-
-The Codex app's Run action invokes the same build-and-run script.
+[signing configuration](tools/apple-signing/README.md). For direct downloads,
+Developer ID signing, notarization, and Sparkle updates, use the
+[release workflow](docs/releases.md).
 
 ## Monorepo boundaries
 
@@ -87,8 +96,7 @@ packages/core/              Provider IDs and normalized quota data; no UI depend
 packages/providers/         Live vendor adapters, credential discovery, Keychain, refresh
 tools/cognitive-complexity/ SwiftSyntax-based lint tool and its regression tests
 tools/testing/              Xcode framework environment for Bazel tests
-scripts/                    Bootstrap and repository checks
-script/                     Native app build/run/debug entry point
+scripts/                    Bootstrap, repository checks, and native app build/run/debug
 docs/                       Development policy and implementation references
 ```
 
@@ -104,3 +112,10 @@ build definition for the same targets.
 
 See [the lint policy](docs/linting.md) for the copied rules, provenance, and limits.
 All pre-commit checks are read-only; fix and stage failures before retrying a commit.
+
+## License
+
+Rations source code is available under the [MIT license](LICENSE).
+Third-party code retains its own notices. The menu glyph is adapted from
+CC BY-SA 4.0 artwork; see [icon attribution](apps/macos/Resources/IconAttribution.txt).
+Bundled notices are available in About Rations → Acknowledgments.

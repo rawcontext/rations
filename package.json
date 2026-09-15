@@ -1,6 +1,7 @@
 {
   "name": "rations",
   "private": true,
+  "license": "MIT",
   "packageManager": "pnpm@12.4.1",
   "scripts": {
     "prepare": "lefthook install",
@@ -8,8 +9,11 @@
     "test": "bazel test //...",
     "lint": "bash scripts/lint.sh",
     "check": "pnpm run lint && pnpm run build && pnpm test",
-    "dev": "./script/build_and_run.sh",
-    "xcode": "bazel run //apps/macos:xcodeproj"
+    "dev": "./scripts/build_and_run.sh",
+    "xcode": "bazel run //apps/macos:xcodeproj",
+    "release:prepare": "python3 tools/release/release.py prepare",
+    "release": "python3 tools/release/release.py release",
+    "release:publish": "python3 tools/release/release.py publish"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.13",

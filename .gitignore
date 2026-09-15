@@ -4,6 +4,8 @@ dist/
 bazel-*
 .build/
 .swiftlint_cache/
+__pycache__/
+*.py[cod]
 DerivedData/
 *.xcodeproj/
 *.xcworkspace/

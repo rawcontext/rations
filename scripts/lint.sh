@@ -10,7 +10,7 @@ while IFS= read -r -d '' file; do
   case "$file" in
     docs/*) continue ;;
     *.swift) swift_files+=("$PWD/$file") ;;
-    BUILD.bazel|*/BUILD.bazel|MODULE.bazel|REPO.bazel|*.bzl) build_files+=("$PWD/$file") ;;
+    BUILD.bazel|*/BUILD.bazel|*.BUILD|MODULE.bazel|REPO.bazel|*.bzl) build_files+=("$PWD/$file") ;;
     *.sh|tools/bazel) shell_files+=("$PWD/$file") ;;
   esac
 done < <(git ls-files --cached --others --exclude-standard -z)

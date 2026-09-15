@@ -12,3 +12,12 @@ bazel_dep(name = "rules_swift", version = "4.0.1")
 
 bazel_dep(name = "rules_xcodeproj", version = "4.1.0", dev_dependency = True)
 bazel_dep(name = "swift-syntax", version = "603.0.2", dev_dependency = True)
+
+http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+http_archive(
+    name = "sparkle",
+    build_file = "//third_party/sparkle:framework.BUILD",
+    sha256 = "c2bf58aa8387266ac179357b1415d6f2635f044da8be41042af32425dae6da0c",
+    urls = ["https://github.com/sparkle-project/Sparkle/releases/download/2.10.0/Sparkle-2.10.0.tar.xz"],
+)

@@ -15,6 +15,16 @@ bool_flag(
     build_setting_default = False,
 )
 
+bool_flag(
+    name = "distribution",
+    build_setting_default = False,
+)
+
+config_setting(
+    name = "distribution_enabled",
+    flag_values = {":distribution": "true"},
+)
+
 config_setting(
     name = "production_enabled",
     flag_values = {":production": "true"},
@@ -36,6 +46,7 @@ swift_library(
     deps = [
         "//packages/core:lib",
         "//packages/providers:lib",
+        "@sparkle//:framework",
     ],
 )
 
@@ -44,6 +55,20 @@ swift_test(
     size = "small",
     srcs = ["Sources/Services/AppInstanceLock.swift"] + glob(["Tests/*.swift"]),
     visibility = ["//:__pkg__"],
+)
+
+genrule(
+    name = "license_notices",
+    srcs = [
+        "//:LICENSE",
+        "@sparkle//:LICENSE",
+    ],
+    outs = [
+        "RationsLicense.txt",
+        "SparkleLicense.txt",
+    ],
+    cmd = "cp $(location //:LICENSE) $(location RationsLicense.txt) && " +
+          "cp $(location @sparkle//:LICENSE) $(location SparkleLicense.txt)",
 )
 
 macos_application(
@@ -57,7 +82,10 @@ macos_application(
         ":team_signing_enabled": "Resources/Development.entitlements",
         "//conditions:default": None,
     }),
-    infoplists = ["Resources/Info.plist"],
+    infoplists = ["Resources/Info.plist"] + select({
+        ":distribution_enabled": ["Resources/Distribution.plist"],
+        "//conditions:default": [],
+    }),
     minimum_os_version = "14.0",
     provisioning_profile = select({
         ":team_signing_enabled": "//tools/apple-signing:development",
@@ -67,6 +95,7 @@ macos_application(
         "Resources/CodexBarAttribution.txt",
         "Resources/IconAttribution.txt",
         "Resources/PrivacyInfo.xcprivacy",
+        ":license_notices",
     ],
     visibility = ["//visibility:public"],
     deps = [":sources"],

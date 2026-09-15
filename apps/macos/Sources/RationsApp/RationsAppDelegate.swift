@@ -13,8 +13,9 @@ final class RationsAppDelegate: NSObject, NSApplicationDelegate {
         guard claimInstance() else { NSApp.terminate(nil); return }
         let settings = SettingsWindowController(store: store)
         self.settings = settings
-        status = StatusItemController(store: store) { [weak settings] in settings?.show() }
-        NSApp.mainMenu = ApplicationMenu.make { [weak settings] in settings?.show() }
+        let updater = SoftwareUpdater()
+        status = StatusItemController(store: store, updater: updater) { [weak settings] in settings?.show() }
+        NSApp.mainMenu = ApplicationMenu.make(updater: updater) { [weak settings] in settings?.show() }
         if CommandLine.arguments.contains("--settings") { settings.show() }
         observeMessages()
         store.start()

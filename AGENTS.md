@@ -50,7 +50,7 @@
 - Rations is a native Swift macOS menu bar app. Bazel owns builds and dependencies; generate the Xcode project with `npm run xcode` rather than maintaining a parallel SwiftPM or Xcode build definition.
 - Keep the app in `apps/macos`, UI-independent models in `packages/core`, and vendor adapters in `packages/providers`. Declare direct dependencies and deliberate Bazel visibility.
 - Use Xcode 27 beta through the project-local `tools/bazel` Bazelisk wrapper. `DEVELOPER_DIR` can select a differently located beta installation. The application deployment target remains macOS 14.0.
-- Use `npm run check` for repository lint/build/tests and `npm run dev` for the native build/run loop. The Run button uses `script/build_and_run.sh`.
+- Use `npm run check` for repository lint/build/tests and `npm run dev` for the native build/run loop. The Run button uses `scripts/build_and_run.sh`.
 - The Eudoxus 3-derived lint policy and thresholds are documented in `docs/linting.md`; retain them when adding source or tooling.
 
 ## Git workflow

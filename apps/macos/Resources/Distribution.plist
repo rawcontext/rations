@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>SUFeedURL</key>
+  <string>https://github.com/rawcontext/rations/releases/latest/download/appcast.xml</string>
+  <key>SUPublicEDKey</key>
+  <string>pRBSwVHZLN7l6CFHRE2nrSZgypz99hqBPJCSNHeC5yQ=</string>
+  <key>SUEnableAutomaticChecks</key>
+  <true/>
+  <key>SUAutomaticallyUpdate</key>
+  <false/>
+  <key>SUSendProfileInfo</key>
+  <false/>
+  <key>SUVerifyUpdateBeforeExtraction</key>
+  <true/>
+  <key>SURequireSignedFeed</key>
+  <true/>
+</dict>
+</plist>

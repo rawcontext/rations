@@ -2,6 +2,10 @@
 
 Reviewed September 14, 2026 (America/Chicago).
 
+Distribution decision: ship direct downloads through GitHub Releases using
+[Developer ID signing and notarization](releases.md). This document records a
+separate Mac App Store assessment; no App Store submission is planned.
+
 **Rations is not ready for Mac App Store submission.** The current development
 app works outside App Sandbox. Its provider access needs an architectural change
 before a sandboxed release can preserve the existing features.

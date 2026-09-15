@@ -6,14 +6,16 @@ import RationsCore
 final class StatusItemController: NSObject, NSMenuDelegate {
     private let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     private let store: RationsStore
+    private let updater: SoftwareUpdater
     private let showSettings: @MainActor () -> Void
     private var timer: Timer?
     private var displayTimer: Timer?
     private var refreshItem: NSMenuItem?
     private var headers: [ProviderID: NSMenuItem] = [:]
 
-    init(store: RationsStore, showSettings: @escaping @MainActor () -> Void) {
+    init(store: RationsStore, updater: SoftwareUpdater, showSettings: @escaping @MainActor () -> Void) {
         self.store = store
+        self.updater = updater
         self.showSettings = showSettings
         super.init()
         let menu = NSMenu()
@@ -40,6 +42,7 @@ final class StatusItemController: NSObject, NSMenuDelegate {
         refreshItem = refresh
         menu.addItem(refresh)
         menu.addItem(MenuCommand("Settings…", key: ",", handler: showSettings))
+        if let updateItem = updater.menuItem() { menu.addItem(updateItem) }
         menu.addItem(.separator())
         menu.addItem(MenuCommand("About Rations", handler: AboutRations.show))
         menu.addItem(MenuCommand("Quit Rations", key: "q") { NSApp.terminate(nil) })
