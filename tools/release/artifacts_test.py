@@ -42,6 +42,11 @@ class ArtifactTests(unittest.TestCase):
             self.assertEqual(order[-1], app)
             self.assertNotIn(helper / "alias", order)
             self.assertNotIn(helper / "notice.txt", order)
+            with patch("artifacts.run", return_value="x86_64 arm64"):
+                artifacts.validate_architectures(app)
+            with patch("artifacts.run", return_value="arm64"):
+                with self.assertRaises(RuntimeError):
+                    artifacts.validate_architectures(app)
 
     @patch("artifacts.sparkle_tool", return_value="fixture-sign-update")
     @patch("artifacts.run")

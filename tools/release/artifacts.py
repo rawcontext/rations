@@ -6,6 +6,7 @@ import tempfile
 import xml.etree.ElementTree as ET
 
 from common import FEED_URL, ROOT, SPARKLE_ACCOUNT, digest, plist, run, sparkle_tool
+from signing import code_objects
 
 
 def validate_bundle(info):
@@ -31,8 +32,7 @@ def build():
     run("ditto", "-x", "-k", archive, work)
     info = plist(app / "Contents" / "Info.plist")
     validate_bundle(info)
-    executable = app / "Contents" / "MacOS" / info["CFBundleExecutable"]
-    run("lipo", executable, "-verify_arch", "arm64", "x86_64")
+    validate_architectures(app)
     run("plutil", "-lint", app / "Contents" / "Resources" / "PrivacyInfo.xcprivacy")
     for notice in ["RationsLicense.txt", "SparkleLicense.txt", "CodexBarAttribution.txt", "IconAttribution.txt"]:
         if not (app / "Contents" / "Resources" / notice).is_file():
@@ -40,6 +40,14 @@ def build():
     if (app / "Contents" / "embedded.provisionprofile").exists():
         raise RuntimeError("A development provisioning profile leaked into the distribution app.")
     return app
+
+
+def validate_architectures(app):
+    for path in code_objects(app):
+        if path.is_file():
+            architectures = set(run("lipo", "-archs", path, capture=True).split())
+            if not {"arm64", "x86_64"}.issubset(architectures):
+                raise RuntimeError(f"The release contains code without both supported architectures: {path}")
 
 
 def disk_image(app, output):
