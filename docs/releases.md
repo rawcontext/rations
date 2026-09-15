@@ -8,24 +8,24 @@ Context LLC's team `U65DCW9TAK`.
 ## Release commands
 
 ```sh
-npm run release:prepare
-npm run release
-npm run release:publish
+make release-prepare
+make release
+make release-publish
 ```
 
-`release:prepare` builds the production bundle through Bazel for Apple Silicon
+`make release-prepare` archives the production app through Xcode for Apple Silicon
 and Intel, stages it at `dist/release-work/Rations.app`, and verifies identity,
 architectures, update configuration, and bundled notices. This local preparation
 step does not produce a publicly distributable installer by itself.
 
-`release` requires committed source. It runs `npm run check`, rebuilds the
+`make release` requires committed source. It runs `make check`, rebuilds the
 production app, verifies credentials, signs nested code from the inside out,
 notarizes and staples the app, creates a DMG with an Applications shortcut,
 signs/notarizes/staples the DMG, and generates the signed Sparkle appcast.
 Results go in `dist/releases/<version>/`. Existing release directories are never
 silently replaced. Apple submission receipts are retained for troubleshooting.
 
-`release:publish` checks the source commit, artifact checksums, notarization ticket,
+`make release-publish` checks the source commit, artifact checksums, notarization ticket,
 and update signatures. It pushes the source/tag, creates the GitHub release,
 downloads the published DMGs, and compares them with the verified installer.
 Run it only after reviewing the release notes and installer. Publishing is an
@@ -61,9 +61,10 @@ different valid Developer ID Application certificate from the same team.
 
 ## Sparkle
 
-Sparkle 2.10.0 is pinned by SHA-256 in `MODULE.bazel` and imported as a dynamic
-framework through Bazel. Its updater, helper tools, and framework are signed
-with the application's Developer ID while retaining required helper entitlements.
+Sparkle 2.10.0 is an exact Swift Package Manager dependency in `Rations.xcodeproj`.
+Its package manifest verifies the binary artifact checksum. Release tools come
+from `.build/SourcePackages/artifacts/sparkle/Sparkle/bin/`. Its updater, helper
+tools, and framework are signed with the application's Developer ID while retaining required helper entitlements.
 
 The update-signing key uses Keychain account `com.rawcontext.rations`. The public
 key is embedded in `Resources/Distribution.plist`; release preflight checks that
@@ -80,7 +81,7 @@ is a later distribution option; there is no cask to install yet.
 
 ## Validation and notices
 
-`npm run check` includes synthetic release validation tests in `//tools/release:test`.
+`make check` includes synthetic release validation tests through `make test-release`.
 They reject development bundle identities, unsuitable signing identities,
 mismatched update URLs/sizes, and verify nested signing order without touching
 real credentials. The release command additionally validates actual signatures,

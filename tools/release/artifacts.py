@@ -1,4 +1,4 @@
-"""Build and package the Bazel-owned production app."""
+"""Build and package the native Xcode production app."""
 
 from pathlib import Path
 import shutil
@@ -21,15 +21,14 @@ def validate_bundle(info):
 
 def build():
     print("Building the production app for Apple Silicon and Intel…", flush=True)
-    target = ["--config=distribution", "//apps/macos:app"]
-    run("bazel", "build", *target)
-    archive = ROOT / run("bazel", "cquery", *target, "--output=files", capture=True)
+    run("make", "archive")
+    archived_app = ROOT / ".build" / "Rations.xcarchive" / "Products" / "Applications" / "Rations.app"
     work = ROOT / "dist" / "release-work"
     work.mkdir(parents=True, exist_ok=True)
     app = work / "Rations.app"
     if app.exists():
         shutil.rmtree(app)
-    run("ditto", "-x", "-k", archive, work)
+    run("ditto", archived_app, app)
     info = plist(app / "Contents" / "Info.plist")
     validate_bundle(info)
     validate_architectures(app)

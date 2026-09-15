@@ -1,0 +1,525 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0D1D59F4DFE5A60B466229EA /* RationsCore in Frameworks */ = {isa = PBXBuildFile; productRef = B21A42CCDD41ED2F7945EF8D /* RationsCore */; };
+		0F1AA1CAF628B1832E0D5DB9 /* AppInstanceLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EEB45EE9C852C94AC88C54 /* AppInstanceLockTests.swift */; };
+		498EA0F430EDEAD6A5AB3FD2 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 234A15C76436E29BE28EBD86 /* Sparkle */; };
+		5206F83322B2E1D11B11D4DD /* AppInstanceLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F26BD9F0F878EBC34CEDFCD /* AppInstanceLock.swift */; };
+		8B9832AAD39CBBB2F4EEC56F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 88BF581BA13D7A319898AF93 /* PrivacyInfo.xcprivacy */; };
+		9B72011F4AB6E221E147130D /* RationsProviders in Frameworks */ = {isa = PBXBuildFile; productRef = 556BFDFF95EB04EE8583B81E /* RationsProviders */; };
+		A2E2BDC76C62C3514083CB6E /* IconAttribution.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3DF6470B6FB95829FFC78367 /* IconAttribution.txt */; };
+		B01CEA2B16F12F13FD9F8515 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 046AA6CA4CC2B3354A06BCF7 /* Cocoa.framework */; };
+		B93AF19666E6A8E497F2228C /* SparkleLicense.txt in Resources */ = {isa = PBXBuildFile; fileRef = 271D4FD032DC9A9252A72F2C /* SparkleLicense.txt */; };
+		BFD82CF4DA50ABB3EBA60927 /* CodexBarAttribution.txt in Resources */ = {isa = PBXBuildFile; fileRef = CA9AAE6CF20571BDC2EBB9A4 /* CodexBarAttribution.txt */; };
+		E43EB5BD8CF25A9F16D69C97 /* RationsLicense.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3EAA425151DECD4DB736CA2E /* RationsLicense.txt */; };
+		E6CDC74EA69138FBAB9F0581 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 046AA6CA4CC2B3354A06BCF7 /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		046AA6CA4CC2B3354A06BCF7 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		271D4FD032DC9A9252A72F2C /* SparkleLicense.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = SparkleLicense.txt; sourceTree = DERIVED_FILE_DIR; };
+		2C53D680A506290A1D0C0DAC /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3DF6470B6FB95829FFC78367 /* IconAttribution.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = IconAttribution.txt; sourceTree = "<group>"; };
+		3EAA425151DECD4DB736CA2E /* RationsLicense.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = RationsLicense.txt; sourceTree = DERIVED_FILE_DIR; };
+		4DBD59179A0C105353B34B48 /* RationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RationsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6386DBE281A900D1115A49C8 /* Rations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rations.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F26BD9F0F878EBC34CEDFCD /* AppInstanceLock.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppInstanceLock.swift; path = apps/macos/Sources/Services/AppInstanceLock.swift; sourceTree = "<group>"; };
+		88BF581BA13D7A319898AF93 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		A55A0C54AEE4FB658CA1F9AF /* App.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = App.xcconfig; sourceTree = "<group>"; };
+		AC621DD5B38BE63F3E5D82E5 /* Development.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = Development.entitlements; sourceTree = "<group>"; };
+		BE6AC78192CF02FE54E63A41 /* Release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		CA9AAE6CF20571BDC2EBB9A4 /* CodexBarAttribution.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = CodexBarAttribution.txt; sourceTree = "<group>"; };
+		D669AA23797CCCAFF85BD2C3 /* Debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		D6821765A87A210229AFF53A /* Distribution.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Distribution.plist; sourceTree = "<group>"; };
+		F2EEB45EE9C852C94AC88C54 /* AppInstanceLockTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppInstanceLockTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A94BFF71FAD8DBFA6009BF32 /* apps/macos/Sources */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
+			path = apps/macos/Sources;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C055B26F68759CE180E9521A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6CDC74EA69138FBAB9F0581 /* Cocoa.framework in Frameworks */,
+				0D1D59F4DFE5A60B466229EA /* RationsCore in Frameworks */,
+				9B72011F4AB6E221E147130D /* RationsProviders in Frameworks */,
+				498EA0F430EDEAD6A5AB3FD2 /* Sparkle in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C4DF453A38DF6E0EA40B069E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B01CEA2B16F12F13FD9F8515 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		28CC456554D84B893ABF7EBA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6386DBE281A900D1115A49C8 /* Rations.app */,
+				4DBD59179A0C105353B34B48 /* RationsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		47204E1877935FB655381349 = {
+			isa = PBXGroup;
+			children = (
+				28CC456554D84B893ABF7EBA /* Products */,
+				C6D1C9978109EBC538D7B789 /* Frameworks */,
+				48D03F135CC4FA8DB65B79AF /* Configuration */,
+				A94BFF71FAD8DBFA6009BF32 /* apps/macos/Sources */,
+				F0CA97CDF157E5D03C44C836 /* Tests */,
+				6F26BD9F0F878EBC34CEDFCD /* AppInstanceLock.swift */,
+				A330309F042BE80DB465A42E /* Resources */,
+			);
+			sourceTree = "<group>";
+		};
+		48D03F135CC4FA8DB65B79AF /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				A55A0C54AEE4FB658CA1F9AF /* App.xcconfig */,
+				BE6AC78192CF02FE54E63A41 /* Release.xcconfig */,
+				D669AA23797CCCAFF85BD2C3 /* Debug.xcconfig */,
+			);
+			name = Configuration;
+			path = apps/macos/Configuration;
+			sourceTree = "<group>";
+		};
+		6ACF9801928CF74F45919325 /* OS X */ = {
+			isa = PBXGroup;
+			children = (
+				046AA6CA4CC2B3354A06BCF7 /* Cocoa.framework */,
+			);
+			name = "OS X";
+			sourceTree = "<group>";
+		};
+		A330309F042BE80DB465A42E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CA9AAE6CF20571BDC2EBB9A4 /* CodexBarAttribution.txt */,
+				3DF6470B6FB95829FFC78367 /* IconAttribution.txt */,
+				88BF581BA13D7A319898AF93 /* PrivacyInfo.xcprivacy */,
+				2C53D680A506290A1D0C0DAC /* Info.plist */,
+				D6821765A87A210229AFF53A /* Distribution.plist */,
+				AC621DD5B38BE63F3E5D82E5 /* Development.entitlements */,
+				3EAA425151DECD4DB736CA2E /* RationsLicense.txt */,
+				271D4FD032DC9A9252A72F2C /* SparkleLicense.txt */,
+			);
+			name = Resources;
+			path = apps/macos/Resources;
+			sourceTree = "<group>";
+		};
+		C6D1C9978109EBC538D7B789 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6ACF9801928CF74F45919325 /* OS X */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F0CA97CDF157E5D03C44C836 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				F2EEB45EE9C852C94AC88C54 /* AppInstanceLockTests.swift */,
+			);
+			name = Tests;
+			path = apps/macos/Tests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2172268A2F6075735E5F814E /* RationsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01274C82220A837C05E52274 /* Build configuration list for PBXNativeTarget "RationsTests" */;
+			buildPhases = (
+				DD98D0FC2AEA4D21F550441B /* Sources */,
+				C4DF453A38DF6E0EA40B069E /* Frameworks */,
+				281AA7BDDF11713DB9AC0F8D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RationsTests;
+			productName = RationsTests;
+			productReference = 4DBD59179A0C105353B34B48 /* RationsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		475476FF12B913B83FCECD4D /* Rations */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F7262B38C700D0E358571278 /* Build configuration list for PBXNativeTarget "Rations" */;
+			buildPhases = (
+				2ECD0FC2EBB161CED503196F /* Prepare Info.plist and license notices */,
+				3E42B890AAF71A9835E7B049 /* Sources */,
+				C055B26F68759CE180E9521A /* Frameworks */,
+				9944B72952665B87CDC9FEEB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A94BFF71FAD8DBFA6009BF32 /* apps/macos/Sources */,
+			);
+			name = Rations;
+			packageProductDependencies = (
+				B21A42CCDD41ED2F7945EF8D /* RationsCore */,
+				556BFDFF95EB04EE8583B81E /* RationsProviders */,
+				234A15C76436E29BE28EBD86 /* Sparkle */,
+			);
+			productName = Rations;
+			productReference = 6386DBE281A900D1115A49C8 /* Rations.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B54DE9B899A17EEE21888E7D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 2700;
+			};
+			buildConfigurationList = EC8D8297C2099E0F93155443 /* Build configuration list for PBXProject "Rations" */;
+			compatibilityVersion = "Xcode 16.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 47204E1877935FB655381349;
+			minimizedProjectReferenceProxies = 0;
+			packageReferences = (
+				552E1550EF09D4880DC715D8 /* XCLocalSwiftPackageReference "packages" */,
+				29F8C66CAD769A9685E9E4B5 /* XCRemoteSwiftPackageReference "Sparkle" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 28CC456554D84B893ABF7EBA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				475476FF12B913B83FCECD4D /* Rations */,
+				2172268A2F6075735E5F814E /* RationsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		281AA7BDDF11713DB9AC0F8D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9944B72952665B87CDC9FEEB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFD82CF4DA50ABB3EBA60927 /* CodexBarAttribution.txt in Resources */,
+				A2E2BDC76C62C3514083CB6E /* IconAttribution.txt in Resources */,
+				8B9832AAD39CBBB2F4EEC56F /* PrivacyInfo.xcprivacy in Resources */,
+				E43EB5BD8CF25A9F16D69C97 /* RationsLicense.txt in Resources */,
+				B93AF19666E6A8E497F2228C /* SparkleLicense.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2ECD0FC2EBB161CED503196F /* Prepare Info.plist and license notices */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/scripts/prepare_resources.sh",
+				"$(SRCROOT)/apps/macos/Resources/Info.plist",
+				"$(SRCROOT)/apps/macos/Resources/Distribution.plist",
+				"$(SRCROOT)/LICENSE",
+				"$(SRCROOT)/third_party/sparkle/LICENSE",
+			);
+			name = "Prepare Info.plist and license notices";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Rations-Info.plist",
+				"$(DERIVED_FILE_DIR)/RationsLicense.txt",
+				"$(DERIVED_FILE_DIR)/SparkleLicense.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "\"$SRCROOT/scripts/prepare_resources.sh\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3E42B890AAF71A9835E7B049 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DD98D0FC2AEA4D21F550441B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F1AA1CAF628B1832E0D5DB9 /* AppInstanceLockTests.swift in Sources */,
+				5206F83322B2E1D11B11D4DD /* AppInstanceLock.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		67E5FE86F2DCC4F7159A325B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		76533EA3B2CEAEECA99ABC13 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		7A8CFBE260AC80E90B6B532C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U65DCW9TAK;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rawcontext.rations.tests;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		9A3CA4D9AD3077FA4088B5EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE6AC78192CF02FE54E63A41 /* Release.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		AAB269C6B55C69FC5EABAB9B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D669AA23797CCCAFF85BD2C3 /* Debug.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		FB4931BADA69862C4428D242 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U65DCW9TAK;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rawcontext.rations.tests;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		01274C82220A837C05E52274 /* Build configuration list for PBXNativeTarget "RationsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A8CFBE260AC80E90B6B532C /* Release */,
+				FB4931BADA69862C4428D242 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC8D8297C2099E0F93155443 /* Build configuration list for PBXProject "Rations" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				67E5FE86F2DCC4F7159A325B /* Debug */,
+				76533EA3B2CEAEECA99ABC13 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F7262B38C700D0E358571278 /* Build configuration list for PBXNativeTarget "Rations" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9A3CA4D9AD3077FA4088B5EA /* Release */,
+				AAB269C6B55C69FC5EABAB9B /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		552E1550EF09D4880DC715D8 /* XCLocalSwiftPackageReference "packages" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = packages;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		29F8C66CAD769A9685E9E4B5 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = exactVersion;
+				version = 2.10.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		234A15C76436E29BE28EBD86 /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29F8C66CAD769A9685E9E4B5 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+		556BFDFF95EB04EE8583B81E /* RationsProviders */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RationsProviders;
+		};
+		B21A42CCDD41ED2F7945EF8D /* RationsCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RationsCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = B54DE9B899A17EEE21888E7D /* Project object */;
+}

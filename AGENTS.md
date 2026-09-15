@@ -47,10 +47,10 @@
 
 - The authoritative UI is `docs/design/ui-screens/project/Rations v6.dc.html`; read `docs/design/README.md` for its scope and precedence over older product notes.
 - Bundle IDs are `com.rawcontext.rations` (production) and `com.rawcontext.rations.dev` (development). Use Raw Context LLC signing team `U65DCW9TAK`.
-- Rations is a native Swift macOS menu bar app. Bazel owns builds and dependencies; generate the Xcode project with `npm run xcode` rather than maintaining a parallel SwiftPM or Xcode build definition.
-- Keep the app in `apps/macos`, UI-independent models in `packages/core`, and vendor adapters in `packages/providers`. Declare direct dependencies and deliberate Bazel visibility.
-- Use Xcode 27 beta through the project-local `tools/bazel` Bazelisk wrapper. `DEVELOPER_DIR` can select a differently located beta installation. The application deployment target remains macOS 14.0.
-- Use `npm run check` for repository lint/build/tests and `npm run dev` for the native build/run loop. The Run button uses `scripts/build_and_run.sh`.
+- Rations is a native Swift macOS menu bar app. The checked-in `Rations.xcodeproj` owns the app build; Swift Package Manager owns shared Swift modules and external dependencies. Open the project directly with `make xcode`.
+- Keep the app in `apps/macos`, UI-independent models in `packages/core`, and vendor adapters in `packages/providers`. Declare direct dependencies in the Xcode target and Swift package manifests.
+- Use Xcode 27 beta through the Makefile. `DEVELOPER_DIR` can select a differently located beta installation. The application deployment target remains macOS 14.0.
+- Use the Makefile for all commands: `make check` for repository lint/build/tests and `make dev` for the native build/run loop. The Run button uses `scripts/build_and_run.sh`, which invokes `make build`.
 - The Eudoxus 3-derived lint policy and thresholds are documented in `docs/linting.md`; retain them when adding source or tooling.
 
 ## Git workflow

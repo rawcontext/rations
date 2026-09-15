@@ -36,8 +36,7 @@ def digest(path):
 
 
 def sparkle_tool(name):
-    output_base = Path(run("bazel", "info", "output_base", capture=True))
-    candidates = list((output_base / "external").glob("*sparkle*/bin/" + name))
-    if len(candidates) != 1:
-        raise RuntimeError("Build the distribution target to resolve the pinned Sparkle tools.")
-    return candidates[0]
+    path = ROOT / ".build" / "SourcePackages" / "artifacts" / "sparkle" / "Sparkle" / "bin" / name
+    if not path.is_file():
+        raise RuntimeError("Run make release-prepare to resolve the pinned Sparkle tools.")
+    return path

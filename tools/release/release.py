@@ -19,7 +19,7 @@ def clean_commit():
 
 def release():
     commit = clean_commit()
-    run("npm", "run", "check")
+    run("make", "check")
     app = artifacts.build()
     signing.preflight(app)
     info = plist(app / "Contents" / "Info.plist")

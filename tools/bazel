@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-
-# Bazelisk invokes this wrapper with the resolved Bazel binary in BAZEL_REAL.
-export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode-beta.app/Contents/Developer}"
-exec "${BAZEL_REAL:?Run Bazel through Bazelisk}" "$@"

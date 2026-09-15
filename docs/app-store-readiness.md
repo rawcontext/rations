@@ -17,7 +17,7 @@ before a sandboxed release can preserve the existing features.
 | App Sandbox | `Resources/Development.entitlements` contains application/team identifiers only. | Implement and test sandbox-compatible provider connections, then enable the sandbox and required scoped capabilities. Simply adding an entitlement would break existing integrations. |
 | External dependencies | `VendorExecutable`, `CredentialDiscovery`, and `CursorAppAuth` use separately installed CLIs, vendor Keychain entries, home-directory credentials, and Cursor's database. | Replace these dependencies with permitted, self-contained sign-in and quota sources. Document which providers can support this before committing to feature parity. |
 | Service authorization | `ProviderFetcher` calls private vendor usage endpoints with copied native credentials. | Establish permission for each integration and its authentication method. No provider authorization evidence is present in this repository. |
-| Distribution signing | Bazel's signed Release configuration still selects a development provisioning profile. | Add Mac App Store distribution signing, packaging, upload validation, and a tested installation from TestFlight. A production bundle identifier alone is insufficient. |
+| Distribution signing | Xcode's Release configuration uses development signing; direct releases use Developer ID. | Add Mac App Store distribution signing, packaging, upload validation, and a tested installation from TestFlight. A production bundle identifier alone is insufficient. |
 | Privacy policy | No published Rations policy or in-app policy link exists. | Publish a policy describing storage, vendor requests, retention/removal, and contact details; link it from Settings and App Store Connect. |
 | Store assets | There is no application icon asset catalog. Only the menu-bar glyph is drawn in code. | Supply the release app icon, screenshots, support URL, store description, review instructions/access, and required App Store Connect answers. The About GitHub link intentionally points to the future `rawcontext/rations` repository. |
 
@@ -67,7 +67,7 @@ Account settings, agreements, and existing store records were not inspected in t
 
 ## Required release validation
 
-For this change, `npm run check` passed all lint/build checks and all four test
+For this change, `make check` passed all lint/build checks and all four test
 targets, including 111 app/core/provider test cases. The signed development app
 rebuilt and launched successfully; its code signature and bundled privacy manifest
 validated. Live diagnostics showed Claude and Grok recovering without browser
@@ -83,7 +83,7 @@ Xcode 27 beta, so it does not establish runtime compatibility on macOS 14.
 Use an Xcode/SDK build accepted for customer distribution at submission time.
 Keep the repository's development toolchain unchanged until the release toolchain
 is selected and tested. Validate the actual upload through Apple's distribution
-workflow; do not infer acceptance from a local Bazel build.
+workflow; do not infer acceptance from a local Xcode build.
 [Apple's upload requirements](https://developer.apple.com/help/app-store-connect/manage-builds/upload-builds/)
 
 Developer ID signing and notarization would support a separate direct-distribution

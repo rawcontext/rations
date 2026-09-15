@@ -1,3 +1,0 @@
-"""Keep generated projects and dependencies out of package discovery."""
-
-ignore_directories(["**/node_modules", "**/.build", "**/*.xcodeproj", "dist", "docs"])

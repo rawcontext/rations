@@ -163,7 +163,7 @@ the optional Grok Bot allowance are not included in this adapter.
 
 ## Validation and diagnostics
 
-`npm run check` includes synthetic parser cases, account identity checks, saved
+`make check` includes synthetic parser cases, account identity checks, saved
 record round trips, terminal redraws, malformed/missing quota handling, mocked HTTP
 requests and errors, reset dates, refresh cooldowns, and the login lifecycle.
 Login tests run isolated fake vendor processes and cover successful completion,

@@ -37,8 +37,9 @@ struct CodexUsageParserTests {
         #expect(throws: ProviderFailure.self) { try parse(data) }
     }
 
-    @Test(arguments: [true as Any, 101, -1, "25", NSNull()])
-    func malformedPercentStaysUnknown(_ value: Any) throws {
+    @Test(arguments: ["true", "101", "-1", "\"25\"", "null"])
+    func malformedPercentStaysUnknown(_ json: String) throws {
+        let value = try JSONSerialization.jsonObject(with: Data(json.utf8), options: .fragmentsAllowed)
         let data = try ProviderTestData.json([
             "account_id": "test-account", "rate_limit": ["primary_window": ["used_percent": value]]
         ])

@@ -3,4 +3,4 @@ min_version: 2.1.12
 pre-commit:
   jobs:
     - name: repository-lint
-      run: ./node_modules/.bin/pnpm run lint
+      run: make lint

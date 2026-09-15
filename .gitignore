@@ -1,14 +1,12 @@
 .DS_Store
 node_modules/
 dist/
-bazel-*
 .build/
 .swiftlint_cache/
 __pycache__/
 *.py[cod]
 DerivedData/
-*.xcodeproj/
-*.xcworkspace/
+.swiftpm/
 *.xcuserstate
 xcuserdata/
 report/

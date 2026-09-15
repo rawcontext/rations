@@ -12,11 +12,8 @@
     ".git/hooks/prepare-commit-msg",
     "docs/design/ui-screens/project/**",
     "**/node_modules/**",
-    "**/bazel-*/**",
     "**/.build/**",
     "**/*.xcodeproj/**",
-    "**/migrations/meta/**",
-    "pnpm-lock.yaml",
-    "MODULE.bazel.lock"
+    "**/migrations/meta/**"
   ]
 }

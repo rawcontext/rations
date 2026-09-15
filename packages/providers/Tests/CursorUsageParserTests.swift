@@ -38,8 +38,9 @@ struct CursorUsageParserTests {
         #expect(try parse(data).menuRow.tightestWindow?.usedPercent == 25)
     }
 
-    @Test(arguments: [NSNull(), true, "20", -1] as [Any])
-    func invalidOrMissingAllowanceStaysUnknown(_ value: Any) throws {
+    @Test(arguments: ["null", "true", "\"20\"", "-1"])
+    func invalidOrMissingAllowanceStaysUnknown(_ json: String) throws {
+        let value = try JSONSerialization.jsonObject(with: Data(json.utf8), options: .fragmentsAllowed)
         let reading = try parse(CursorTestData.summary(individual: ["plan": ["totalPercentUsed": value]]))
         #expect(reading.menuRow.windows.first?.usedPercent == nil)
         #expect(reading.notice?.contains("did not report") == true)
