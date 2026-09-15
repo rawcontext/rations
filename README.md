@@ -7,6 +7,8 @@ Antigravity, Grok, and Cursor allowances while the frontier-model overlords deci
 when you may think again. See what’s left, when it resets, and how long until your
 next attempt to escape the permanent underclass.
 
+<img width="688" height="521" alt="Screenshot 2026-09-15 at 11 31 02" src="https://github.com/user-attachments/assets/198c3714-1218-4250-9763-ef5e803a4e26" />
+
 ## Installation
 
 1. [Download Rations for macOS](https://github.com/rawcontext/rations/releases/latest/download/Rations.dmg).
