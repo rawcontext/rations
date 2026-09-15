@@ -2,10 +2,13 @@ import AppKit
 
 @MainActor
 enum ApplicationMenu {
-    static func make() -> NSMenu {
+    static func make(showSettings: @escaping @MainActor () -> Void) -> NSMenu {
         let main = NSMenu()
         let app = NSMenuItem()
         app.submenu = NSMenu(title: "Rations")
+        app.submenu?.addItem(MenuCommand("About Rations", handler: AboutRations.show))
+        app.submenu?.addItem(MenuCommand("Settings…", key: ",", handler: showSettings))
+        app.submenu?.addItem(.separator())
         app.submenu?.addItem(MenuCommand("Quit Rations", key: "q") { NSApp.terminate(nil) })
         main.addItem(app)
         let edit = NSMenuItem()

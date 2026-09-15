@@ -4,7 +4,7 @@ public enum ResetText {
     public static func countdown(to reset: Date?, now: Date) -> String {
         guard let reset else { return "Unknown" }
         let seconds = reset.timeIntervalSince(now)
-        guard seconds > 0 else { return "Reset due" }
+        guard seconds > 0 else { return "" }
         if seconds < 60 { return "<1m" }
         let minutes = Int(seconds / 60)
         if minutes < 60 { return "\(minutes)m" }

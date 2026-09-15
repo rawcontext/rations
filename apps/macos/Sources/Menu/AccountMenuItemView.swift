@@ -31,15 +31,20 @@ final class AccountMenuItemView: NSView {
         content.row.windows.map { window in
             let percent = content.preferences.usageMode.percent(for: window).map { "\(Int($0.rounded()))%" }
                 ?? "unknown"
-            return window.label + ": " + percent + " " + content.preferences.usageMode.title.lowercased()
-                + ", " + ResetText.countdown(to: window.resetsAt, now: content.store.displayTime)
+            let usage = window.label + ": " + percent + " " + content.preferences.usageMode.title.lowercased()
+            let countdown = ResetText.countdown(to: window.resetsAt, now: content.store.displayTime)
+            return countdown.isEmpty ? usage : usage + ", " + countdown
         }.joined(separator: "; ")
     }
 
     @available(*, unavailable)
     required init?(coder: NSCoder) { fatalError("Account menu items are created programmatically") }
 
-    override func hitTest(_ point: NSPoint) -> NSView? { nil }
+    override func hitTest(_ point: NSPoint) -> NSView? { frame.contains(point) ? self : nil }
+
+    // Account rows open submenus through menu tracking; clicks have no action.
+    override func mouseDown(with event: NSEvent) {}
+    override func mouseUp(with event: NSEvent) {}
 
     func setHighlighted(_ highlighted: Bool) {
         hosting.rootView.highlighted = highlighted

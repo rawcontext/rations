@@ -11,12 +11,12 @@ final class SettingsWindowController: NSWindowController, NSToolbarDelegate {
         self.store = store
         let content = RationsSettings(store: store, loginItem: LoginItemManager())
         let window = NSWindow(contentViewController: NSHostingController(rootView: content))
-        window.styleMask = [.titled, .closable, .miniaturizable]
+        window.styleMask = [.titled, .closable]
         window.setContentSize(NSSize(width: 560, height: 450))
         window.isReleasedWhenClosed = false
         super.init(window: window)
         settingsToolbar.delegate = self
-        settingsToolbar.displayMode = .iconAndLabel
+        settingsToolbar.displayMode = .iconOnly
         settingsToolbar.allowsUserCustomization = false
         window.toolbar = settingsToolbar
         window.toolbarStyle = .preference
@@ -41,10 +41,6 @@ final class SettingsWindowController: NSWindowController, NSToolbarDelegate {
         toolbarAllowedItemIdentifiers(toolbar) + [.flexibleSpace]
     }
 
-    func toolbarSelectableItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        SettingsTab.allCases.map { NSToolbarItem.Identifier($0.rawValue) }
-    }
-
     func toolbar(
         _ toolbar: NSToolbar, itemForItemIdentifier identifier: NSToolbarItem.Identifier,
         willBeInsertedIntoToolbar flag: Bool
@@ -52,20 +48,14 @@ final class SettingsWindowController: NSWindowController, NSToolbarDelegate {
         guard let tab = SettingsTab(rawValue: identifier.rawValue) else { return nil }
         let item = NSToolbarItem(itemIdentifier: identifier)
         item.label = tab.title
-        item.image = NSImage(systemSymbolName: tab.symbol, accessibilityDescription: tab.title)
-        item.target = self
-        item.action = #selector(selectTab)
+        let view = NSHostingView(rootView: SettingsTabControl(tab: tab, store: store))
+        view.frame = NSRect(x: 0, y: 0, width: 78, height: 58)
+        item.view = view
         return item
-    }
-
-    @objc private func selectTab(_ sender: NSToolbarItem) {
-        guard let tab = SettingsTab(rawValue: sender.itemIdentifier.rawValue) else { return }
-        store.selectedTab = tab
     }
 
     private func observeSelection() {
         withObservationTracking {
-            settingsToolbar.selectedItemIdentifier = NSToolbarItem.Identifier(store.selectedTab.rawValue)
             window?.title = store.selectedTab.title
         } onChange: { [weak self] in
             Task { @MainActor in self?.observeSelection() }

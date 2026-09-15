@@ -19,8 +19,9 @@ struct WindowDetailView: View {
             if preferences.resetMode != .relative {
                 Text(ResetText.absolute(window.resetsAt)).font(.system(size: 11)).foregroundStyle(.secondary)
             }
-            if preferences.resetMode != .absolute {
-                Text(ResetText.countdown(to: window.resetsAt, now: now))
+            let countdown = ResetText.countdown(to: window.resetsAt, now: now)
+            if preferences.resetMode != .absolute, !countdown.isEmpty {
+                Text(countdown)
                     .font(.system(size: 11)).foregroundStyle(.secondary)
             }
         }

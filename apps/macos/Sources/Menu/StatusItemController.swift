@@ -41,6 +41,7 @@ final class StatusItemController: NSObject, NSMenuDelegate {
         menu.addItem(refresh)
         menu.addItem(MenuCommand("Settings…", key: ",", handler: showSettings))
         menu.addItem(.separator())
+        menu.addItem(MenuCommand("About Rations", handler: AboutRations.show))
         menu.addItem(MenuCommand("Quit Rations", key: "q") { NSApp.terminate(nil) })
     }
 

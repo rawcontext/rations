@@ -3,7 +3,7 @@ import RationsCore
 import Testing
 
 struct ResetTextTests {
-    @Test(arguments: [(-60.0, "Reset due"), (0, "Reset due"), (30, "<1m"), (60, "1m"),
+    @Test(arguments: [(-60.0, ""), (0, ""), (30, "<1m"), (60, "1m"),
                       (3600, "1h 0m"), (8040, "2h 14m"), (86400, "1d 0h"), (223200, "2d 14h")])
     func handlesCountdownBoundaries(seconds: Double, expected: String) {
         let now = Date(timeIntervalSince1970: 1_800_000_000)
