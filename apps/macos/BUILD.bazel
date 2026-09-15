@@ -66,6 +66,7 @@ macos_application(
     resources = [
         "Resources/CodexBarAttribution.txt",
         "Resources/IconAttribution.txt",
+        "Resources/PrivacyInfo.xcprivacy",
     ],
     visibility = ["//visibility:public"],
     deps = [":sources"],
