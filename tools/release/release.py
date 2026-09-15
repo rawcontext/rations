@@ -54,7 +54,7 @@ def publish():
     if manifest["commit"] != commit or manifest["dmgSHA256"] != digest(image):
         raise RuntimeError("Release source or artifact changed after notarization.")
     if digest(output / "Rations.dmg") != manifest["dmgSHA256"]:
-        raise RuntimeError("The website download differs from the verified installer.")
+        raise RuntimeError("The stable download differs from the verified installer.")
     run("xcrun", "stapler", "validate", image)
     artifacts.validate_appcast(output / "appcast.xml", image, version)
     remote = json.loads(run("gh", "repo", "view", REPOSITORY,
@@ -80,7 +80,7 @@ def verify_download(output, version, manifest):
     if digest(image) != manifest["dmgSHA256"]:
         raise RuntimeError("The uploaded installer differs from the verified release.")
     if digest(directory / "Rations.dmg") != manifest["dmgSHA256"]:
-        raise RuntimeError("The public website download does not match the verified release.")
+        raise RuntimeError("The stable public download does not match the verified release.")
     run("xcrun", "stapler", "validate", image)
     print(f"Published and verified: https://github.com/{REPOSITORY}/releases/tag/v{version}")
 

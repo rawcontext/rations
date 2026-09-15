@@ -67,7 +67,7 @@ def appcast(output, version):
     shutil.copyfile(notes, image.with_suffix(".md"))
     run(sparkle_tool("generate_appcast"), "--account", SPARKLE_ACCOUNT,
         "--download-url-prefix", f"https://github.com/rawcontext/rations/releases/download/v{version}/",
-        "--link", "https://rawcontext.com/projects/rations/", "--maximum-deltas", "0",
+        "--link", "https://github.com/rawcontext/rations", "--maximum-deltas", "0",
         "--embed-release-notes", output)
     validate_appcast(output / "appcast.xml", image, version)
     download = output / "Rations.dmg"

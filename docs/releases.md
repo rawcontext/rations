@@ -32,7 +32,7 @@ Run it only after reviewing the release notes and installer. Publishing is an
 explicit command; preparation and signing never publish automatically.
 
 The versioned DMG is used by Sparkle. The identical `Rations.dmg` asset provides
-a stable website link:
+a stable GitHub download link:
 
 `https://github.com/rawcontext/rations/releases/latest/download/Rations.dmg`
 
