@@ -6,7 +6,7 @@ public actor LiveAccountService {
     private let fetcher = ProviderFetcher()
     private var connections: [String: AccountConnection] = [:]
     private var active: [ProviderID: String] = [:]
-    private var errors: [ProviderID: String] = [:]
+    private var errors: [ProviderID: ConnectionProblem] = [:]
     private var schedule = RefreshSchedule()
     private var activity = ProviderActivity()
     private var revision: UInt64 = 0
@@ -63,7 +63,7 @@ public actor LiveAccountService {
         }
         await withTaskGroup(of: AccountFetchResult.self) { group in
             for account in accounts {
-                group.addTask { await AccountFetchResult.fetch(account, using: self.fetcher) }
+                group.addTask { await AccountFetchResult.fetch(account, request: self.fetcher.fetch) }
             }
             for await result in group {
                 guard let provider = connections[result.id]?.profile.provider,
@@ -89,7 +89,7 @@ public actor LiveAccountService {
         _ incoming: AccountConnection, name: String, alreadyConnected: Bool, isNative: Bool
     ) async throws -> ConnectionReceipt {
         let id = incoming.profile.id
-        let result = await AccountFetchResult.fetch(incoming, using: fetcher)
+        let result = await AccountFetchResult.fetch(incoming, request: fetcher.fetch)
         try Task.checkCancellation()
         if let failure = result.failure, case .notSignedIn = failure { throw failure }
         let account = ConnectionMerge.prepare(
@@ -132,7 +132,10 @@ public actor LiveAccountService {
         guard !restored else { return }
         let accounts = try vault.load(interactive: interactive).map { ($0.profile.id, $0) }
         connections = Dictionary(accounts, uniquingKeysWith: { _, latest in latest })
-        for id in connections.keys { connections[id]?.lastReading?.error = "Verifying the saved account…" }
+        for id in connections.keys {
+            connections[id]?.lastReading?.error = "Verifying the saved account…"
+            connections[id]?.lastReading?.errorKind = .verifying
+        }
         restored = true
     }
 
@@ -152,7 +155,7 @@ public actor LiveAccountService {
     private func acceptDiscovery(_ result: NativeDiscoveryResult) {
         guard var account = result.account else {
             active[result.provider] = nil
-            errors[result.provider] = result.error
+            errors[result.provider] = result.failure.map(ConnectionProblem.init)
             if case let .rateLimited(until) = result.failure { schedule.postpone(result.provider, until: until) }
             return
         }
@@ -164,11 +167,14 @@ public actor LiveAccountService {
         }
         connections[account.profile.id] = account
         errors[result.provider] = nil
-        do { try vault.save(account) } catch { errors[result.provider] = Self.message(error) }
+        do { try vault.save(account) } catch { errors[result.provider] = ConnectionProblem(error) }
     }
 
     private func accept(_ result: AccountFetchResult) {
         guard var account = connections[result.id] else { return }
+        account.credential = result.connection.credential
+        account.sourcePath = result.connection.sourcePath
+        account.usesClaudeCLI = result.connection.usesClaudeCLI
         if let reading = result.reading {
             let name = account.profile.name
             account.profile = reading.profile
@@ -178,11 +184,12 @@ public actor LiveAccountService {
         } else {
             var reading = account.lastReading ?? emptyReading(account.profile)
             reading.error = result.failure.map(Self.message) ?? "Usage could not be refreshed."
+            reading.errorKind = result.failure?.kind ?? .unavailable
             account.lastReading = reading
         }
         if case let .rateLimited(until) = result.failure { schedule.postpone(account.profile.provider, until: until) }
         connections[result.id] = account
-        do { try vault.save(account) } catch { errors[account.profile.provider] = Self.message(error) }
+        do { try vault.save(account) } catch { errors[account.profile.provider] = ConnectionProblem(error) }
     }
 
     private func snapshot() -> LiveAccountState {
@@ -198,7 +205,7 @@ public actor LiveAccountService {
     }
 
     private func failureState(_ error: Error) -> LiveAccountState {
-        for provider in ProviderID.allCases { errors[provider] = Self.message(error) }
+        for provider in ProviderID.allCases { errors[provider] = ConnectionProblem(error) }
         return snapshot()
     }
 

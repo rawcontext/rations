@@ -15,6 +15,9 @@ struct AccountSettingsRow: View {
                 nameEditor
                 Text(accountDescription)
                     .font(.caption).foregroundStyle(.secondary)
+                if let error = account.error {
+                    Text(error).font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+                }
             }
             Spacer()
             if !active {
@@ -22,8 +25,10 @@ struct AccountSettingsRow: View {
                     .foregroundStyle(.secondary).opacity(hovering ? 1 : 0)
                     .accessibilityLabel("Remove " + account.profile.name)
             }
-            if account.error != nil {
+            if account.issue?.requiresReconnect == true {
                 Button("Reconnect") { store.reconnect(account.id) }.controlSize(.small)
+            } else if account.issue == .unavailable {
+                Button("Refresh") { store.refresh(manual: true) }.controlSize(.small).disabled(store.isRefreshing)
             }
             Text(statusLabel)
                 .font(.system(size: 12, weight: .semibold))
@@ -33,12 +38,13 @@ struct AccountSettingsRow: View {
     }
 
     private var statusLabel: String {
-        if account.error != nil { return "Needs attention" }
+        if let issue = account.issue { return issue.label }
         return active ? "Signed in" : "Connected"
     }
 
     private var statusColor: Color {
-        if account.error != nil { return .orange }
+        if account.issue == .verifying { return .secondary }
+        if account.issue != nil { return .orange }
         return active ? .accentColor : .green
     }
 

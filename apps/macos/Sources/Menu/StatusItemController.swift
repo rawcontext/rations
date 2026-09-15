@@ -77,7 +77,7 @@ final class StatusItemController: NSObject, NSMenuDelegate {
             let title = store.isRefreshing ? "Connecting…" : "Not connected"
             let empty = NSMenuItem(title: title, action: nil, keyEquivalent: "")
             empty.isEnabled = false
-            empty.toolTip = store.providerErrors[provider]
+            empty.toolTip = store.providerErrors[provider]?.message
             menu.addItem(empty)
             menu.addItem(MenuCommand("Open Sign-In…") { [weak self] in self?.store.signIn(provider) })
         }

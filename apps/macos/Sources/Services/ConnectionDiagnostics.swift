@@ -12,6 +12,7 @@ enum ConnectionDiagnostics {
                 "provider": provider.rawValue,
                 "accounts": accounts.map { account in
                     ["plan": account.profile.plan ?? "unknown", "error": account.error ?? "",
+                     "errorKind": account.issue?.rawValue ?? "",
                      "notice": account.notice ?? "",
                      "fetchedAt": account.fetchedAt?.ISO8601Format() as Any? ?? NSNull(),
                      "resetCredits": account.resetCredits as Any? ?? NSNull(),
@@ -20,7 +21,8 @@ enum ConnectionDiagnostics {
                           "resetsAt": window.resetsAt?.ISO8601Format() as Any? ?? NSNull()]
                      }] as [String: Any]
                 },
-                "error": state.providerErrors[provider] ?? ""
+                "error": state.providerErrors[provider]?.message ?? "",
+                "errorKind": state.providerErrors[provider]?.kind.rawValue ?? ""
             ]
         }
         let options: JSONSerialization.WritingOptions = [.prettyPrinted, .sortedKeys]

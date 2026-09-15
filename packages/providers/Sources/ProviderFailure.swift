@@ -1,4 +1,5 @@
 import Foundation
+import RationsCore
 import Security
 
 public enum ProviderFailure: Error, LocalizedError, Sendable {
@@ -8,6 +9,15 @@ public enum ProviderFailure: Error, LocalizedError, Sendable {
     case rateLimited(Date)
     case timedOut
     case keychain(Int32)
+
+    var kind: ConnectionIssue {
+        switch self {
+        case .notSignedIn: .authentication
+        case .keychain where needsKeychainApproval: .approval
+        case .rateLimited: .cooldown
+        default: .unavailable
+        }
+    }
 
     var needsKeychainApproval: Bool {
         guard case let .keychain(status) = self else { return false }

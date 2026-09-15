@@ -2,6 +2,11 @@ import RationsCore
 import Testing
 
 struct DisplayPreferencesTests {
+    @Test
+    func refreshDefaultsToFifteenMinutes() {
+        #expect(DisplayPreferences().refreshMinutes == 15)
+    }
+
     @Test(arguments: [(0.0, UsageTone.comfortable), (75.0, .warning), (90.0, .critical), (100.0, .critical)])
     func pressureUsesRemainingQuota(used: Double, tone: UsageTone) {
         var preferences = DisplayPreferences()

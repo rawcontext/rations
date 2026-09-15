@@ -29,7 +29,7 @@ struct AccountsSettingsView: View {
         } header: {
             Text(provider.displayName)
         } footer: {
-            if let error = store.providerErrors[provider] { Text(error) }
+            if let error = store.providerErrors[provider] { Text("Native sign-in: " + error.message) }
         }
     }
 }

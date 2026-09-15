@@ -31,7 +31,7 @@ struct UsageHTTPClient: Sendable {
             throw ProviderFailure.rateLimited(deadline)
         }
         if response.statusCode == 401 {
-            throw ProviderFailure.notSignedIn("The saved sign-in expired. Reconnect this account.")
+            throw ProviderFailure.notSignedIn("The provider rejected this sign-in. Reconnect this account.")
         }
         guard (200..<300).contains(response.statusCode), data.count < 2_000_000 else {
             throw ProviderFailure.unavailable("Usage is unavailable from this provider (HTTP \(response.statusCode)).")

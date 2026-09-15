@@ -4,7 +4,6 @@ struct NativeDiscoveryResult: Sendable {
     let provider: ProviderID
     let account: AccountConnection?
     let failure: ProviderFailure?
-    var error: String? { failure?.errorDescription }
 
     static func capture(_ provider: ProviderID) async -> Self {
         do {

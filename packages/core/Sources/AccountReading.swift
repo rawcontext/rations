@@ -6,8 +6,10 @@ public struct AccountReading: Identifiable, Codable, Equatable, Sendable {
     public var fetchedAt: Date?
     public let resetCredits: Int?
     public var error: String?
+    public var errorKind: ConnectionIssue?
     public var notice: String?
     public var id: String { profile.id }
+    public var issue: ConnectionIssue? { error == nil ? nil : errorKind ?? .unavailable }
 
     public var menuRow: QuotaRow {
         if let main = rows.first(where: { $0.id == "main" }) { return main }

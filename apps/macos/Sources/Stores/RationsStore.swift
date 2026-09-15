@@ -15,7 +15,7 @@ final class RationsStore {
     private(set) var displayTime = Date.now
     private(set) var accounts: [AccountReading] = []
     private(set) var activeAccounts: [ProviderID: String] = [:]
-    private(set) var providerErrors: [ProviderID: String] = [:]
+    private(set) var providerErrors: [ProviderID: ConnectionProblem] = [:]
     private(set) var isRefreshing = false
     var selectedTab = SettingsTab.general
     var addingProvider: ProviderID?
@@ -55,7 +55,7 @@ final class RationsStore {
     func updateDisplayTime() { displayTime = .now }
 
     func refreshIfNeeded() {
-        if Date.now.timeIntervalSince(lastRefresh) >= 60 { refresh() }
+        if Date.now.timeIntervalSince(lastRefresh) >= Double(preferences.refreshMinutes) * 60 { refresh() }
     }
 
     func connect(_ provider: ProviderID, name: String, file: URL? = nil) async throws {

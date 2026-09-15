@@ -13,10 +13,10 @@ struct AntigravityCredentialSource {
         _ = try await VendorProcess.run(try VendorExecutable.locate(.antigravity), arguments: ["models"])
     }
 
-    func capture(interactive: Bool, now: Date = .now) async throws -> Data {
+    func capture(interactive: Bool, now: Date = .now, forceRenewal: Bool = false) async throws -> Data {
         try Task.checkCancellation()
         let existing = try existingCredential(interactive: interactive)
-        if let existing {
+        if let existing, !forceRenewal {
             let expiry = try ProviderJSON(existing).object("token")?.string("expiry").flatMap(ProviderJSON.date)
             guard let expiry, expiry <= now.addingTimeInterval(60) else { return existing }
         }

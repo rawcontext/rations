@@ -3,7 +3,7 @@ public struct DisplayPreferences: Codable, Equatable, Sendable {
     public var resetMode = ResetDisplayMode.both
     public var warningRemaining = 25
     public var criticalRemaining = 10
-    public var refreshMinutes = 5
+    public var refreshMinutes = 15
     public var hidePersonalInformation = true
     public var disabledProviders: Set<ProviderID> = []
 

@@ -110,8 +110,8 @@ accounts require a matching sign-in or an exported OAuth credential.
 ## Refresh, storage, and failure behavior
 
 - Polling follows the refresh setting. Opening the menu requests a refresh when
-  at least a minute has elapsed. Manual refresh immediately requests fresh usage
-  and reset-credit counts, even within that minute, while still respecting provider
+  the selected interval has elapsed (15 minutes for new preferences). Manual refresh immediately requests fresh usage
+  and reset-credit counts, even within that interval, while still respecting provider
   `Retry-After` cooldowns and avoiding overlapping refreshes.
 - Providers fetch independently; one failure does not discard successful readings.
   After sign-in discovery, results appear as each usage request completes. Older
@@ -203,6 +203,35 @@ are adapted from MIT-licensed
 [CodexBar at a5f2c581](https://github.com/steipete/CodexBar/tree/a5f2c581ce2e859dab983e28af50c03351db7dd3/Sources/CodexBarCore/Providers/Cursor).
 The copyright and license are bundled in `Resources/CodexBarAttribution.txt`.
 Rations retains unknown usage instead of adopting the reference's zero fallback.
+
+### Silent credential recovery
+
+Grok's native credential source checks its explicit expiry (or JWT expiry) and
+runs `grok models` to let the CLI renew it before fetching usage. Live inspection
+confirmed a six-hour access-token lifetime and successful browser-free renewal.
+Imports do not modify their source files.
+
+Claude ignores expired OAuth candidates and prefers newer readable credentials.
+A rejected candidate no longer prevents trying another source. When no usable
+OAuth credential remains, the existing identity-checked Claude Code `/usage`
+probe lets the CLI handle renewal. A profile cooldown does not trigger that fallback.
+
+After a usage authentication rejection, each account gets at most one recovery
+and retry. Recovery must return the same provider/account identity. Updated
+credentials are retained even if the subsequent usage request fails. A cooldown,
+network failure, or malformed response does not start credential recovery.
+
+Antigravity already renews expired native credentials through `agy models` and
+can force renewal after rejection when its credential is readable. A foreign
+Keychain access refusal remains an access problem: background work cannot grant
+macOS approval. Expired inactive accounts without a matching native sign-in still
+need reconnecting. Recovery does not rotate copied native refresh tokens directly.
+
+The approach was compared with [CodexBar's Claude recovery](https://github.com/steipete/CodexBar/blob/b202fc0c8ce7f6b39d6acc832f5cb15ede1e4dd2/docs/claude.md)
+and [Antigravity sources](https://github.com/steipete/CodexBar/blob/b202fc0c8ce7f6b39d6acc832f5cb15ede1e4dd2/docs/antigravity.md),
+plus [Grok's native authentication documentation](https://github.com/xai-org/grok-build/blob/37949780c144e37df692e3d669051a21fec24f20/crates/codegen/xai-grok-pager/docs/user-guide/02-authentication.md).
+Rations retains its stricter account identity matching and avoids attributing an
+identity-free `agy /usage` result to a named saved account.
 
 The sign-in lifecycle follows the pattern in CodexBar's
 [CLILoginRunner](https://github.com/steipete/CodexBar/blob/afa483f2a287ebb999adbfaa060a2c3d0cfa1cc8/Sources/CodexBar/CLILoginRunner.swift)

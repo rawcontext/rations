@@ -26,10 +26,10 @@ struct ProviderFetcher: Sendable {
 
     private func claude(_ account: AccountConnection) async throws -> AccountReading {
         if account.usesClaudeCLI {
-            let before = try await CredentialDiscovery.capture(.claude)
+            let before = try await ClaudeCredentialSource.cliConnection()
             guard before.profile.id == account.profile.id else { throw inactiveClaude() }
             let screen = try await ClaudeTerminalProbe.read()
-            let after = try await CredentialDiscovery.capture(.claude)
+            let after = try await ClaudeCredentialSource.cliConnection()
             guard after.profile.id == account.profile.id else { throw inactiveClaude() }
             return try ClaudeTerminalParser.parse(screen, profile: account.profile, now: .now)
         }
