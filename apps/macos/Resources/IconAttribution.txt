@@ -1,4 +1,4 @@
-Rations menu bar glyph
+Rations app icon and menu bar glyph
 
 Adapted from "Military Symbol - Friendly Unit (Bichrome 1.5x1 Frame)- CSS -
 Supply - Food & Rations (NATO APP-6A).svg" by CdnMCG, 2020.
@@ -10,4 +10,6 @@ https://creativecommons.org/licenses/by-sa/4.0/
 Changes: isolated the food-and-rations glyph; omitted the unit frame and supply
 line; redrew the curved outline for a 16-point macOS menu bar template image.
 The glyph has a transparent interior and uses the system's monochrome tint.
-This adapted glyph artwork is distributed under CC BY-SA 4.0.
+The app icon uses the solid-disc adaptation selected as design 1B, with a
+graphite gradient, ambient glow, and Icon Composer glass effects.
+The adapted icon and glyph artwork are distributed under CC BY-SA 4.0.

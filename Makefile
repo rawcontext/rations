@@ -8,13 +8,14 @@ ARGS ?=
 XCODEBUILD = xcodebuild -project Rations.xcodeproj -scheme Rations \
 	-derivedDataPath "$(CURDIR)/.build/Xcode" \
 	-clonedSourcePackagesDirPath "$(CURDIR)/.build/SourcePackages"
+ICON_TOOL = $(DEVELOPER_DIR)/../Applications/Icon Composer.app/Contents/Executables/ictool
 ifeq ($(SIGNED),0)
 SIGNING = CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM= \
 	CODE_SIGN_ENTITLEMENTS= ENABLE_HARDENED_RUNTIME=NO
 endif
 
 .PHONY: help bootstrap ci-tools build archive test test-app test-packages test-lint test-release \
-	lint check dev verify debug logs telemetry xcode release-prepare release release-publish
+	lint check dev verify debug logs telemetry xcode icon-preview release-prepare release release-publish
 
 help:
 	@printf '%s\n' \
@@ -29,6 +30,7 @@ help:
 	  'make logs            Build, launch, and stream process logs' \
 	  'make telemetry       Build, launch, and stream development telemetry' \
 	  'make xcode           Open the Xcode project' \
+	  'make icon-preview    Render the Icon Composer appearance previews' \
 	  'make archive         Create an unsigned universal Release archive' \
 	  'make release-prepare Build and validate the universal production app' \
 	  'make release         Sign, notarize, and package the release' \
@@ -75,6 +77,14 @@ dev verify debug logs telemetry:
 
 xcode:
 	open Rations.xcodeproj
+
+icon-preview:
+	mkdir -p .build/icon-previews
+	@for appearance in Default Dark ClearLight ClearDark TintedLight TintedDark; do \
+	  "$(ICON_TOOL)" apps/macos/Resources/AppIcon.icon --export-image \
+	    --output-file ".build/icon-previews/$$appearance.png" --platform macOS \
+	    --rendition "$$appearance" --width 512 --height 512 --scale 1 || exit; \
+	done
 
 release-prepare release release-publish:
 	python3 tools/release/release.py $(patsubst release-%,%,$@)

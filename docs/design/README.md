@@ -10,6 +10,7 @@ and designated it as the design source of truth. Its contents are preserved unde
 - [Earlier iterations](ui-screens/project/Rations.dc.html): historical context only.
 - [Export notes](ui-screens/README.md) and [design history](ui-screens/project/github.md).
 - [Original PRD](ui-screens/project/uploads/QuotaBar-PRD.md).
+- [App icon handoff](app-icon-handoff.zip): design 1B, selected on 15 September 2026.
 - [Accounts reference image](<ui-screens/project/uploads/Screenshot 2026-09-13 at 01.08.55.png>).
 
 The HTML and generated `support.js` are design artifacts, not application runtime
@@ -62,6 +63,19 @@ Reset counts use “0 resets,” “1 reset,” or “2 resets.” Preview mode 
 accounts have been removed. See [account connections](../account-connections.md)
 for supported sign-in sources and current limitations. Vendor account switching
 remains a separate future feature.
+
+## App icon
+
+The app icon uses **1B: Graphite · solid disc** from the app icon handoff.
+The editable Apple Icon Composer document is
+`apps/macos/Resources/AppIcon.icon`. It contains a graphite background gradient,
+an ambient glow, and the original solid-disc SVG with native glass effects.
+Open the document in Icon Composer to edit it; `make icon-preview` renders all
+six macOS appearances into `.build/icon-previews`.
+
+Xcode compiles the document into the app's icon assets, including the `.icns`
+fallback for macOS 14 and 15. The handoff ZIP is preserved as reference material.
+Its embedded agent directions are not repository instructions.
 
 ## Application identities
 

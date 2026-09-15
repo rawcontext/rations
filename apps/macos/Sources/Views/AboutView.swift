@@ -5,7 +5,8 @@ struct AboutView: View {
 
     var body: some View {
         VStack(spacing: 14) {
-            Image(nsImage: StatusGlyph.image).resizable().scaledToFit().frame(width: 40, height: 40)
+            Image(nsImage: NSApplication.shared.applicationIconImage)
+                .resizable().scaledToFit().frame(width: 40, height: 40)
             Text("Rations").font(.headline)
             Text(version).font(.caption).foregroundStyle(.secondary)
             Text("If you have to ask when it resets, you’re already in line.")

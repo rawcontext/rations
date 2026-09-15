@@ -11,6 +11,7 @@
 		0F1AA1CAF628B1832E0D5DB9 /* AppInstanceLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EEB45EE9C852C94AC88C54 /* AppInstanceLockTests.swift */; };
 		498EA0F430EDEAD6A5AB3FD2 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 234A15C76436E29BE28EBD86 /* Sparkle */; };
 		5206F83322B2E1D11B11D4DD /* AppInstanceLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F26BD9F0F878EBC34CEDFCD /* AppInstanceLock.swift */; };
+		666A24BA17D243EB6B2EB225 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = DC5F9AA796D7895197E077F8 /* AppIcon.icon */; };
 		8B9832AAD39CBBB2F4EEC56F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 88BF581BA13D7A319898AF93 /* PrivacyInfo.xcprivacy */; };
 		9B72011F4AB6E221E147130D /* RationsProviders in Frameworks */ = {isa = PBXBuildFile; productRef = 556BFDFF95EB04EE8583B81E /* RationsProviders */; };
 		A2E2BDC76C62C3514083CB6E /* IconAttribution.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3DF6470B6FB95829FFC78367 /* IconAttribution.txt */; };
@@ -37,6 +38,7 @@
 		CA9AAE6CF20571BDC2EBB9A4 /* CodexBarAttribution.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = CodexBarAttribution.txt; sourceTree = "<group>"; };
 		D669AA23797CCCAFF85BD2C3 /* Debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		D6821765A87A210229AFF53A /* Distribution.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Distribution.plist; sourceTree = "<group>"; };
+		DC5F9AA796D7895197E077F8 /* AppIcon.icon */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		F2EEB45EE9C852C94AC88C54 /* AppInstanceLockTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppInstanceLockTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,6 +127,7 @@
 				AC621DD5B38BE63F3E5D82E5 /* Development.entitlements */,
 				3EAA425151DECD4DB736CA2E /* RationsLicense.txt */,
 				271D4FD032DC9A9252A72F2C /* SparkleLicense.txt */,
+				DC5F9AA796D7895197E077F8 /* AppIcon.icon */,
 			);
 			name = Resources;
 			path = apps/macos/Resources;
@@ -244,6 +247,7 @@
 				8B9832AAD39CBBB2F4EEC56F /* PrivacyInfo.xcprivacy in Resources */,
 				E43EB5BD8CF25A9F16D69C97 /* RationsLicense.txt in Resources */,
 				B93AF19666E6A8E497F2228C /* SparkleLicense.txt in Resources */,
+				666A24BA17D243EB6B2EB225 /* AppIcon.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

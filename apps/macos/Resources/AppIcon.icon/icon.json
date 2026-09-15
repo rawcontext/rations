@@ -1,0 +1,61 @@
+{
+  "fill": {
+    "linear-gradient": [
+      "srgb:0.29412,0.31373,0.34510,1.00000",
+      "srgb:0.07843,0.08627,0.10196,1.00000"
+    ]
+  },
+  "groups": [
+    {
+      "name": "Ambient glow",
+      "layers": [
+        {
+          "image-name": "glow.svg",
+          "name": "Graphite glow",
+          "glass": false
+        }
+      ],
+      "specular": false,
+      "shadow": {
+        "kind": "neutral",
+        "opacity": 0
+      },
+      "translucency": {
+        "enabled": false,
+        "value": 0
+      }
+    },
+    {
+      "name": "Rations glyph",
+      "layers": [
+        {
+          "image-name": "glyph-disc.svg",
+          "name": "Solid disc \u2014 1B",
+          "fill": {
+            "linear-gradient": [
+              "srgb:1.00000,1.00000,1.00000,1.00000",
+              "srgb:0.84706,0.86275,0.88627,1.00000"
+            ]
+          },
+          "glass": true
+        }
+      ],
+      "lighting": "individual",
+      "blur-material": 0,
+      "specular": true,
+      "shadow": {
+        "kind": "neutral",
+        "opacity": 0.5
+      },
+      "translucency": {
+        "enabled": true,
+        "value": 0.3
+      }
+    }
+  ],
+  "supported-platforms": {
+    "squares": [
+      "macOS"
+    ]
+  }
+}
