@@ -91,6 +91,10 @@ Runtime coverage on the build Mac is separate from Intel cross-compilation and
 macOS 14 compatibility testing. Record those limits in release notes; do not
 claim that cross-building is an Intel runtime test.
 
+The mounted installer volume uses the app's icon through `.VolumeIcon.icns` and
+the volume's custom-icon flag. The downloaded `.dmg` file itself uses Finder's
+standard disk-image file icon.
+
 The app bundles Rations' MIT license, Sparkle's notices, the notice for Cursor
 code adapted from CodexBar, and the CC BY-SA icon attribution. About Rations →
 Acknowledgments exposes only these shipped materials. Research references alone

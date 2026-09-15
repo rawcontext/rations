@@ -51,11 +51,21 @@ def validate_architectures(app):
 
 def disk_image(app, output):
     with tempfile.TemporaryDirectory(prefix="rations-dmg-") as temporary:
-        payload = Path(temporary)
+        payload = Path(temporary) / "contents"
+        payload.mkdir()
         run("ditto", app, payload / "Rations.app")
         (payload / "Applications").symlink_to("/Applications")
+        shutil.copyfile(app / "Contents" / "Resources" / "AppIcon.icns", payload / ".VolumeIcon.icns")
+        writable = Path(temporary) / "writable.dmg"
+        mount = Path(temporary) / "volume"
         run("hdiutil", "create", "-volname", "Rations", "-srcfolder", payload,
-            "-fs", "HFS+", "-format", "UDZO", output)
+            "-fs", "HFS+", "-format", "UDRW", writable)
+        run("hdiutil", "attach", "-readwrite", "-nobrowse", "-mountpoint", mount, writable)
+        try:
+            run("xcrun", "SetFile", "-a", "C", mount)
+        finally:
+            run("hdiutil", "detach", mount)
+        run("hdiutil", "convert", writable, "-format", "UDZO", "-o", output)
 
 
 def appcast(output, version):

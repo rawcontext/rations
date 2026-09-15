@@ -69,7 +69,9 @@ remains a separate future feature.
 The app icon uses **1B: Graphite · solid disc** from the app icon handoff.
 The editable Apple Icon Composer document is
 `apps/macos/Resources/AppIcon.icon`. It contains a graphite background gradient,
-an ambient glow, and the original solid-disc SVG with native glass effects.
+an ambient glow, and the solid-disc SVG with native glass effects. The disc is
+shifted 12 pixels right on its 1024-pixel canvas to center its visible weight
+after the missing wedge; its original outline and size are preserved.
 Open the document in Icon Composer to edit it; `make icon-preview` renders all
 six macOS appearances into `.build/icon-previews`.
 
